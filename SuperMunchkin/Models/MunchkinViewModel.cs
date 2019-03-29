@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace SuperMunchkin.ViewModels
 {
-    public class UserViewModel
+    public class MunchkinViewModel
     {
-
     }
 }

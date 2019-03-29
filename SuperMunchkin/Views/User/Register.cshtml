@@ -3,5 +3,17 @@
     ViewData["Title"] = "Register";
 }
 
+@model SuperMunchkin.Models.UserViewModel
+
 <h2>Register</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TextBoxFor(m => m.Username)
+    @Html.PasswordFor(m => m.Password)
+    @Html.PasswordFor(m => m.PasswordCheck)
+    @Html.TextBoxFor(m => m.Email)
+}
 

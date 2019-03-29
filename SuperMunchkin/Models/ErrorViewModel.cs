@@ -1,6 +1,6 @@
 using System;
 
-namespace SuperMunchkin.ViewModels
+namespace SuperMunchkin.Models
 {
     public class ErrorViewModel
     {

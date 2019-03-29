@@ -6,15 +6,21 @@ body{
     background-color: #FFD09A;
 }
 
-.button{
+.button-small{
     height: 50px;
     width: 50px;
     padding: 7px 0px 0px 9px;
-    color: black;
-    background-color: #F6F1DF;
 }
 
-.custom-border{
+.button-big {
+    height: 50px;
+    width: 100px;
+    text-align: center;
+}
+
+.custom-border {
+    color: black;
+    background-color: #F6F1DF;
     border: 2px solid black;
     border-radius: 15px;
 }
@@ -23,7 +29,17 @@ body{
     display: none;
 }
 
-.nav-link > a{
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:active{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
     text-decoration: none;
     color: black;
 }

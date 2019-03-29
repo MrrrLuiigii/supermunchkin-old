@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SuperMunchkin.Models
+namespace SuperMunchkin.ViewModels
 {
     public class UserViewModel
     {

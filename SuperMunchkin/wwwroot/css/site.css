@@ -2,11 +2,11 @@
     font-family: Munchkin;
 }
 
-body {
+body{
     background-color: #FFD09A;
 }
 
-.button {
+.button{
     height: 50px;
     width: 50px;
     padding: 7px 0px 0px 9px;
@@ -19,12 +19,13 @@ body {
     border-radius: 15px;
 }
 
-.scrollable::-webkit-scrollbar{
+.hiddenscroll::-webkit-scrollbar{
     display: none;
 }
 
-.carousel-control-prev, .carousel-control-next{
-    width: 0px !important;
+.nav-link{
+    text-decoration: none;
+    color: black;
 }
 
 @font-face{

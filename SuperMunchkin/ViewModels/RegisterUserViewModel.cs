@@ -2,19 +2,15 @@
 
 namespace SuperMunchkin.ViewModels
 {
-    public enum MunchkinGender
-    {
-        Male,
-        Female
-    }
-
-    public class MunchkinViewModel
+    public class RegisterUserViewModel
     {
         [Required]
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
         [Required]
-        public MunchkinGender Gender { get; set; }
+        public string PasswordCheck { get; set; }
+        [Required][EmailAddress]
+        public string Email { get; set; }
     }
 }

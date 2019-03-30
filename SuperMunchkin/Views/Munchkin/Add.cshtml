@@ -1,14 +1,14 @@
 ﻿
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Add";
 }
 
-@model SuperMunchkin.ViewModels.UserViewModel
+@model SuperMunchkin.ViewModels.MunchkinViewModel
+
 
 <div class="w-100 text-center mt-5 mb-5">
-    <h1>SuperMunchkin</h1>
+    <h1>Add Munchkin</h1>
 </div>
-
 
 @using (Html.BeginForm())
 {
@@ -24,11 +24,21 @@
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "custom-border p-1" })
             </div>
+            <div class="d-inline-block mb-3">
+                <div class="float-left mr-5">
+                    @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                    @Html.RadioButtonFor(m => m.Gender, MunchkinGender.Male)<p>Male</p>
+                </div>
+                <div class="float-right">
+                    @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                    @Html.RadioButtonFor(m => m.Gender, MunchkinGender.Female)<p>Female</p>
+                </div>
+            </div>
             <div>
                 <button class="button-big custom-border mr-3">
-                    @Html.ActionLink("Register", "Register", "User")
+                    @Html.ActionLink("Cancel", "Index", "Game")
                 </button>
-                <input type="submit" value="Login" class="button-big custom-border" />
+                <input type="submit" value="Add" class="button-big custom-border" />
             </div>
         </div>
     </div>

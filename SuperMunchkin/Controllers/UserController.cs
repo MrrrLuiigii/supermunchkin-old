@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SuperMunchkin.ViewModels;
 
 namespace SuperMunchkin.Controllers
@@ -19,17 +15,31 @@ namespace SuperMunchkin.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Login(UserViewModel uvm)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Game");
+            }
+
+            return View(uvm);
+        }
+
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Register(UserViewModel uvm)
+        public IActionResult Register(RegisterUserViewModel uvm)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Game");
+                if(uvm.Password == uvm.PasswordCheck)
+                {
+                    return RedirectToAction("Login", "User");
+                }
             }
 
             return View(uvm);

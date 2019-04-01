@@ -3,15 +3,21 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="w-100 text-center mt-5 mb-5">
+<div class="w-100 text-center mt-3 mb-5">
     <h1>Game Setup</h1>
 </div>
 
-<div class="w-100" style="overflow-x: hidden; overflow-y: scroll;">
-
-</div>
-<div class="custom-border w-100">
-    
+<div class="w-100 hiddenscroll text-center" style="height: 65vh; overflow-y: scroll;">
+    @{
+        for (int i = 0; i < 10; i++)
+        {
+            <div class="overview custom-border mb-3">
+                <div class="custom-border" style="height: 30px; width: 30px; padding-top: 3px;">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+        }
+    }
 </div>
 
 <div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; left: 0; padding-top: 3px;">

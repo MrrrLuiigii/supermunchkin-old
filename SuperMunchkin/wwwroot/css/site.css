@@ -17,6 +17,11 @@ body{
     text-align: center;
 }
 
+.overview{
+    height: 100px;
+    width: 90%;
+}
+
 .custom-border {
     color: black;
     background-color: #F6F1DF;

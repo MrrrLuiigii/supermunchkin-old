@@ -24,13 +24,14 @@
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "custom-border p-1" })
             </div>
+            <div>
+                @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+            </div>
             <div class="d-inline-block mb-3">
                 <div class="float-left mr-5">
-                    @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
                     @Html.RadioButtonFor(m => m.Gender, MunchkinGender.Male)<p>Male</p>
                 </div>
                 <div class="float-right">
-                    @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
                     @Html.RadioButtonFor(m => m.Gender, MunchkinGender.Female)<p>Female</p>
                 </div>
             </div>

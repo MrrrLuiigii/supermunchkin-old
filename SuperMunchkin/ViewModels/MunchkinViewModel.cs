@@ -4,8 +4,8 @@ namespace SuperMunchkin.ViewModels
 {
     public enum MunchkinGender
     {
-        Male,
-        Female
+        Male = 1,
+        Female = 2
     }
 
     public class MunchkinViewModel
@@ -15,6 +15,6 @@ namespace SuperMunchkin.ViewModels
         [Required]
         public string Password { get; set; }
         [Required]
-        public MunchkinGender Gender { get; set; }
+        public MunchkinGender? Gender { get; set; }
     }
 }

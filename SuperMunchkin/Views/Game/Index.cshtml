@@ -7,13 +7,16 @@
     <h1>Game Setup</h1>
 </div>
 
-<div class="w-100 hiddenscroll text-center" style="height: 65vh; overflow-y: scroll;">
+<div class="w-100 hiddenscroll text-center m-auto" style="height: 65vh; overflow-y: scroll;">
     @{
         for (int i = 0; i < 10; i++)
-        {
-            <div class="overview custom-border mb-3">
-                <div class="custom-border" style="height: 30px; width: 30px; padding-top: 3px;">
-                    <i class="fas fa-times"></i>
+        {            
+            <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
+                <div class="custom-border" style="height: 30px; width: 30px; padding-top: 3px; position: relative; top: -10px; left: -10px;">
+                    <a href="@Url.Action("Add", "Munchkin")"> @*Remove the Munchkin*@
+                        <i class="fas fa-times"></i>
+                    </a>
+
                 </div>
             </div>
         }

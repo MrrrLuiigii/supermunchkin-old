@@ -5,7 +5,7 @@ namespace DAL.Contexts.Munchkin
 {
     public class MunchkinContextSQL : IMunchkinContext
     {
-        public void AdjustGear(AdjustStats direction)
+        public void AdjustGear(AdjustMunchkinStats direction)
         {
             throw new System.NotImplementedException();
         }
@@ -15,7 +15,7 @@ namespace DAL.Contexts.Munchkin
             throw new System.NotImplementedException();
         }
 
-        public void AdjustLevel(AdjustStats direction)
+        public void AdjustLevel(AdjustMunchkinStats direction)
         {
             throw new System.NotImplementedException();
         }

@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Models.Enums
+﻿namespace Models.Enums
 {
+    public enum GameStatus
+    {
+        Setup = 1,
+        Playing = 2,
+        Finished = 3
+    }
+
     public enum MunchkinGender
     {
         Male = 1,
         Female = 2
     }
 
-    public enum AdjustStats
+    public enum AdjustMunchkinStats
     {
         Up = 1,
         Down = 2

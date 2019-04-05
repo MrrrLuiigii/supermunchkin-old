@@ -5,7 +5,7 @@ namespace DAL.Interfaces.Munchkin
     public interface IMunchkinRepository
     {
         void AdjustGender(MunchkinGender gender);
-        void AdjustLevel(AdjustStats direction);
-        void AdjustGear(AdjustStats direction);
+        void AdjustLevel(AdjustMunchkinStats direction);
+        void AdjustGear(AdjustMunchkinStats direction);
     }
 }

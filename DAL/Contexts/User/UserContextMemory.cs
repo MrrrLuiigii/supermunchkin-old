@@ -1,19 +1,11 @@
-<<<<<<< HEAD
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-=======
 ﻿using System.Collections.Generic;
 using DAL.Interfaces.User;
 using Models.Interfaces;
->>>>>>> parent of b64d1f3... Removing Model Interfaces
 
-namespace DAL.Repositories
+namespace DAL.Contexts
 {
-    class UserRepository
+    public class UserContextMemory : IUserContext
     {
-<<<<<<< HEAD
-=======
         public void AddMunchkin(IMunchkin munchkin)
         {
             throw new System.NotImplementedException();
@@ -58,6 +50,5 @@ namespace DAL.Repositories
         {
             throw new System.NotImplementedException();
         }
->>>>>>> parent of b64d1f3... Removing Model Interfaces
     }
 }

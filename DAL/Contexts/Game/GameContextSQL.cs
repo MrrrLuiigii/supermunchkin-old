@@ -1,20 +1,12 @@
-<<<<<<< HEAD
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-=======
 ﻿using System.Collections.Generic;
-using DAL.Interfaces;
+using DAL.Interfaces.Game;
 using Models.Enums;
 using Models.Interfaces;
->>>>>>> parent of b64d1f3... Removing Model Interfaces
 
-namespace DAL.Repositories
+namespace DAL.Contexts.Game
 {
-    class GameRepository
+    public class GameContextSQL : IGameContext
     {
-<<<<<<< HEAD
-=======
         public void AddGame(IGame game)
         {
             throw new System.NotImplementedException();
@@ -49,6 +41,5 @@ namespace DAL.Repositories
         {
             throw new System.NotImplementedException();
         }
->>>>>>> parent of b64d1f3... Removing Model Interfaces
     }
 }

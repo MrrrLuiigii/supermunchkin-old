@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using DAL.Interfaces.Game;
 using Models.Enums;
-using Models.Interfaces;
 
 namespace DAL.Contexts.Game
 {

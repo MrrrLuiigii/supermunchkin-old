@@ -1,42 +1,51 @@
 ﻿using System.Collections.Generic;
 using DAL.Interfaces.User;
-using Models.Interfaces;
 
 namespace DAL.Contexts
 {
     public class UserContextMemory : IUserContext
     {
-        public void AddMunchkin(IMunchkin munchkin)
+        public void AddMunchkin(Munchkin munchkin)
         {
             throw new System.NotImplementedException();
         }
 
-        public void AddUser(IUser user)
+        public void AddMunchkin(Munchkin munchkin)
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<IMunchkin> GetAllMunchkins()
+        public void AddUser(User user)
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<IUser> GetAllUsers()
+        public void AddUser(User user)
         {
             throw new System.NotImplementedException();
         }
 
-        public IMunchkin GetMunchkinById(int id)
+        public IEnumerable<Munchkin> GetAllMunchkins()
         {
             throw new System.NotImplementedException();
         }
 
-        public IUser GetUserById(int id)
+        public IEnumerable<User> GetAllUsers()
         {
             throw new System.NotImplementedException();
         }
 
-        public IUser Login(string username, string password)
+        public Munchkin GetMunchkinById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public User GetUserById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public User Login(string username, string password)
         {
             throw new System.NotImplementedException();
         }
@@ -46,7 +55,37 @@ namespace DAL.Contexts
             throw new System.NotImplementedException();
         }
 
-        public void RemoveMunchkin(IMunchkin munchkin)
+        public void RemoveMunchkin(Munchkin munchkin)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveMunchkin(Munchkin munchkin)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        IEnumerable<Munchkin> IUserRepository.GetAllMunchkins()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        IEnumerable<User> IUserCollectionRepository.GetAllUsers()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        Munchkin IUserRepository.GetMunchkinById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        User IUserCollectionRepository.GetUserById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        User IUserCollectionRepository.Login(string username, string password)
         {
             throw new System.NotImplementedException();
         }

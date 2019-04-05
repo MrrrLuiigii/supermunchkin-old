@@ -1,42 +1,41 @@
 ﻿using System.Collections.Generic;
 using DAL.Interfaces.User;
-using Models.Interfaces;
 
 namespace DAL.Repos
 {
     public class UserRepository : IUserRepository, IUserCollectionRepository
     {
-        public void AddMunchkin(IMunchkin munchkin)
+        public void AddMunchkin(Munchkin munchkin)
         {
             throw new System.NotImplementedException();
         }
 
-        public void AddUser(IUser user)
+        public void AddUser(User user)
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<IMunchkin> GetAllMunchkins()
+        public IEnumerable<Munchkin> GetAllMunchkins()
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<IUser> GetAllUsers()
+        public IEnumerable<User> GetAllUsers()
         {
             throw new System.NotImplementedException();
         }
 
-        public IMunchkin GetMunchkinById(int id)
+        public Munchkin GetMunchkinById(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public IUser GetUserById(int id)
+        public User GetUserById(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public IUser Login(string username, string password)
+        public User Login(string username, string password)
         {
             throw new System.NotImplementedException();
         }
@@ -46,7 +45,7 @@ namespace DAL.Repos
             throw new System.NotImplementedException();
         }
 
-        public void RemoveMunchkin(IMunchkin munchkin)
+        public void RemoveMunchkin(Munchkin munchkin)
         {
             throw new System.NotImplementedException();
         }

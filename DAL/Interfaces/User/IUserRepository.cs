@@ -1,5 +1,4 @@
-﻿using Models.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DAL.Interfaces.User
 {
@@ -7,9 +6,9 @@ namespace DAL.Interfaces.User
     {
         void Logout();
 
-        void AddMunchkin(IMunchkin munchkin);
-        void RemoveMunchkin(IMunchkin munchkin);
-        IEnumerable<IMunchkin> GetAllMunchkins();
-        IMunchkin GetMunchkinById(int id);
+        void AddMunchkin(Munchkin munchkin);
+        void RemoveMunchkin(Munchkin munchkin);
+        IEnumerable<Munchkin> GetAllMunchkins();
+        Munchkin GetMunchkinById(int id);
     }
 }

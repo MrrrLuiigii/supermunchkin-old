@@ -1,13 +1,12 @@
-﻿using Models.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DAL.Interfaces.User
 {
     public interface IUserCollectionRepository
     {
-        void AddUser(IUser user);
-        IUser Login(string username, string password);
-        IEnumerable<IUser> GetAllUsers();
-        IUser GetUserById(int id);
+        void AddUser(User user);
+        User Login(string username, string password);
+        IEnumerable<User> GetAllUsers();
+        User GetUserById(int id);
     }
 }

@@ -43,6 +43,7 @@ namespace SuperMunchkin.Controllers
             {
                 if(uvm.Password == uvm.PasswordCheck)
                 {
+                    //if user does not exist yet
                     User user = new User(uvm.Username, uvm.Password, uvm.Email);
                     userCollectionLogic.AddUser(user);
 

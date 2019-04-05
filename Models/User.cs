@@ -16,5 +16,13 @@ namespace Models
             Password = password;
             Email = email;
         }
+
+        public User(int id, string username, string password, string email)
+        {
+            Id = id;
+            Username = username;
+            Password = password;
+            Email = email;
+        }
     }
 }

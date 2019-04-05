@@ -1,13 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace SuperMunchkin.ViewModels
 {
-    public enum MunchkinGender
-    {
-        Male = 1,
-        Female = 2
-    }
-
     public class MunchkinViewModel
     {
         [Required]

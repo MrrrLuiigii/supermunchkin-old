@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Models.Enums
 {
-    class Enums
+    public enum MunchkinGender
     {
+        Male = 1,
+        Female = 2
     }
 }

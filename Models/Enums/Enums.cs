@@ -1,21 +1,15 @@
 ﻿namespace Models.Enums
 {
-    public enum GameStatus
-    {
-        Setup = 1,
-        Playing = 2,
-        Finished = 3
-    }
-
-    public enum MunchkinGender
+    public enum MunhckinGender
     {
         Male = 1,
         Female = 2
     }
 
-    public enum AdjustMunchkinStats
+    public enum GameStatus
     {
-        Up = 1,
-        Down = 2
+        Setup = 1,
+        Playing = 2,
+        Finished = 3
     }
 }

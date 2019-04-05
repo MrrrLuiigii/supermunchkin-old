@@ -37,11 +37,6 @@ namespace DAL.Repos
             throw new System.NotImplementedException();
         }
 
-        public int RollDice()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void SetWinner(IMunchkin munchkin)
         {
             throw new System.NotImplementedException();

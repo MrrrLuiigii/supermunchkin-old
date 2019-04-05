@@ -6,7 +6,6 @@ namespace DAL.Interfaces
     public interface IGameRepository
     {
         void AdjustGameStatus(GameStatus status);
-        int RollDice();
         void SetWinner(IMunchkin munchkin);
 
         void AddMunchkin(IMunchkin munchkin);

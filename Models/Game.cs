@@ -1,5 +1,6 @@
-﻿using Models.Enums;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using Models.Enums;
 
 namespace Models
 {
@@ -8,6 +9,7 @@ namespace Models
         public int Id { get; set; }
         public GameStatus Status { get; set; }
         public DateTime DatePlayed { get; set; }
+        public IEnumerable<Munchkin> Munchkins { get; set; }
         public Munchkin Winner { get; set; }
     }
 }

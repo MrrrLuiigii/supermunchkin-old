@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
-using DAL.Interfaces.Game;
+using DAL.Interfaces.Games;
+using Models;
 using Models.Enums;
 
-namespace DAL.Contexts.Game
+namespace DAL.Contexts.Games
 {
-    public class GameContextSQL : IGameContext
+    public class GameContextMemory : IGameRepository, IGameCollectionRepository
     {
-        public void AddGame(IGame game)
+        public void AddGame(Game game)
         {
             throw new System.NotImplementedException();
         }
 
-        public void AddMunchkin(IMunchkin munchkin)
+        public void AddMunchkin(Munchkin munchkin)
         {
             throw new System.NotImplementedException();
         }
@@ -21,22 +22,22 @@ namespace DAL.Contexts.Game
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<IGame> GetAllGames()
+        public IEnumerable<Game> GetAllGames()
         {
             throw new System.NotImplementedException();
         }
 
-        public IGame GetGameById(int id)
+        public Game GetGameById(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public void RemoveMunchkin(IMunchkin munchkin)
+        public void RemoveMunchkin(Munchkin munchkin)
         {
             throw new System.NotImplementedException();
         }
 
-        public void SetWinner(IMunchkin munchkin)
+        public void SetWinner(Munchkin munchkin)
         {
             throw new System.NotImplementedException();
         }

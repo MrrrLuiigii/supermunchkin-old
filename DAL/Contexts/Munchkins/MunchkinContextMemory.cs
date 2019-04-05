@@ -1,9 +1,9 @@
-﻿using DAL.Interfaces.Munchkin;
+﻿using DAL.Interfaces.Munchkins;
 using Models.Enums;
 
-namespace DAL.Contexts.Munchkin
+namespace DAL.Contexts.Munchkins
 {
-    public class MunchkinContextSQL : IMunchkinContext
+    public class MunchkinContextMemory : IMunchkinRepository
     {
         public void AdjustGear(AdjustMunchkinStats direction)
         {

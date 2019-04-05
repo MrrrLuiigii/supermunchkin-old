@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using DAL.Interfaces.User;
+using DAL.Interfaces.Users;
+using Models;
 
-namespace DAL.Contexts.User
+namespace DAL.Contexts.Users
 {
-    public class UserContextSQL : IUserContext
+    public class UserContextMemory : IUserRepository, IUserCollectionRepository
     {
         public void AddMunchkin(Munchkin munchkin)
         {
@@ -36,11 +37,6 @@ namespace DAL.Contexts.User
         }
 
         public User Login(string username, string password)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Logout()
         {
             throw new System.NotImplementedException();
         }

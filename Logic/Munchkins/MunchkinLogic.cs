@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Logic.Munchkins
+﻿namespace Logic.Munchkins
 {
-    class MunchkinLogic
+    public class MunchkinLogic
     {
     }
 }

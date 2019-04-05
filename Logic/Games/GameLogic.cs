@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Logic.Games
+﻿namespace Logic.Games
 {
-    class GameLogic
+    public class GameLogic
     {
     }
 }

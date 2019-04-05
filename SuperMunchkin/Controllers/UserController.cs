@@ -1,7 +1,6 @@
 ﻿using Logic.Users;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Models.Enums;
 using SuperMunchkin.ViewModels;
 
 namespace SuperMunchkin.Controllers

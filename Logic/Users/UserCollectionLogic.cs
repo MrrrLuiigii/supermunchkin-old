@@ -25,6 +25,21 @@ namespace Logic.Users
             return true;
         }
 
+        public User Login(string username, string password)
+        {
+            IEnumerable<User> users = GetAllUsers();
+
+            foreach (User user in users)
+            {
+                if (user.Username == username && user.Password == password)
+                {
+                    return user;
+                }
+            }
+
+            return null;
+        }
+
         public User GetUserById(int id)
         {
             return userRepo.GetUserById(id);

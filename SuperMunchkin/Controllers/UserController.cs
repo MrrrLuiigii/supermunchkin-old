@@ -26,10 +26,19 @@ namespace SuperMunchkin.Controllers
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Game");
+                User user = userCollectionLogic.Login(uvm.Username, uvm.Password);
+
+                if(user != null)
+                {
+                    return RedirectToAction("Index", "Game", new { user.Id });
+                }
+
+                ViewBag.ErrorMessage = "Username and/or password are incorrect.";
+                return View();
             }
 
-            return View(uvm);
+            ViewBag.ErrorMessage = "Username and password are required.";
+            return View();
         }
 
         public IActionResult Register()
@@ -57,7 +66,7 @@ namespace SuperMunchkin.Controllers
                 }
             }
 
-            ViewBag.ErrorMessage = "All fields are required.";
+            ViewBag.ErrorMessage = "All fields have to be filled in correctly.";
             return View();
         }
     }

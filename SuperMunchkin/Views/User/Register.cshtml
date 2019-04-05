@@ -5,8 +5,8 @@
 
 @model SuperMunchkin.ViewModels.RegisterUserViewModel
 
-<div class="w-100 text-center mt-5">
-    <h1>SuperMunchkin</h1>
+<div class="w-100 text-center mt-5 pb-3">
+    <h1>Super<br />Munchkin</h1>
 </div>
 
 
@@ -19,7 +19,7 @@
             <div class="w-100" style="height: 50px;">
                 @ViewBag.ErrorMessage
             </div>
-            <div class="mb-1 pt-5">
+            <div class="mb-1 pt-3">
                 @Html.TextBoxFor(m => m.Username, new { placeholder = "Username", @class = "custom-border p-1" })
             </div>
             <div class="mb-1">

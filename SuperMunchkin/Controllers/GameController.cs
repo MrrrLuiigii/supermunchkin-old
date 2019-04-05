@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SuperMunchkin.Controllers
 {
     public class GameController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(int userId)
         {
             return View();
         }

@@ -5,7 +5,7 @@ namespace Database
 {
     public class Memory
     {
-        public List<User> Users;
+        public static List<User> Users;
 
         public Memory()
         {
@@ -17,6 +17,11 @@ namespace Database
             Users.Add(new User(4, "Nick", "user", "nick@gmail.com"));
             Users.Add(new User(5, "Tom", "user", "tom@gmail.com"));
             Users.Add(new User(6, "Beau", "user", "beau@gmail.com"));
+        }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return Users;
         }
     }
 }

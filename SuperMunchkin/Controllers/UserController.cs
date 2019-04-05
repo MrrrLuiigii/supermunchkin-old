@@ -1,10 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Logic.Users;
+using Microsoft.AspNetCore.Mvc;
+using Models;
 using SuperMunchkin.ViewModels;
 
 namespace SuperMunchkin.Controllers
 {
     public class UserController : Controller
     {
+        private UserLogic userLogic = new UserLogic();
+        private UserCollectionLogic userCollectionLogic = new UserCollectionLogic();
+
         public IActionResult Index()
         {
             return View();
@@ -38,6 +43,9 @@ namespace SuperMunchkin.Controllers
             {
                 if(uvm.Password == uvm.PasswordCheck)
                 {
+                    User user = new User(uvm.Username, uvm.Password, uvm.Email);
+                    userCollectionLogic.AddUser(user);
+
                     return RedirectToAction("Login", "User");
                 }
             }

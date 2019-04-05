@@ -1,7 +1,7 @@
 ﻿using DAL.Interfaces.Munchkins;
 using Models.Enums;
 
-namespace DAL.Repos
+namespace DAL.Repositories
 {
     public class MunchkinRepository : IMunchkinRepository
     {

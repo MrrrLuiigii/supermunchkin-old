@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logic.Game
+namespace Logic.Games
 {
     class GameCollectionLogic
     {

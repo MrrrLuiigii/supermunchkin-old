@@ -1,8 +1,7 @@
-﻿using System;
-
-namespace Database
+﻿namespace Database
 {
     public class Memory
     {
+
     }
 }

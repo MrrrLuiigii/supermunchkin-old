@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logic.User
+namespace Logic.Games
 {
-    class UserCollectionLogic
+    class GameLogic
     {
     }
 }

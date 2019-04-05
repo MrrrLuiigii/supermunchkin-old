@@ -9,5 +9,12 @@ namespace Models
         public string Password { get; set; }
         public string Email { get; set; }
         public IEnumerable<Munchkin> Munchkins { get; set; }
+
+        public User(string username, string password, string email)
+        {
+            Username = username;
+            Password = password;
+            Email = email;
+        }
     }
 }

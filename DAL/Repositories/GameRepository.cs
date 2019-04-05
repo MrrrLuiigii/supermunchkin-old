@@ -3,7 +3,7 @@ using DAL.Interfaces.Games;
 using Models;
 using Models.Enums;
 
-namespace DAL.Repos
+namespace DAL.Repositories
 {
     public class GameRepository : IGameRepository, IGameCollectionRepository
     {

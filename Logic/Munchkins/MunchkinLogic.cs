@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logic.Munchkin
+namespace Logic.Munchkins
 {
     class MunchkinLogic
     {

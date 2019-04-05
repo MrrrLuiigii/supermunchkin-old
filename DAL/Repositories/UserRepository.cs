@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using DAL.Interfaces.Users;
+using DAL.Contexts.Users;
 using Models;
 
-namespace DAL.Repos
+namespace DAL.Repositories
 {
     public class UserRepository : IUserRepository, IUserCollectionRepository
     {
+        private IUserContext userContext = new UserContextMemory();
+
         public void AddMunchkin(Munchkin munchkin)
         {
             throw new System.NotImplementedException();

@@ -11,42 +11,37 @@ namespace DAL.Repositories
 
         public void AddMunchkin(Munchkin munchkin)
         {
-            throw new System.NotImplementedException();
+            userContext.AddMunchkin(munchkin);
         }
 
         public void AddUser(User user)
         {
-            throw new System.NotImplementedException();
+            userContext.AddUser(user);
         }
 
         public IEnumerable<Munchkin> GetAllMunchkins()
         {
-            throw new System.NotImplementedException();
+            return userContext.GetAllMunchkins();
         }
 
         public IEnumerable<User> GetAllUsers()
         {
-            throw new System.NotImplementedException();
+            return userContext.GetAllUsers();
         }
 
         public Munchkin GetMunchkinById(int id)
         {
-            throw new System.NotImplementedException();
+            return userContext.GetMunchkinById(id);
         }
 
         public User GetUserById(int id)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public User Login(string username, string password)
-        {
-            throw new System.NotImplementedException();
+            return userContext.GetUserById(id);
         }
 
         public void RemoveMunchkin(Munchkin munchkin)
         {
-            throw new System.NotImplementedException();
+            userContext.RemoveMunchkin(munchkin);
         }
     }
 }

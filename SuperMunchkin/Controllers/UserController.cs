@@ -1,6 +1,7 @@
 ﻿using Logic.Users;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Models.Enums;
 using SuperMunchkin.ViewModels;
 
 namespace SuperMunchkin.Controllers
@@ -43,15 +44,21 @@ namespace SuperMunchkin.Controllers
             {
                 if(uvm.Password == uvm.PasswordCheck)
                 {
-                    //if user does not exist yet
                     User user = new User(uvm.Username, uvm.Password, uvm.Email);
-                    userCollectionLogic.AddUser(user);
+                    
+                    if (userCollectionLogic.AddUser(user))
+                    {
+                        return RedirectToAction("Login");
+                        
+                    }
 
-                    return RedirectToAction("Login", "User");
+                    ViewBag.ErrorMessage = "This username and\\or email has already been taken.";
+                    return View();
                 }
             }
 
-            return View(uvm);
+            ViewBag.ErrorMessage = "All fields are required.";
+            return View();
         }
     }
 }

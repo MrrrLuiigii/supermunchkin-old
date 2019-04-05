@@ -9,9 +9,20 @@ namespace Logic.Users
     {
         IUserCollectionRepository userRepo = new UserRepository();
 
-        public void AddUser(User user)
+        public bool AddUser(User user)
         {
+            IEnumerable<User> users = GetAllUsers();
+
+            foreach (User u in users)
+            {
+                if (u.Username == user.Username || u.Email == user.Email)
+                {
+                    return false;
+                }
+            }
+
             userRepo.AddUser(user);
+            return true;
         }
 
         public User GetUserById(int id)

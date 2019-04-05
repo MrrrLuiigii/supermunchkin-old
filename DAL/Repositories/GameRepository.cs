@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using DAL.Interfaces;
+using DAL.Interfaces.Games;
+using Models;
 using Models.Enums;
 
 namespace DAL.Repos

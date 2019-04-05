@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Models;
+using System.Collections.Generic;
 
-namespace DAL.Interfaces
+namespace DAL.Interfaces.Games
 {
     public interface IGameCollectionRepository
     {

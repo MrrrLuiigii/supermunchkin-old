@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using DAL.Interfaces.User;
+using DAL.Interfaces.Users;
+using Models;
 
 namespace DAL.Repos
 {
@@ -36,11 +37,6 @@ namespace DAL.Repos
         }
 
         public User Login(string username, string password)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Logout()
         {
             throw new System.NotImplementedException();
         }

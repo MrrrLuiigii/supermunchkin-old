@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Models;
+using System.Collections.Generic;
 
-namespace DAL.Interfaces.User
+namespace DAL.Interfaces.Users
 {
     public interface IUserRepository
     {
-        void Logout();
-
         void AddMunchkin(Munchkin munchkin);
         void RemoveMunchkin(Munchkin munchkin);
         IEnumerable<Munchkin> GetAllMunchkins();

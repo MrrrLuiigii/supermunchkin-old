@@ -1,6 +1,6 @@
 ﻿using Models.Enums;
 
-namespace DAL.Interfaces.Munchkin
+namespace DAL.Interfaces.Munchkins
 {
     public interface IMunchkinRepository
     {

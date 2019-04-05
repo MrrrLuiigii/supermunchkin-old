@@ -1,6 +1,7 @@
-﻿using Models.Enums;
+﻿using Models;
+using Models.Enums;
 
-namespace DAL.Interfaces
+namespace DAL.Interfaces.Games
 {
     public interface IGameRepository
     {

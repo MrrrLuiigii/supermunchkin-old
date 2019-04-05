@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Models;
+using System.Collections.Generic;
 
-namespace DAL.Interfaces.User
+namespace DAL.Interfaces.Users
 {
     public interface IUserCollectionRepository
     {

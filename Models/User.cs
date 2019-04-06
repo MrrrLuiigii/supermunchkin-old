@@ -24,5 +24,10 @@ namespace Models
             Password = password;
             Email = email;
         }
+
+        public User(int id, string username, string password, string email, IEnumerable<Munchkin> munchkins) : this(id, username, password, email)
+        {
+            Munchkins = munchkins;
+        }
     }
 }

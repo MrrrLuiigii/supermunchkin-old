@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DAL.Contexts.Games;
 using DAL.Interfaces.Games;
 using Models;
 using Models.Enums;
@@ -7,39 +8,41 @@ namespace DAL.Repositories
 {
     public class GameRepository : IGameRepository, IGameCollectionRepository
     {
+        private IGameContext context = new GameContextMemory();
+
         public void AddGame(Game game)
         {
-            throw new System.NotImplementedException();
+            context.AddGame(game);
         }
 
-        public void AddMunchkin(Munchkin munchkin)
+        public void AddMunchkin(Game game, Munchkin munchkin)
         {
-            throw new System.NotImplementedException();
+            context.AddMunchkin(game, munchkin);
         }
 
-        public void AdjustGameStatus(GameStatus status)
+        public void AdjustGameStatus(Game game, GameStatus status)
         {
-            throw new System.NotImplementedException();
+            context.AdjustGameStatus(game, status);
         }
 
         public IEnumerable<Game> GetAllGames()
         {
-            throw new System.NotImplementedException();
+            return context.GetAllGames();
         }
 
         public Game GetGameById(int id)
         {
-            throw new System.NotImplementedException();
+            return context.GetGameById(id);
         }
 
-        public void RemoveMunchkin(Munchkin munchkin)
+        public void RemoveMunchkin(Game game, Munchkin munchkin)
         {
-            throw new System.NotImplementedException();
+            context.RemoveMunchkin(game, munchkin);
         }
 
-        public void SetWinner(Munchkin munchkin)
+        public void SetWinner(Game game, Munchkin munchkin)
         {
-            throw new System.NotImplementedException();
+            context.SetWinner(game, munchkin);
         }
     }
 }

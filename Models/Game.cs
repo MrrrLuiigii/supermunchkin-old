@@ -11,5 +11,27 @@ namespace Models
         public DateTime DatePlayed { get; set; }
         public IEnumerable<Munchkin> Munchkins { get; set; }
         public Munchkin Winner { get; set; }
+
+        public Game()
+        {
+            DatePlayed = DateTime.Now;
+        }
+
+        public Game(int id, GameStatus status, DateTime datePlayed, IEnumerable<Munchkin> munchkins)
+        {
+            Id = id;
+            Status = status;
+            DatePlayed = datePlayed;
+            Munchkins = munchkins;
+        }
+
+        public Game(int id, GameStatus status, DateTime datePlayed, IEnumerable<Munchkin> munchkins, Munchkin winner)
+        {
+            Id = id;
+            Status = status;
+            DatePlayed = datePlayed;
+            Munchkins = munchkins;
+            Winner = winner;
+        }
     }
 }

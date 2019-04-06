@@ -5,10 +5,10 @@ namespace DAL.Interfaces.Games
 {
     public interface IGameRepository
     {
-        void AdjustGameStatus(GameStatus status);
-        void SetWinner(Munchkin munchkin);
+        void AdjustGameStatus(Game game, GameStatus status);
+        void SetWinner(Game game, Munchkin munchkin);
 
-        void AddMunchkin(Munchkin munchkin);
-        void RemoveMunchkin(Munchkin munchkin);
+        void AddMunchkin(Game game, Munchkin munchkin);
+        void RemoveMunchkin(Game game, Munchkin munchkin);
     }
 }

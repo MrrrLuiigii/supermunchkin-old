@@ -36,7 +36,7 @@ namespace DAL.Contexts.Users
 
         public User GetUserById(int id)
         {
-            throw new System.NotImplementedException();
+            return memory.GetUserById(id);
         }
 
         public User Login(string username, string password)

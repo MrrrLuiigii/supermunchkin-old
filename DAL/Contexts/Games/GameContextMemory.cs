@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
 using DAL.Interfaces.Games;
+using Database;
 using Models;
 using Models.Enums;
 
 namespace DAL.Contexts.Games
 {
-    public class GameContextMemory : IGameRepository, IGameCollectionRepository
+    public class GameContextMemory : IGameContext
     {
+        private Memory memory = new Memory();
+
         public void AddGame(Game game)
         {
-            throw new System.NotImplementedException();
+            //Add game
         }
 
         public void AddMunchkin(Munchkin munchkin)

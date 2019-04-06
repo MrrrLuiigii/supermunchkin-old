@@ -15,6 +15,12 @@ namespace SuperMunchkin.Controllers
         {
             User user = userCollectionLogic.GetUserById(userId);
             ViewBag.LoggedInUser = user;
+
+            Game game = new Game();
+            gameCollectionLogic.AddGame(game);
+
+            ViewBag.ActiveGame = game;
+
             return View();
         }
 

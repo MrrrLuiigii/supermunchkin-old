@@ -60,5 +60,25 @@ namespace Database
         {
             return Users;
         }
+
+        public Game GetGameById(int id)
+        {
+            Game game = null;
+
+            foreach (Game g in Games)
+            {
+                if(g.Id == id)
+                {
+                    game = g;
+                }
+            }
+
+            return game;
+        }
+
+        public IEnumerable<Game> GetAllGames()
+        {
+            return Games;
+        }
     }
 }

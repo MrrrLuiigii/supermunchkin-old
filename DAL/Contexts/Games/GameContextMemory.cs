@@ -15,34 +15,34 @@ namespace DAL.Contexts.Games
             //Add game
         }
 
-        public void AddMunchkin(Munchkin munchkin)
+        public void AddMunchkin(Game game, Munchkin munchkin)
         {
-            throw new System.NotImplementedException();
+            //Add munchkin
         }
 
-        public void AdjustGameStatus(GameStatus status)
+        public void AdjustGameStatus(Game game, GameStatus status)
         {
-            throw new System.NotImplementedException();
+            //Adjust gamestatus
         }
 
         public IEnumerable<Game> GetAllGames()
         {
-            throw new System.NotImplementedException();
+            return memory.GetAllGames();
         }
 
         public Game GetGameById(int id)
         {
-            throw new System.NotImplementedException();
+            return memory.GetGameById(id);
         }
 
-        public void RemoveMunchkin(Munchkin munchkin)
+        public void RemoveMunchkin(Game game, Munchkin munchkin)
         {
-            throw new System.NotImplementedException();
+            //Remove munchkin
         }
 
-        public void SetWinner(Munchkin munchkin)
+        public void SetWinner(Game game, Munchkin munchkin)
         {
-            throw new System.NotImplementedException();
+            //Set winner
         }
     }
 }

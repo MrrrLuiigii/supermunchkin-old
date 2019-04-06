@@ -1,4 +1,5 @@
-﻿using Logic.Munchkins;
+﻿using Logic.Games;
+using Logic.Munchkins;
 using Logic.Users;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -10,13 +11,20 @@ namespace SuperMunchkin.Controllers
     {
         private MunchkinLogic munchkinLogic = new MunchkinLogic();
 
+        private GameLogic gameLogic = new GameLogic();
+        private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Add()
+        public IActionResult Add(int id)
         {
+            int gameId = id;
+            Game game = gameCollectionLogic.GetGameById(gameId);
+            ViewBag.ActiveGame = game;
+
             return View();
         }
 

@@ -12,5 +12,11 @@ namespace Logic.Games
         {
             gameCollectionRepository.AddGame(game);
         }
+
+        public Game GetGameById(int id)
+        {
+            return gameCollectionRepository.GetGameById(id);
+        }
+
     }
 }

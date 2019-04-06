@@ -11,8 +11,10 @@ namespace SuperMunchkin.Controllers
         private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
         private UserCollectionLogic userCollectionLogic = new UserCollectionLogic();
 
-        public IActionResult Index(int userId)
+        public IActionResult Index(int id)
         {
+            int userId = id;
+
             User user = userCollectionLogic.GetUserById(userId);
             ViewBag.LoggedInUser = user;
 

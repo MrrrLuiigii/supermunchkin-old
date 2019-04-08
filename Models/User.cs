@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Models
 {
@@ -25,6 +26,7 @@ namespace Models
             Email = email;
         }
 
+        [JsonConstructor]
         public User(int id, string username, string password, string email, IEnumerable<Munchkin> munchkins) : this(id, username, password, email)
         {
             Munchkins = munchkins;

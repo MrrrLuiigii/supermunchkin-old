@@ -14,7 +14,7 @@ namespace SuperMunchkin.Controllers
 
         public IActionResult Index()
         {
-            User user = JsonConvert.DeserializeObject(Request.Cookies["LoggedInUser"]) as User;
+            User user = JsonConvert.DeserializeObject<User>(Request.Cookies["LoggedInUser"]);
             ViewBag.LoggedInUser = user;
 
             Game game = new Game();

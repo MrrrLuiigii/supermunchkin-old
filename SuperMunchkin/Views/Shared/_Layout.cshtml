@@ -46,7 +46,10 @@
     </nav>
 
     <div class="container body-content">
-        @RenderBody()
+        <partial name="_CookieConsentPartial" />
+        <main role="main">
+            @RenderBody()
+        </main>
     </div>
     
         <script src="~/lib/jquery/dist/jquery.js"></script>

@@ -19,12 +19,9 @@ namespace SuperMunchkin.Controllers
             return View();
         }
 
-        public IActionResult Add(int id)
+        public IActionResult Add(Game game)
         {
-            int gameId = id;
-            Game game = gameCollectionLogic.GetGameById(gameId);
             ViewBag.ActiveGame = game;
-
             return View();
         }
 

@@ -1,6 +1,7 @@
 ﻿using Logic.Users;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Newtonsoft.Json;
 using SuperMunchkin.ViewModels;
 
 namespace SuperMunchkin.Controllers
@@ -29,7 +30,8 @@ namespace SuperMunchkin.Controllers
 
                 if(user != null)
                 {
-                    return RedirectToAction("Index", "Game", new { user.Id });
+                    Response.Cookies.Append("LoggedInUser", JsonConvert.SerializeObject(user));
+                    return RedirectToAction("Index", "Game");
                 }
 
                 ViewBag.ErrorMessage = "Username and/or password are incorrect.";
@@ -60,7 +62,7 @@ namespace SuperMunchkin.Controllers
                         
                     }
 
-                    ViewBag.ErrorMessage = "This username and\\or email has already been taken.";
+                    ViewBag.ErrorMessage = "This username and/or email has already been taken.";
                     return View();
                 }
             }

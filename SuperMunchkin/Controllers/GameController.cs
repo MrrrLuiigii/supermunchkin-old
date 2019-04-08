@@ -2,6 +2,7 @@
 using Logic.Games;
 using Logic.Users;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace SuperMunchkin.Controllers
 {
@@ -11,11 +12,9 @@ namespace SuperMunchkin.Controllers
         private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
         private UserCollectionLogic userCollectionLogic = new UserCollectionLogic();
 
-        public IActionResult Index(int id)
+        public IActionResult Index()
         {
-            int userId = id;
-
-            User user = userCollectionLogic.GetUserById(userId);
+            User user = JsonConvert.DeserializeObject(Request.Cookies["LoggedInUser"]) as User;
             ViewBag.LoggedInUser = user;
 
             Game game = new Game();

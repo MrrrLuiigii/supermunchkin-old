@@ -15,12 +15,12 @@ namespace Database
         {
             Munchkins = new List<Munchkin>();
 
-            Munchkins.Add(new Munchkin(1, MunchkinGender.Female, 8, 12));
-            Munchkins.Add(new Munchkin(2, MunchkinGender.Male, 9, 15));
-            Munchkins.Add(new Munchkin(3, MunchkinGender.Male, 5, 20));
-            Munchkins.Add(new Munchkin(4, MunchkinGender.Female, 7, 11));
-            Munchkins.Add(new Munchkin(5, MunchkinGender.Male, 10, 17));
-            Munchkins.Add(new Munchkin(6, MunchkinGender.Male, 6, 10));
+            Munchkins.Add(new Munchkin(1, "Nicky", MunchkinGender.Female, 8, 12));
+            Munchkins.Add(new Munchkin(2, "Nicky2", MunchkinGender.Male, 9, 15));
+            Munchkins.Add(new Munchkin(3, "Nicky3", MunchkinGender.Male, 5, 20));
+            Munchkins.Add(new Munchkin(4, "Nicky4", MunchkinGender.Female, 7, 11));
+            Munchkins.Add(new Munchkin(5, "Nicky5", MunchkinGender.Male, 10, 17));
+            Munchkins.Add(new Munchkin(6, "Nicky6", MunchkinGender.Male, 6, 10));
 
             Users = new List<User>();
 

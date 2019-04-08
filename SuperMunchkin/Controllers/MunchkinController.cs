@@ -35,5 +35,10 @@ namespace SuperMunchkin.Controllers
 
             return View(mvm);
         }
+
+        public IActionResult Remove(Munchkin munchkin)
+        {
+            return RedirectToAction("Index", "Game");
+        }
     }
 }

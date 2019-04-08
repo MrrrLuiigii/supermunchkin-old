@@ -9,7 +9,7 @@ namespace Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public IEnumerable<Munchkin> Munchkins { get; set; }
+        public List<Munchkin> Munchkins { get; set; }
 
         public User(string username, string password, string email)
         {
@@ -27,7 +27,7 @@ namespace Models
         }
 
         [JsonConstructor]
-        public User(int id, string username, string password, string email, IEnumerable<Munchkin> munchkins) : this(id, username, password, email)
+        public User(int id, string username, string password, string email, List<Munchkin> munchkins) : this(id, username, password, email)
         {
             Munchkins = munchkins;
         }

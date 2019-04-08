@@ -9,15 +9,17 @@ namespace Models
         public int Id { get; set; }
         public GameStatus Status { get; set; }
         public DateTime DatePlayed { get; set; }
-        public IEnumerable<Munchkin> Munchkins { get; set; }
+        public List<Munchkin> Munchkins { get; set; }
         public Munchkin Winner { get; set; }
 
         public Game()
         {
+            Status = GameStatus.Setup;
             DatePlayed = DateTime.Now;
+            Munchkins = new List<Munchkin>();
         }
 
-        public Game(int id, GameStatus status, DateTime datePlayed, IEnumerable<Munchkin> munchkins)
+        public Game(int id, GameStatus status, DateTime datePlayed, List<Munchkin> munchkins)
         {
             Id = id;
             Status = status;
@@ -25,7 +27,7 @@ namespace Models
             Munchkins = munchkins;
         }
 
-        public Game(int id, GameStatus status, DateTime datePlayed, IEnumerable<Munchkin> munchkins, Munchkin winner)
+        public Game(int id, GameStatus status, DateTime datePlayed, List<Munchkin> munchkins, Munchkin winner)
         {
             Id = id;
             Status = status;

@@ -10,7 +10,6 @@ namespace SuperMunchkin.Controllers
     {
         private GameLogic gameLogic = new GameLogic();
         private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
-        private UserCollectionLogic userCollectionLogic = new UserCollectionLogic();
 
         public IActionResult Index()
         {

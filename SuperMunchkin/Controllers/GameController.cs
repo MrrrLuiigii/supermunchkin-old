@@ -16,19 +16,15 @@ namespace SuperMunchkin.Controllers
         {
             User user = JsonConvert.DeserializeObject<User>(Request.Cookies["LoggedInUser"]);
             ViewBag.LoggedInUser = user;
-
-            Game game = new Game();
             
-            game.Munchkins.Add(new Munchkin(1, "Nicky", Models.Enums.MunchkinGender.Male, 8, 15));
-
-            gameCollectionLogic.AddGame(game);
-
-            ViewBag.ActiveGame = game;
             return View();
         }
 
-        public IActionResult Game(Game game)
+        public IActionResult Game()
         {
+            Game game = new Game();
+            gameCollectionLogic.AddGame(game);
+
             ViewBag.ActiveGame = game;
             return View();
         }

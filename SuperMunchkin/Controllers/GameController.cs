@@ -20,7 +20,7 @@ namespace SuperMunchkin.Controllers
             Game game = new Game();
             
             game.Munchkins.Add(new Munchkin(1, "Nicky", Models.Enums.MunchkinGender.Male, 8, 15));
-            
+
             gameCollectionLogic.AddGame(game);
 
             ViewBag.ActiveGame = game;

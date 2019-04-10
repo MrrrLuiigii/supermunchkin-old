@@ -29,16 +29,6 @@ namespace DAL.Repositories
             return userContext.GetAllUsers();
         }
 
-        public Munchkin GetMunchkinById(int id)
-        {
-            return userContext.GetMunchkinById(id);
-        }
-
-        public User GetUserById(int id)
-        {
-            return userContext.GetUserById(id);
-        }
-
         public void RemoveMunchkin(Munchkin munchkin)
         {
             userContext.RemoveMunchkin(munchkin);

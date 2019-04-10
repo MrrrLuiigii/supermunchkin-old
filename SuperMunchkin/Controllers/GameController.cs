@@ -16,6 +16,9 @@ namespace SuperMunchkin.Controllers
         {
             User user = JsonConvert.DeserializeObject<User>(Request.Cookies["LoggedInUser"]);
             ViewBag.LoggedInUser = user;
+
+            List<Game> userGames = gameCollectionLogic.GetAllGamesByUser(user);
+            ViewBag.UserGames = userGames;
             
             return View();
         }

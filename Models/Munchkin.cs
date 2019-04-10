@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 
 namespace Models
 {
@@ -16,6 +17,7 @@ namespace Models
             Gender = gender;
         }
 
+        [JsonConstructor]
         public Munchkin(int id, string name, MunchkinGender gender, int level, int gear)
         {
             Id = id;

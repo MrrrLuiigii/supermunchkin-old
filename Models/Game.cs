@@ -21,6 +21,8 @@ namespace Models
 
         public Game(int id, GameStatus status, DateTime datePlayed, List<Munchkin> munchkins)
         {
+            Munchkins = new List<Munchkin>();
+
             Id = id;
             Status = status;
             DatePlayed = datePlayed;
@@ -29,6 +31,8 @@ namespace Models
 
         public Game(int id, GameStatus status, DateTime datePlayed, List<Munchkin> munchkins, Munchkin winner)
         {
+            Munchkins = new List<Munchkin>();
+
             Id = id;
             Status = status;
             DatePlayed = datePlayed;

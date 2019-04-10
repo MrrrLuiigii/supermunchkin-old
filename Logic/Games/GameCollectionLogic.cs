@@ -1,4 +1,5 @@
 ﻿using DAL.Interfaces.Games;
+using DAL.Interfaces.Users;
 using DAL.Repositories;
 using Models;
 using System;
@@ -9,6 +10,7 @@ namespace Logic.Games
 {
     public class GameCollectionLogic
     {
+        private IUserRepository userRepository = new UserRepository();
         private IGameCollectionRepository gameCollectionRepository = new GameRepository();
 
         public void AddGame(Game game)
@@ -18,13 +20,33 @@ namespace Logic.Games
 
         public Game GetGameById(int id)
         {
-            return gameCollectionRepository.GetGameById(id);
+            IEnumerable<Game> games = gameCollectionRepository.GetAllGames();
+            return games.ToList().Find(g => g.Id == id);
         }
 
         public Game GetGameByDateTime(DateTime dateTime)
         {
             IEnumerable<Game> games = gameCollectionRepository.GetAllGames();
-            return games.ToList().Find(x => x.DatePlayed == dateTime);
+            return games.ToList().Find(g => g.DatePlayed == dateTime);
+        }
+
+        public List<Game> GetAllGamesByUser(User user)
+        {
+            List<Game> games = gameCollectionRepository.GetAllGames().ToList();
+            List<Game> userGames = new List<Game>();
+
+            foreach (Game game in games)
+            {
+                foreach (Munchkin munchkin in user.Munchkins)
+                {
+                    if (game.Munchkins.Contains(munchkin))
+                    {
+                        userGames.Add(game);
+                    }
+                }
+            }
+
+            return userGames;
         }
 
     }

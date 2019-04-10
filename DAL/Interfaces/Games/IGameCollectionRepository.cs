@@ -7,6 +7,5 @@ namespace DAL.Interfaces.Games
     {
         void AddGame(Game game);
         IEnumerable<Game> GetAllGames();
-        Game GetGameById(int id);
     }
 }

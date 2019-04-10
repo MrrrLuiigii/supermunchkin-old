@@ -30,11 +30,6 @@ namespace DAL.Repositories
             return context.GetAllGames();
         }
 
-        public Game GetGameById(int id)
-        {
-            return context.GetGameById(id);
-        }
-
         public void RemoveMunchkin(Game game, Munchkin munchkin)
         {
             context.RemoveMunchkin(game, munchkin);

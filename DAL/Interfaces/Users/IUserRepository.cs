@@ -8,6 +8,5 @@ namespace DAL.Interfaces.Users
         void AddMunchkin(Munchkin munchkin);
         void RemoveMunchkin(Munchkin munchkin);
         IEnumerable<Munchkin> GetAllMunchkins();
-        Munchkin GetMunchkinById(int id);
     }
 }

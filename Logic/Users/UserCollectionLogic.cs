@@ -2,6 +2,7 @@
 using DAL.Repositories;
 using Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logic.Users
 {
@@ -42,7 +43,8 @@ namespace Logic.Users
 
         public User GetUserById(int id)
         {
-            return userRepo.GetUserById(id);
+            IEnumerable<User> users = userRepo.GetAllUsers();
+            return users.ToList().Find(u => u.Id == id);
         }
 
         public IEnumerable<User> GetAllUsers()

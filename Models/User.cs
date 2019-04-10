@@ -13,6 +13,8 @@ namespace Models
 
         public User(string username, string password, string email)
         {
+            Munchkins = new List<Munchkin>();
+
             Username = username;
             Password = password;
             Email = email;
@@ -20,6 +22,8 @@ namespace Models
 
         public User(int id, string username, string password, string email)
         {
+            Munchkins = new List<Munchkin>();
+
             Id = id;
             Username = username;
             Password = password;
@@ -29,6 +33,8 @@ namespace Models
         [JsonConstructor]
         public User(int id, string username, string password, string email, List<Munchkin> munchkins) : this(id, username, password, email)
         {
+            Munchkins = new List<Munchkin>();
+
             Munchkins = munchkins;
         }
     }

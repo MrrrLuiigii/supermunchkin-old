@@ -4,50 +4,15 @@
 }
 
 <div class="w-100 text-center mt-3 mb-5">
-    <h1>Game Index</h1>
+    <h1>Game Lobby</h1>
 </div>
 
 <div class="hiddenscroll text-center m-auto" style="height: 65vh; overflow-y: scroll;">
     @{
-        foreach (Models.Munchkin m in ViewBag.ActiveGame.Munchkins)
+        foreach (Models.Game g in ViewBag.UserGames)
         {
             <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
-
-                @{
-                    if (ViewBag.ActiveGame.Status == Models.Enums.GameStatus.Setup)
-                    {
-                        <div class="custom-border" style="height: 30px; width: 30px; padding-top: 3px; position: relative; top: -10px; left: -10px;">
-                            <a href="@Url.Action("Remove", "Munchkin", new { m })">
-                                <i class="fas fa-times"></i>
-                            </a>
-                            <h4 class="ml-4 text-left" style="width: 60vw">
-                                m.Name
-                                @{
-                                    if (m.Gender == Models.Enums.MunchkinGender.Male)
-                                    {
-                                        <i class="fas fa-mars"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="fas fa-venus"></i>
-                                    }
-                                }
-                            </h4>
-                        </div>
-                    }
-                }
-
-                <div class="float-right mr-3">
-                    <h1>@{m.Level += m.Gear;}</h1>
-                </div>
-                <div class="text-left ml-4 mt-3">
-                    <div>
-                        Level @m.Level
-                    </div>
-                    <div>
-                        Gear @m.Gear
-                    </div>
-                </div>
+                @g.Status
             </div>
         }
     }

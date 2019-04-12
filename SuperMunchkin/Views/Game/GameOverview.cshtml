@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewData["Title"] = "GameOverView";
+}
+
+@model Game
+
+<div class="w-100 text-center mt-3 mb-5">
+    <h1>Game Overview</h1>
+</div>
+
+<div class="hiddenscroll text-center m-auto" style="height: 65vh; overflow-y: scroll;">
+    @{
+        foreach (Models.Munchkin m in ViewBag.ActiveGame.Munchkins)
+        {
+            <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
+
+            @{
+                if (ViewBag.ActiveGame.Status == Models.Enums.GameStatus.Setup)
+                {
+                    <div class="custom-border" style="height: 30px; width: 30px; padding-top: 3px; position: relative; top: -10px; left: -10px;">
+                        <a href="@Url.Action("Remove", "Munchkin", new { m })">
+                            <i class="fas fa-times"></i>
+                        </a>
+                        <h4 class="ml-4 text-left" style="width: 60vw">
+                            m.Name
+                            @{
+                                        if (m.Gender == Models.Enums.MunchkinGender.Male)
+                                        {
+                                <i class="fas fa-mars"></i>
+                                        }
+                                        else
+                                        {
+                                <i class="fas fa-venus"></i>
+                                        }
+                            }
+                        </h4>
+                    </div>
+                }
+            }
+
+            <div class="float-right mr-3">
+                <h1>@{m.Level += m.Gear;}</h1>
+            </div>
+            <div class="text-left ml-4 mt-3">
+                <div>
+                    Level @m.Level
+                </div>
+                <div>
+                    Gear @m.Gear
+                </div>
+            </div>
+        </div>
+        }
+    }
+</div>
+
+<div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; left: 0; padding-top: 3px;">
+    <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
+</div>
+
+@{
+    if (ViewBag.ActiveGame.Status == Models.Enums.GameStatus.Setup)
+    {
+    <div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; right: 0; padding-top: 7px;">
+        <a href="@Url.Action("Add", "Munchkin", new { ViewBag.ActiveGame })">
+            <i class="fas fa-plus fa-2x"></i>
+        </a>
+    </div>
+    }
+}

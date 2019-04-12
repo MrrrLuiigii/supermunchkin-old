@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Models.Enums;
+using Newtonsoft.Json;
 
 namespace Models
 {
@@ -9,7 +10,7 @@ namespace Models
         public int Id { get; set; }
         public GameStatus Status { get; set; }
         public DateTime DatePlayed { get; }
-        public List<Munchkin> Munchkins { get; }
+        public List<Munchkin> Munchkins { get; set; }
         public Munchkin Winner { get; set; }
 
         public Game()
@@ -29,6 +30,7 @@ namespace Models
             Munchkins = munchkins;
         }
 
+        [JsonConstructor]
         public Game(int id, GameStatus status, DateTime datePlayed, List<Munchkin> munchkins, Munchkin winner)
         {
             Munchkins = new List<Munchkin>();

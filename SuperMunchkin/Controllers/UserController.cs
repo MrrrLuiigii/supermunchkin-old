@@ -31,7 +31,7 @@ namespace SuperMunchkin.Controllers
                 if(user != null)
                 {
                     Response.Cookies.Append("LoggedInUser", JsonConvert.SerializeObject(user));
-                    return RedirectToAction("Index", "Game");
+                    return RedirectToAction("GameLobby", "Game");
                 }
 
                 ViewBag.ErrorMessage = "Username and/or password are incorrect.";

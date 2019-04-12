@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Collections.Generic;
+using Models.Enums;
 
 namespace SuperMunchkin.Controllers
 {
@@ -12,7 +13,7 @@ namespace SuperMunchkin.Controllers
         private GameLogic gameLogic = new GameLogic();
         private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
 
-        public IActionResult Index()
+        public IActionResult GameLobby()
         {
             User user = JsonConvert.DeserializeObject<User>(Request.Cookies["LoggedInUser"]);
             ViewBag.LoggedInUser = user;
@@ -32,9 +33,23 @@ namespace SuperMunchkin.Controllers
             return View();
         }
 
-        public IActionResult Game()
+        public IActionResult GameSetup(Game game)
         {
-            return View();
+            return View(game);
+        }
+
+        public IActionResult GameOverview(Game game, GameStatus status, string munchkins)
+        {
+            game.Status = status;
+            game.Munchkins = JsonConvert.DeserializeObject<List<Munchkin>>(munchkins);
+
+            if (game.Status == GameStatus.Setup)
+            {
+                return GameSetup(game);
+                //return RedirectToAction("GameSetup", "Game", new { game });
+            }
+
+            return View(game);
         }
 
         public IActionResult History()

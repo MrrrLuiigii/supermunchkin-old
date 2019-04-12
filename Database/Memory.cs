@@ -35,9 +35,9 @@ namespace Database
 
             Games.Add(new Game(1, GameStatus.Finished, DateTime.Now, Munchkins, Munchkins[4]));
             Games.Add(new Game(2, GameStatus.Finished, DateTime.Now, Munchkins, Munchkins[2]));
-            Games.Add(new Game(3, GameStatus.Finished, DateTime.Now, Munchkins, Munchkins[5]));
-            Games.Add(new Game(4, GameStatus.Finished, DateTime.Now, Munchkins, Munchkins[0]));
-            Games.Add(new Game(5, GameStatus.Finished, DateTime.Now, Munchkins, Munchkins[1]));
+            Games.Add(new Game(3, GameStatus.Setup, DateTime.Now, Munchkins));
+            Games.Add(new Game(4, GameStatus.Setup, DateTime.Now, Munchkins));
+            Games.Add(new Game(5, GameStatus.Playing, DateTime.Now, Munchkins));
             Games.Add(new Game(6, GameStatus.Playing, DateTime.Now, Munchkins));
         }
 
@@ -79,6 +79,11 @@ namespace Database
         public IEnumerable<Game> GetAllGames()
         {
             return Games;
+        }
+
+        public IEnumerable<Munchkin> GetAllMunchkins()
+        {
+            return Munchkins;
         }
     }
 }

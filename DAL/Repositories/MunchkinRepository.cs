@@ -1,23 +1,27 @@
-﻿using DAL.Interfaces.Munchkins;
+﻿using DAL.Contexts.Munchkins;
+using DAL.Interfaces.Munchkins;
+using Models;
 using Models.Enums;
 
 namespace DAL.Repositories
 {
     public class MunchkinRepository : IMunchkinRepository
     {
-        public void AdjustGear(AdjustMunchkinStats direction)
+        private IMunchkinContext munchkinContext = new MunchkinContextMemory();
+
+        public void AdjustGear(Munchkin munchkin, AdjustMunchkinStats direction)
         {
-            throw new System.NotImplementedException();
+            munchkinContext.AdjustGear(munchkin, direction);
         }
 
-        public void AdjustGender(MunchkinGender gender)
+        public void AdjustGender(Munchkin munchkin, MunchkinGender gender)
         {
-            throw new System.NotImplementedException();
+            munchkinContext.AdjustGender(munchkin, gender);
         }
 
-        public void AdjustLevel(AdjustMunchkinStats direction)
+        public void AdjustLevel(Munchkin munchkin, AdjustMunchkinStats direction)
         {
-            throw new System.NotImplementedException();
+            munchkinContext.AdjustLevel(munchkin, direction);
         }
     }
 }

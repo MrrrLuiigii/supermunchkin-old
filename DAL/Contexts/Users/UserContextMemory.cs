@@ -21,7 +21,7 @@ namespace DAL.Contexts.Users
 
         public IEnumerable<Munchkin> GetAllMunchkins()
         {
-            throw new System.NotImplementedException();
+            return memory.GetAllMunchkins();
         }
 
         public IEnumerable<User> GetAllUsers()

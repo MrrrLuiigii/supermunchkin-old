@@ -1,11 +1,12 @@
-﻿using Models.Enums;
+﻿using Models;
+using Models.Enums;
 
 namespace DAL.Interfaces.Munchkins
 {
     public interface IMunchkinRepository
     {
-        void AdjustGender(MunchkinGender gender);
-        void AdjustLevel(AdjustMunchkinStats direction);
-        void AdjustGear(AdjustMunchkinStats direction);
+        void AdjustGender(Munchkin munchkin, MunchkinGender gender);
+        void AdjustLevel(Munchkin munchkin, AdjustMunchkinStats direction);
+        void AdjustGear(Munchkin munchkin, AdjustMunchkinStats direction);
     }
 }

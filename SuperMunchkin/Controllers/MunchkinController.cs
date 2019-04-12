@@ -40,5 +40,10 @@ namespace SuperMunchkin.Controllers
         {
             return RedirectToAction("Index", "Game");
         }
+
+        public IActionResult MunchkinEdit(Munchkin munchkin)
+        {
+            return View(munchkin);
+        }
     }
 }

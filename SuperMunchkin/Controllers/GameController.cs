@@ -23,12 +23,17 @@ namespace SuperMunchkin.Controllers
             return View();
         }
 
-        public IActionResult Game()
+        public IActionResult GameSetup()
         {
             Game game = new Game();
             gameCollectionLogic.AddGame(game);
 
             ViewBag.ActiveGame = game;
+            return View();
+        }
+
+        public IActionResult Game()
+        {
             return View();
         }
 

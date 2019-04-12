@@ -39,9 +39,10 @@ namespace Logic.Games
             {
                 foreach (Munchkin munchkin in user.Munchkins)
                 {
-                    if (game.Munchkins.Contains(munchkin))
+                    if (game.Munchkins.Find(m => m.Id == munchkin.Id) != null)
                     {
                         userGames.Add(game);
+                        break;
                     }
                 }
             }

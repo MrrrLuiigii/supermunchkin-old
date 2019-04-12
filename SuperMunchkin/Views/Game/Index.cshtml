@@ -11,9 +11,29 @@
     @{
         foreach (Models.Game g in ViewBag.UserGames)
         {
-            <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
-                @g.Status
-            </div>
+            if (g.Status != Models.Enums.GameStatus.Finished)
+            {
+                <a href="@Url.Action()">
+                    <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
+                        <div class="d-inline-block">
+                            <div class="pt-2">
+                                @if (g.Status == Models.Enums.GameStatus.Setup)
+                                {
+                                    <h4>Start playing!</h4>
+                                }
+                                else
+                                {
+                                    <h4>Continue playing!</h4>
+                                }
+                            </div>
+                            <div>
+                                <p class="float-left text-left ml-3" style="width: 30vw;">Number of players</p>
+                                <h1 class="float-right mr-3">@g.Munchkins.Count/6</h1>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
         }
     }
 </div>

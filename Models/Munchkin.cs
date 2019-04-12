@@ -11,6 +11,11 @@ namespace Models
         public int Level { get; set; }
         public int Gear { get; set; }        
 
+        public Munchkin()
+        {
+
+        }
+
         public Munchkin(string name, MunchkinGender gender)
         {
             Name = name;

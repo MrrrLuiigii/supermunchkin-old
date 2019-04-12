@@ -13,9 +13,7 @@
         {
             if (g.Status != Models.Enums.GameStatus.Finished)
             {
-                string munchkins = Newtonsoft.Json.JsonConvert.SerializeObject(g.Munchkins);
-
-                <a href="@Url.Action("GameOverview", "Game", new { g, g.Status, munchkins })">
+                <a href="@Url.Action("GameOverview", "Game", new { g.Id })">
                     <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
                         <div class="d-inline-block">
                             <div class="pt-2">
@@ -46,7 +44,7 @@
 
 <div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; right: 0; padding-top: 7px;">
     <a href="@Url.Action("Game", "Game")">
-        <i class="fas fa-play"></i>
+        <i class="fas fa-play" style="font-size: x-large; padding-left: 3px; padding-top: 4px;"></i>
     </a>
 </div>
 

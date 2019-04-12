@@ -38,15 +38,13 @@ namespace SuperMunchkin.Controllers
             return View(game);
         }
 
-        public IActionResult GameOverview(Game game, GameStatus status, string munchkins)
+        public IActionResult GameOverview(int id)
         {
-            game.Status = status;
-            game.Munchkins = JsonConvert.DeserializeObject<List<Munchkin>>(munchkins);
+            Game game = gameCollectionLogic.GetGameById(id);
 
             if (game.Status == GameStatus.Setup)
             {
                 return GameSetup(game);
-                //return RedirectToAction("GameSetup", "Game", new { game });
             }
 
             return View(game);

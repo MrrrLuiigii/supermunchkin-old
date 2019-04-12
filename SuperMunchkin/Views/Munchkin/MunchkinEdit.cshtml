@@ -4,9 +4,75 @@
 }
 
 @using Models;
+@using Models.Enums;
 @model Munchkin
 
-<div class="w-100 text-center mt-5 pb-3">
-    <h1>Edit<br />@Model.Name</h1>
+<div class="w-100 text-center mt-3 mb-5">
+    <h1>Edit @Model.Name</h1>
 </div>
 
+<div class="text-center">
+    <div class="text-center">
+        <h3>Strength</h3>
+        <h1>
+            @{
+                int strength = Model.Level + Model.Gear;
+            }
+            @strength
+        </h1>
+    </div>
+
+    <div class="d-inline-block text-center mt-4 mr-4">
+        <h3>Level</h3>
+
+        <div class="d-inline-block">
+            <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
+            <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
+        </div>
+        <div class="d-inline-block ml-2">
+            <h1>@Model.Level</h1>
+        </div>
+    </div>
+
+    <div class="d-inline-block text-center mt-4 ml-4">
+        <h3>Gear</h3>
+        <div class="d-inline-block">
+            <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
+            <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
+        </div>
+        <div class="d-inline-block ml-2">
+            <h1>@Model.Gear</h1>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <h3>Gender</h3>
+    <a href="@Url.Action("AdjustGender", "Munchkin", new { @Model.Id })">
+        <div class="d-inline-block">
+            <i class="fas fa-exchange-alt fa-2x custom-border button-small" style="padding-top: 7px;"></i>
+        </div>
+    </a>
+
+    @{
+        if (Model.Gender == MunchkinGender.Male)
+        {
+            <div class="d-inline-block ml-2 p-2">
+                <i class="fas fa-male fa-2x"></i>
+                <i class="fas fa-mars fa-2x"></i>
+            </div>
+        }
+        else
+        {
+            <div class="d-inline-block ml-2 p-2">
+                <i class="fas fa-female fa-2x"></i>
+                <i class="fas fa-venus fa-2x"></i>
+            </div>
+        }
+    }
+
+</div>
+
+<div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; left: 0; padding-top: 3px;">
+    <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
+</div>

@@ -3,14 +3,15 @@ using Logic.Munchkins;
 using Logic.Users;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Models.Enums;
 using SuperMunchkin.ViewModels;
 
 namespace SuperMunchkin.Controllers
 {
     public class MunchkinController : Controller
     {
+        private UserLogic userLogic = new UserLogic();
         private MunchkinLogic munchkinLogic = new MunchkinLogic();
-
         private GameLogic gameLogic = new GameLogic();
         private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
 
@@ -41,9 +42,38 @@ namespace SuperMunchkin.Controllers
             return RedirectToAction("Index", "Game");
         }
 
-        public IActionResult MunchkinEdit(Munchkin munchkin)
+        public IActionResult MunchkinEdit(int id)
         {
+            Munchkin munchkin = userLogic.GetMunchkinById(id);
             return View(munchkin);
+        }
+
+        public IActionResult AdjustGender(int id)
+        {
+            Munchkin munchkin = userLogic.GetMunchkinById(id);
+            MunchkinGender gender = MunchkinGender.Male;
+
+            if(munchkin.Gender == MunchkinGender.Male)
+            {
+                gender = MunchkinGender.Female;
+            }
+
+            munchkinLogic.AdjustGender(munchkin, gender);
+            return MunchkinEdit(id);
+        }
+
+        public IActionResult AdjustLevel(int id, AdjustMunchkinStats direction)
+        {
+            Munchkin munchkin = userLogic.GetMunchkinById(id);
+            munchkinLogic.AdjustLevel(munchkin, direction);
+            return MunchkinEdit(id);
+        }
+
+        public IActionResult AdjustGear(int id, AdjustMunchkinStats direction)
+        {
+            Munchkin munchkin = userLogic.GetMunchkinById(id);
+            munchkinLogic.AdjustGear(munchkin, direction);
+            return MunchkinEdit(id);
         }
     }
 }

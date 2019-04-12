@@ -1,10 +1,16 @@
 ﻿*{
+    color: black;
     font-family: Munchkin;
     outline: none;
 }
 
 body{
     background-color: #FFD09A;
+}
+
+.button-tiny{
+    height: 30px;
+    width: 30px;
 }
 
 .button-small{
@@ -27,7 +33,7 @@ body{
     color: black;
     background-color: #F6F1DF;
     border: 2px solid black;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 .hiddenscroll::-webkit-scrollbar{
@@ -58,7 +64,7 @@ a:hover{
     .mobileMenu{
         transform: translateX(-100%);
         position: fixed;
-        top: 0px;
+        top: 0;
         bottom: 0;
         margin: auto;
         left: 0;
@@ -67,7 +73,7 @@ a:hover{
 
     .mobileMenu.open {
         transform: translateX(0%);
-        box-shadow: 1px 0px 5px #000000;
+        box-shadow: 1px 0 5px #000000;
         background-color: #F6F1DF;
         border: 2px solid black;
         border-radius: 15px;

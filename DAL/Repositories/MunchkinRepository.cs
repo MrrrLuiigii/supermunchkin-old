@@ -9,19 +9,9 @@ namespace DAL.Repositories
     {
         private IMunchkinContext munchkinContext = new MunchkinContextMemory();
 
-        public void AdjustGear(Munchkin munchkin, AdjustMunchkinStats direction)
+        public void AdjustMunchkin(Munchkin munchkin)
         {
-            munchkinContext.AdjustGear(munchkin, direction);
-        }
-
-        public void AdjustGender(Munchkin munchkin, MunchkinGender gender)
-        {
-            munchkinContext.AdjustGender(munchkin, gender);
-        }
-
-        public void AdjustLevel(Munchkin munchkin, AdjustMunchkinStats direction)
-        {
-            munchkinContext.AdjustLevel(munchkin, direction);
+            munchkinContext.AdjustMunchkin(munchkin);
         }
     }
 }

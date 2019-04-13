@@ -9,19 +9,9 @@ namespace DAL.Contexts.Munchkins
     {
         Memory memory = new Memory();
 
-        public void AdjustGear(Munchkin munchkin, AdjustMunchkinStats direction)
+        public void AdjustMunchkin(Munchkin munchkin)
         {
-            //Adjust Gear
-        }
-
-        public void AdjustGender(Munchkin munchkin, MunchkinGender gender)
-        {
-            //Adjust Gender
-        }
-
-        public void AdjustLevel(Munchkin munchkin, AdjustMunchkinStats direction)
-        {
-            //Adjust Level
+            //Update munchkin
         }
     }
 }

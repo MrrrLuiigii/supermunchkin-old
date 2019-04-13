@@ -51,29 +51,23 @@ namespace SuperMunchkin.Controllers
         public IActionResult AdjustGender(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
-            MunchkinGender gender = MunchkinGender.Male;
 
-            if(munchkin.Gender == MunchkinGender.Male)
-            {
-                gender = MunchkinGender.Female;
-            }
-
-            munchkinLogic.AdjustGender(munchkin, gender);
-            return MunchkinEdit(id);
+            munchkinLogic.AdjustGender(munchkin);
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
 
         public IActionResult AdjustLevel(int id, AdjustMunchkinStats direction)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             munchkinLogic.AdjustLevel(munchkin, direction);
-            return MunchkinEdit(id);
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
 
         public IActionResult AdjustGear(int id, AdjustMunchkinStats direction)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             munchkinLogic.AdjustGear(munchkin, direction);
-            return MunchkinEdit(id);
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
     }
 }

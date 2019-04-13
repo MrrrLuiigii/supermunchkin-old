@@ -5,11 +5,13 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Collections.Generic;
 using Models.Enums;
+using Logic.Users;
 
 namespace SuperMunchkin.Controllers
 {
     public class GameController : Controller
     {
+        private UserLogic userLogic = new UserLogic();
         private GameLogic gameLogic = new GameLogic();
         private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
 
@@ -53,6 +55,15 @@ namespace SuperMunchkin.Controllers
         public IActionResult History()
         {
             return View();
+        }
+
+        public IActionResult SetWinner(int gameId, int munchkinId)
+        {
+            Game game = gameCollectionLogic.GetGameById(gameId);
+            Munchkin munchkin = userLogic.GetMunchkinById(munchkinId);
+            gameLogic.SetWinner(game, munchkin);
+            gameLogic.AdjustGameStatus(game, GameStatus.Finished);
+            return RedirectToAction("GameLobby", "Game");
         }
     }
 }

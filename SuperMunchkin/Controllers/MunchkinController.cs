@@ -51,7 +51,6 @@ namespace SuperMunchkin.Controllers
         public IActionResult AdjustGender(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
-
             munchkinLogic.AdjustGender(munchkin);
             return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
@@ -59,7 +58,13 @@ namespace SuperMunchkin.Controllers
         public IActionResult AdjustLevel(int id, AdjustMunchkinStats direction)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
-            munchkinLogic.AdjustLevel(munchkin, direction);
+            ViewBag.Winner = null;
+
+            if (munchkinLogic.AdjustLevel(munchkin, direction))
+            {
+                ViewBag.Winner = munchkin;
+            }
+
             return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
 

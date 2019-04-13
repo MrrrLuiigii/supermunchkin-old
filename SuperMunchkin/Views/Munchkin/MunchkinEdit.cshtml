@@ -26,8 +26,13 @@
         <h3>Level</h3>
 
         <div class="d-inline-block">
-            <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
-            <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
+
+            <a href="@Url.Action("AdjustLevel", "Munchkin", new { @Model.Id, AdjustMunchkinStats.Up })">
+                <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
+            </a>
+            <a href="@Url.Action("AdjustLevel", "Munchkin", new { @Model.Id, AdjustMunchkinStats.Down })">
+                <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
+            </a>
         </div>
         <div class="d-inline-block ml-2">
             <h1>@Model.Level</h1>
@@ -37,8 +42,12 @@
     <div class="d-inline-block text-center mt-4 ml-4">
         <h3>Gear</h3>
         <div class="d-inline-block">
-            <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
-            <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
+            <a href="@Url.Action("AdjustGear", "Munchkin", new { @Model.Id, AdjustMunchkinStats.Up })">
+                <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
+            </a>
+            <a href="@Url.Action("AdjustGear", "Munchkin", new { @Model.Id, AdjustMunchkinStats.Down })">
+                <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
+            </a>
         </div>
         <div class="d-inline-block ml-2">
             <h1>@Model.Gear</h1>
@@ -76,3 +85,16 @@
 <div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; left: 0; padding-top: 3px;">
     <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
 </div>
+
+@{
+    if (ViewBag.Winner != null)
+    {
+        <div class="w-100 mb-3 text-center" style="position: fixed; left: 0; bottom: 0;">
+            <h6 class="text-danger">@ViewBag.Winner.Name<br />won the game!</h6>
+        </div>
+
+        <div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; right: 0; padding-top: 6px;">
+            <i class="fas fa-flag-checkered fa-2x"></i>
+        </div>
+    }
+}

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Models.Enums;
 using Logic.Users;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SuperMunchkin.Controllers
 {
@@ -15,9 +17,10 @@ namespace SuperMunchkin.Controllers
         private GameLogic gameLogic = new GameLogic();
         private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
 
+        [Authorize]
         public IActionResult GameLobby()
         {
-            User user = JsonConvert.DeserializeObject<User>(Request.Cookies["LoggedInUser"]);
+            User user = JsonConvert.DeserializeObject<User>(((ClaimsIdentity)User.Identity).Claims.First().Value);
             ViewBag.LoggedInUser = user;
 
             List<Game> userGames = gameCollectionLogic.GetAllGamesByUser(user);
@@ -26,6 +29,7 @@ namespace SuperMunchkin.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult CreateNewGame()
         {
             Game game = new Game();
@@ -36,6 +40,7 @@ namespace SuperMunchkin.Controllers
             return RedirectToAction("GameSetup", "Game", new { gameId });
         }
 
+        [Authorize]
         public IActionResult GameSetup(int id)
         {
             Game game = gameCollectionLogic.GetGameById(id);
@@ -43,6 +48,7 @@ namespace SuperMunchkin.Controllers
             return View(game);
         }
 
+        [Authorize]
         public IActionResult GameOverview(int id)
         {
             Game game = gameCollectionLogic.GetGameById(id);
@@ -55,11 +61,13 @@ namespace SuperMunchkin.Controllers
             return View(game);
         }
 
+        [Authorize]
         public IActionResult History()
         {
             return View();
         }
 
+        [Authorize]
         public IActionResult SetWinner(int gameId, int munchkinId)
         {
             Game game = gameCollectionLogic.GetGameById(gameId);

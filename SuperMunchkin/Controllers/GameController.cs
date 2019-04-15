@@ -26,17 +26,20 @@ namespace SuperMunchkin.Controllers
             return View();
         }
 
-        public IActionResult GameSetup()
+        public IActionResult CreateNewGame()
         {
             Game game = new Game();
             gameCollectionLogic.AddGame(game);
 
-            ViewBag.ActiveGame = game;
-            return View();
+            int gameId = gameCollectionLogic.GetGameByDateTime(game.DatePlayed).Id;
+            
+            return RedirectToAction("GameSetup", "Game", new { gameId });
         }
 
-        public IActionResult GameSetup(Game game)
+        public IActionResult GameSetup(int id)
         {
+            Game game = gameCollectionLogic.GetGameById(id);
+
             return View(game);
         }
 
@@ -46,7 +49,7 @@ namespace SuperMunchkin.Controllers
 
             if (game.Status == GameStatus.Setup)
             {
-                return GameSetup(game);
+                return RedirectToAction("GameSetup", "Game", new { id });
             }
 
             return View(game);

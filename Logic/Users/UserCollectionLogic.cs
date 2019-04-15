@@ -22,21 +22,24 @@ namespace Logic.Users
                 }
             }
 
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, BCrypt.Net.BCrypt.GenerateSalt());
             userRepo.AddUser(user);
             return true;
         }
 
         public User Login(string username, string password)
         {
-            IEnumerable<User> users = GetAllUsers();
+            User user = GetAllUsers().ToList().Find(u => u.Username == username);
 
-            foreach (User user in users)
+            if (user != null && user.Password == password)
             {
-                if (user.Username == username && user.Password == password)
-                {
-                    return user;
-                }
+                return user;
             }
+
+            //if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
+            //{
+            //    return user;
+            //}
 
             return null;
         }

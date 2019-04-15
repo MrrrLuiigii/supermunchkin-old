@@ -11,10 +11,17 @@
 
 </head>
 <body>
+    @using Models;
+    @using Newtonsoft.Json;
+    @using System.Security.Claims;
+    @{
+        User user = JsonConvert.DeserializeObject<User>(((ClaimsIdentity)User.Identity).Claims.First().Value);
+    }
+
     <nav class="navbar navbar-expand-lg justify-content-sm-start" style="position: absolute; z-index: 99;">        
         <div class="navbar-collapse w-50 p-3 p-lg-0 mt-lg-0 d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end mobileMenu" id="navbarSupportedContent">
             <div>
-                <h5 class="mb-4 pt-sm-0 p-lg-0 mr-lg-5 mt-lg-2" style="text-decoration: underline;">Username</h5>
+                <h5 class="mb-4 pt-sm-0 p-lg-0 mr-lg-5 mt-lg-2" style="text-decoration: underline;">@user.Username</h5>
             </div>
             <ul class="navbar-nav align-self-stretch float-right">
                 <li class="nav-item active">

@@ -18,7 +18,7 @@
     <div style="height: 70vh;">
         <div class="text-center">
             <div class="mb-3" style="height: 40px;">
-                <p class="text-danger">@ViewBag.ErrorMessage</p>
+                <p class="text-danger mb-0">@ViewBag.ErrorMessage</p>
             </div>
             <div class="mb-3">
                 @Html.TextBoxFor(m => m.Username, new { placeholder = "Username", @class = "custom-border p-1" })
@@ -26,12 +26,22 @@
             <div class="mb-3">
                 @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "custom-border p-1" })
             </div>
-            <div class="d-inline-block mb-3">
+            <div class="d-inline-block">
                 <div class="float-left mr-5">
-                    @Html.RadioButtonFor(m => m.Gender, MunchkinGender.Male)<p>Male</p>
+                    <div class="d-inline-block">
+                        @Html.RadioButtonFor(m => m.Gender, MunchkinGender.Male)
+                    </div>
+                    <div class="d-inline-block">
+                        <p>Male</p>
+                    </div>
                 </div>
                 <div class="float-right">
-                    @Html.RadioButtonFor(m => m.Gender, MunchkinGender.Female)<p>Female</p>
+                    <div class="d-inline-block">
+                        @Html.RadioButtonFor(m => m.Gender, MunchkinGender.Female)
+                    </div>
+                    <div class="d-inline-block">
+                        <p>Female</p>
+                    </div>
                 </div>
             </div>
             <div>

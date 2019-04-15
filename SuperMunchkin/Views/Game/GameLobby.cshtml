@@ -3,28 +3,40 @@
     ViewData["Title"] = "GameLobby";
 }
 
-<div class="w-100 text-center mt-3 mb-5">
+@using Models;
+@using Models.Enums;
+
+<div class="w-100 text-center mt-3 mb-3">
     <h1>Game Lobby</h1>
 </div>
 
-<div class="hiddenscroll text-center m-auto" style="height: 65vh; overflow-y: scroll;">
+<div class="hiddenscroll text-center m-auto" style="height: 70vh; overflow-y: scroll;">
     @{
-        foreach (Models.Game g in ViewBag.UserGames)
+        foreach (Game g in ViewBag.UserGames)
         {
-            if (g.Status != Models.Enums.GameStatus.Finished)
+            if (g.Status == GameStatus.Playing)
             {
                 <a href="@Url.Action("GameOverview", "Game", new { g.Id })">
                     <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
                         <div class="d-inline-block w-100">
                             <div class="pt-2">
-                                @if (g.Status == Models.Enums.GameStatus.Setup)
-                                {
-                                    <h4>Start playing!</h4>
-                                }
-                                else
-                                {
-                                    <h4>Continue playing!</h4>
-                                }
+                                <h4>Continue playing!</h4>
+                            </div>
+                            <div>
+                                <p class="float-left text-left ml-3" style="width: 30vw;">Number of players</p>
+                                <h1 class="float-right mr-3">@g.Munchkins.Count/6</h1>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+            else if (g.Status == GameStatus.Setup)
+            {
+                <a href="@Url.Action("GameSetup", "Game", new { g.Id })">
+                    <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
+                        <div class="d-inline-block w-100">
+                            <div class="pt-2">
+                                <h4>Start playing!</h4>
                             </div>
                             <div>
                                 <p class="float-left text-left ml-3" style="width: 30vw;">Number of players</p>
@@ -43,7 +55,7 @@
 </div>
 
 <div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; right: 0; padding-top: 7px;">
-    <a href="@Url.Action("Game", "Game")">
+    <a href="@Url.Action("CreateNewGame", "Game")">
         <i class="fas fa-play" style="font-size: x-large; padding-left: 3px; padding-top: 4px;"></i>
     </a>
 </div>

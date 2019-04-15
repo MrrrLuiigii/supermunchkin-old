@@ -20,8 +20,9 @@ namespace SuperMunchkin.Controllers
             return View();
         }
 
-        public IActionResult Add(Game game)
+        public IActionResult Add(int id)
         {
+            Game game = gameCollectionLogic.GetGameById(id);
             ViewBag.ActiveGame = game;
             return View();
         }
@@ -34,12 +35,14 @@ namespace SuperMunchkin.Controllers
                 return RedirectToAction("Index", "Game");
             }
 
+            ViewBag.ErrorMessage = "Make sure all fields are filled in correctly.";
             return View(mvm);
         }
 
-        public IActionResult Remove(Munchkin munchkin)
+        public IActionResult Remove(int id)
         {
-            return RedirectToAction("Index", "Game");
+            Munchkin munchkin = userLogic.GetMunchkinById(id);
+            return RedirectToAction("GameSetup", "Game");
         }
 
         public IActionResult MunchkinEdit(int id)

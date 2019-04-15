@@ -3,8 +3,9 @@
     ViewData["Title"] = "Add";
 }
 
-@model SuperMunchkin.ViewModels.MunchkinViewModel
-
+@using Models.Enums;
+@using SuperMunchkin.ViewModels;
+@model MunchkinViewModel
 
 <div class="w-100 text-center mt-3 pb-3">
     <h1>Add Munchkin</h1>
@@ -16,28 +17,26 @@
 
     <div style="height: 70vh;">
         <div class="text-center">
+            <div class="mb-3" style="height: 40px;">
+                <p class="text-danger">@ViewBag.ErrorMessage</p>
+            </div>
             <div class="mb-3">
-                @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
                 @Html.TextBoxFor(m => m.Username, new { placeholder = "Username", @class = "custom-border p-1" })
             </div>
             <div class="mb-3">
-                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "custom-border p-1" })
-            </div>
-            <div>
-                @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
             </div>
             <div class="d-inline-block mb-3">
                 <div class="float-left mr-5">
-                    @Html.RadioButtonFor(m => m.Gender, Models.Enums.MunchkinGender.Male)<p>Male</p>
+                    @Html.RadioButtonFor(m => m.Gender, MunchkinGender.Male)<p>Male</p>
                 </div>
                 <div class="float-right">
-                    @Html.RadioButtonFor(m => m.Gender, Models.Enums.MunchkinGender.Female)<p>Female</p>
+                    @Html.RadioButtonFor(m => m.Gender, MunchkinGender.Female)<p>Female</p>
                 </div>
             </div>
             <div>
                 <button class="button-big custom-border mr-3">
-                    @Html.ActionLink("Cancel", "Index", "Game")
+                    @Html.ActionLink("Cancel", "GameSetup", "Game")
                 </button>
                 <input type="submit" value="Add" class="button-big custom-border" />
             </div>

@@ -3,7 +3,6 @@
     ViewData["Title"] = "Add";
 }
 
-@using Models;
 @using Models.Enums;
 @using SuperMunchkin.ViewModels;
 @model MunchkinViewModel
@@ -12,7 +11,7 @@
     <h1>Add Munchkin</h1>
 </div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Add", "Munchkin", new { ViewBag.Game.Id }))
 {
     @Html.AntiForgeryToken()
 
@@ -47,7 +46,7 @@
             </div>
             <div>
                 <button class="button-big custom-border mr-3">
-                    @Html.ActionLink("Cancel", "GameSetup", "Game", new { })
+                    @Html.ActionLink("Cancel", "GameSetup", "Game", new { ViewBag.Game.Id })
                 </button>
                 <input type="submit" value="Add" class="button-big custom-border" />
             </div>

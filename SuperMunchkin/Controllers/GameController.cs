@@ -34,7 +34,13 @@ namespace SuperMunchkin.Controllers
         public IActionResult CreateNewGame()
         {
             Game game = new Game();
-            game = gameCollectionLogic.AddGame(game);            
+            game = gameCollectionLogic.AddGame(game);
+
+            if (game == null)
+            {
+                return RedirectToAction("GameLobby", "Game");
+            }
+
             return RedirectToAction("GameSetup", "Game", new { game.Id });
         }
 
@@ -59,9 +65,22 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
-        public IActionResult History()
+        public IActionResult HistoryLobby()
         {
+            User user = JsonConvert.DeserializeObject<User>(((ClaimsIdentity)User.Identity).Claims.First().Value);
+            ViewBag.LoggedInUser = user;
+
+            List<Game> userGames = gameCollectionLogic.GetAllGamesByUser(user);
+            ViewBag.UserGames = userGames;
+
             return View();
+        }
+
+        [Authorize]
+        public IActionResult HistoryOverview(int id)
+        {
+            Game game = gameCollectionLogic.GetGameById(id);
+            return View(game);
         }
 
         [Authorize]

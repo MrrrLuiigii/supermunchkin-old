@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "HistoryLobby";
+}
+
+@using Models;
+@using Models.Enums;
+
+<div class="w-100 text-center mt-3 mb-3">
+    <h1>Game History</h1>
+</div>
+
+<div class="hiddenscroll text-center m-auto" style="height: 70vh; overflow-y: scroll;">
+    @{
+        foreach (Game g in ViewBag.UserGames)
+        {
+            if (g.Status == GameStatus.Finished)
+            {
+                <a href="@Url.Action("HistoryOverview", "Game", new { g.Id })">
+                    <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
+                        <div class="d-inline-block w-100">
+                            <div class="pt-2">
+                                <h4>@g.Winner.Name won!</h4>
+                            </div>
+                            <div>
+                                <p class="float-left text-left ml-3" style="width: 30vw;">Number of players</p>
+                                <h1 class="float-right mr-3">@g.Munchkins.Count/6</h1>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+        }
+    }
+</div>
+
+<div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; left: 0; padding-top: 3px;">
+    <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
+</div>

@@ -13,8 +13,8 @@ namespace SuperMunchkin.Controllers
     public class MunchkinController : Controller
     {
         private UserLogic userLogic = new UserLogic();
+        private UserCollectionLogic userCollectionLogic = new UserCollectionLogic();
         private MunchkinLogic munchkinLogic = new MunchkinLogic();
-        private GameLogic gameLogic = new GameLogic();
         private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
 
         [Authorize]
@@ -27,16 +27,25 @@ namespace SuperMunchkin.Controllers
         public IActionResult Add(int id)
         {
             Game game = gameCollectionLogic.GetGameById(id);
+            ViewBag.Game = game;
             return View();
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult Add(MunchkinViewModel mvm)
+        public IActionResult Add(MunchkinViewModel mvm, int id)
         {
+            Game game = gameCollectionLogic.GetGameById(id);
+            ViewBag.Game = game;
+
             if (ModelState.IsValid)
             {
-                return RedirectToAction("GameSetup", "Game");
+                User user = userCollectionLogic.Login(mvm.Username, mvm.Password);
+
+                if (user != null)
+                {
+                    return RedirectToAction("GameSetup", "Game", new { id });
+                }
             }
             
             ViewBag.ErrorMessage = "Make sure all fields are filled in correctly.";

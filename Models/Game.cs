@@ -9,7 +9,7 @@ namespace Models
     {
         public int Id { get; set; }
         public GameStatus Status { get; set; }
-        public DateTime DatePlayed { get; }
+        public DateTime DatePlayed { get; set; }
         public List<Munchkin> Munchkins { get; set; }
         public Munchkin Winner { get; set; }
 

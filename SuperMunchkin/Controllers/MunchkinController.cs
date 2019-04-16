@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.Enums;
+using Newtonsoft.Json;
 using SuperMunchkin.ViewModels;
 
 namespace SuperMunchkin.Controllers
@@ -26,7 +27,6 @@ namespace SuperMunchkin.Controllers
         public IActionResult Add(int id)
         {
             Game game = gameCollectionLogic.GetGameById(id);
-            ViewBag.ActiveGame = game;
             return View();
         }
 
@@ -36,18 +36,20 @@ namespace SuperMunchkin.Controllers
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Game");
+                return RedirectToAction("GameSetup", "Game");
             }
-
+            
             ViewBag.ErrorMessage = "Make sure all fields are filled in correctly.";
             return View(mvm);
         }
 
         [Authorize]
-        public IActionResult Remove(int id)
+        public IActionResult Remove(int id, int gameId)
         {
+            Game game = gameCollectionLogic.GetGameById(gameId);
+
             Munchkin munchkin = userLogic.GetMunchkinById(id);
-            return RedirectToAction("GameSetup", "Game");
+            return RedirectToAction("GameSetup", "Game", new { game.Id });
         }
 
         [Authorize]

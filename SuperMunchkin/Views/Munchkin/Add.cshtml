@@ -3,6 +3,7 @@
     ViewData["Title"] = "Add";
 }
 
+@using Models;
 @using Models.Enums;
 @using SuperMunchkin.ViewModels;
 @model MunchkinViewModel
@@ -46,7 +47,7 @@
             </div>
             <div>
                 <button class="button-big custom-border mr-3">
-                    @Html.ActionLink("Cancel", "GameSetup", "Game")
+                    @Html.ActionLink("Cancel", "GameSetup", "Game", new { })
                 </button>
                 <input type="submit" value="Add" class="button-big custom-border" />
             </div>

@@ -8,6 +8,7 @@ using Models.Enums;
 using Logic.Users;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace SuperMunchkin.Controllers
 {
@@ -33,18 +34,14 @@ namespace SuperMunchkin.Controllers
         public IActionResult CreateNewGame()
         {
             Game game = new Game();
-            gameCollectionLogic.AddGame(game);
-
-            int gameId = gameCollectionLogic.GetGameByDateTime(game.DatePlayed).Id;
-            
-            return RedirectToAction("GameSetup", "Game", new { gameId });
+            game = gameCollectionLogic.AddGame(game);            
+            return RedirectToAction("GameSetup", "Game", new { game.Id });
         }
 
         [Authorize]
         public IActionResult GameSetup(int id)
         {
             Game game = gameCollectionLogic.GetGameById(id);
-
             return View(game);
         }
 

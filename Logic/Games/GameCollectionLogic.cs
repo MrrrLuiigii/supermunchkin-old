@@ -2,6 +2,7 @@
 using DAL.Interfaces.Users;
 using DAL.Repositories;
 using Models;
+using Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,17 @@ namespace Logic.Games
         private IUserRepository userRepository = new UserRepository();
         private IGameCollectionRepository gameCollectionRepository = new GameRepository();
 
-        public void AddGame(Game game)
+        public Game AddGame(Game game)
         {
+            IEnumerable<Game> games = gameCollectionRepository.GetAllGames();
+
+            while (games.ToList().Find(g => g.DatePlayed == game.DatePlayed && g.Status == game.Status) != null)
+            {
+                game.DatePlayed = game.DatePlayed.AddSeconds(1);
+            }
+
             gameCollectionRepository.AddGame(game);
+            return GetGameByDateTimeAndStatus(game.DatePlayed, game.Status);
         }
 
         public Game GetGameById(int id)
@@ -24,10 +33,10 @@ namespace Logic.Games
             return games.ToList().Find(g => g.Id == id);
         }
 
-        public Game GetGameByDateTime(DateTime dateTime)
+        public Game GetGameByDateTimeAndStatus(DateTime dateTime, GameStatus status)
         {
             IEnumerable<Game> games = gameCollectionRepository.GetAllGames();
-            return games.ToList().Find(g => g.DatePlayed == dateTime);
+            return games.ToList().Find(g => g.DatePlayed == dateTime && g.Status == status);
         }
 
         public List<Game> GetAllGamesByUser(User user)

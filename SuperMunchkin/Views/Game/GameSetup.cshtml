@@ -13,14 +13,15 @@
 
 <div class="hiddenscroll text-center m-auto" style="height: 70vh; overflow-y: scroll;">
     @{
-        foreach (Models.Munchkin m in Model.Munchkins)
+        foreach (Munchkin m in Model.Munchkins)
         {
             <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
                 @{
                     if (Model.Status == GameStatus.Setup)
                     {
                         <div class="custom-border" style="height: 30px; width: 30px; padding-top: 3px; padding-left: 1px; position: relative; top: -10px; left: -10px;">
-                            <a href="@Url.Action("Remove", "Munchkin", new { m.Id })">
+                            @{ int gameId = Model.Id; }
+                            <a href="@Url.Action("Remove", "Munchkin", new { m.Id, gameId })">
                                 <i class="fas fa-times"></i>
                             </a>
                         </div>

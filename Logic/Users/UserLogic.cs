@@ -10,6 +10,16 @@ namespace Logic.Users
     {
         IUserRepository userRepository = UserFactory.GetUserRepository();
 
+        public void CreateMunchkin(Munchkin munchkin)
+        {
+            userRepository.AddMunchkin(munchkin);
+        }
+
+        public void RemoveMunchkin(Munchkin munchkin)
+        {
+            userRepository.RemoveMunchkin(munchkin);
+        }
+
         public Munchkin GetMunchkinById(int id)
         {
             IEnumerable<Munchkin> munchkins = userRepository.GetAllMunchkins();

@@ -1,5 +1,5 @@
 ﻿using DAL.Interfaces.Users;
-using DAL.Repositories;
+using Factories;
 using Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ namespace Logic.Users
 {
     public class UserLogic
     {
-        IUserRepository userRepository = new UserRepository();
+        IUserRepository userRepository = UserFactory.GetUserRepository();
 
         public Munchkin GetMunchkinById(int id)
         {

@@ -1,10 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DAL.Interfaces.Games;
+using DAL.Repositories;
 
 namespace Factories
 {
-    class GameFactory
+    public static class GameFactory
     {
+        public static IGameRepository GetGameRepository()
+        {
+            return new GameRepository();
+        }
+
+        public static IGameCollectionRepository GetGameCollectionRepository()
+        {
+            return new GameRepository();
+        }
     }
 }

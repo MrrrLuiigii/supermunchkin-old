@@ -1,8 +1,18 @@
-﻿using System;
+﻿using DAL.Interfaces.Users;
+using DAL.Repositories;
 
 namespace Factories
 {
-    public class Class1
+    public static class UserFactory
     {
+        public static IUserRepository GetUserRepository()
+        {
+            return new UserRepository();
+        }
+
+        public static IUserCollectionRepository GetUserCollectionRepository()
+        {
+            return new UserRepository();
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using DAL.Interfaces.Munchkins;
-using DAL.Repositories;
+using Factories;
 using Models;
 using Models.Enums;
 
@@ -7,7 +7,7 @@ namespace Logic.Munchkins
 {
     public class MunchkinLogic
     {
-        IMunchkinRepository munchkinRepository = new MunchkinRepository();
+        IMunchkinRepository munchkinRepository = MunchkinFactory.GetMunchkinRepository();
 
         public bool AdjustLevel(Munchkin munchkin, AdjustMunchkinStats direction)
         {

@@ -1,5 +1,5 @@
 ﻿using DAL.Interfaces.Users;
-using DAL.Repositories;
+using Factories;
 using Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ namespace Logic.Users
 {
     public class UserCollectionLogic
     {
-        IUserCollectionRepository userRepo = new UserRepository();
+        IUserCollectionRepository userRepo = UserFactory.GetUserCollectionRepository();
 
         public bool AddUser(User user)
         {

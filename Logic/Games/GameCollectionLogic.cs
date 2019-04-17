@@ -1,6 +1,6 @@
 ﻿using DAL.Interfaces.Games;
 using DAL.Interfaces.Users;
-using DAL.Repositories;
+using Factories;
 using Models;
 using Models.Enums;
 using System;
@@ -11,8 +11,8 @@ namespace Logic.Games
 {
     public class GameCollectionLogic
     {
-        private IUserRepository userRepository = new UserRepository();
-        private IGameCollectionRepository gameCollectionRepository = new GameRepository();
+        private IUserRepository userRepository = UserFactory.GetUserRepository();
+        private IGameCollectionRepository gameCollectionRepository = GameFactory.GetGameCollectionRepository();
 
         public Game AddGame(Game game)
         {

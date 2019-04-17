@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DAL.Interfaces.Munchkins;
+using DAL.Repositories;
 
 namespace Factories
 {
-    class MunchkinFactory
+    public static class MunchkinFactory
     {
+        public static IMunchkinRepository GetMunchkinRepository()
+        {
+            return new MunchkinRepository();
+        }
     }
 }

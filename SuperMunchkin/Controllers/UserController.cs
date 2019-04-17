@@ -1,4 +1,5 @@
-﻿using Logic.Users;
+﻿using Logic.Games;
+using Logic.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -18,6 +19,7 @@ namespace SuperMunchkin.Controllers
     {
         private UserLogic userLogic = new UserLogic();
         private UserCollectionLogic userCollectionLogic = new UserCollectionLogic();
+        private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
 
         [AllowAnonymous]
         public IActionResult Login()
@@ -110,7 +112,6 @@ namespace SuperMunchkin.Controllers
                     if (userCollectionLogic.AddUser(user))
                     {
                         return RedirectToAction("Login");
-                        
                     }
 
                     ViewBag.ErrorMessage = "This username and/or email has already been taken.";
@@ -119,6 +120,43 @@ namespace SuperMunchkin.Controllers
             }
 
             ViewBag.ErrorMessage = "All fields have to be filled in correctly.";
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Statistics()
+        {
+            User user = JsonConvert.DeserializeObject<User>(((ClaimsIdentity)User.Identity).Claims.First().Value);
+            ViewBag.LoggedInUser = user;
+
+            IEnumerable<Game> userGames = gameCollectionLogic.GetAllGamesByUser(user);
+            ViewBag.UserGames = userGames;
+
+            int gamesWon = 0;
+            foreach (Game g in ViewBag.UserGames)
+            {
+                if (user.Munchkins.ToList().Where(m => m.Id == g.Winner.Id) != null)
+                {
+                    gamesWon += 1;
+                }
+            }
+
+            ViewBag.GamesWon = gamesWon;
+
+            int AvgGear = 0;
+            int AvgLevel = 0;
+            foreach (Munchkin m in user.Munchkins)
+            {
+                AvgGear += m.Gear;
+                AvgLevel += m.Level;
+            }
+
+            AvgGear = AvgGear / user.Munchkins.Count;
+            AvgLevel = AvgLevel / user.Munchkins.Count;
+
+            ViewBag.AvgGear = AvgGear;
+            ViewBag.AvgLevel = AvgLevel;
+
             return View();
         }
     }

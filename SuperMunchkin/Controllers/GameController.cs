@@ -52,7 +52,7 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
-        public IActionResult GameOverview(int id)
+        public IActionResult GameOverview(int id, int diceInt)
         {
             Game game = gameCollectionLogic.GetGameById(id);
 
@@ -61,7 +61,15 @@ namespace SuperMunchkin.Controllers
                 return RedirectToAction("GameSetup", "Game", new { id });
             }
 
+            ViewBag.DiceInt = diceInt;
             return View(game);
+        }
+
+        [Authorize]
+        public IActionResult RollDice(int id)
+        {
+            int diceInt = gameLogic.RollDice();
+            return RedirectToAction("GameOverview", "Game", new { id, diceInt });
         }
 
         [Authorize]

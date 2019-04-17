@@ -15,6 +15,7 @@ namespace SuperMunchkin.Controllers
         private UserLogic userLogic = new UserLogic();
         private UserCollectionLogic userCollectionLogic = new UserCollectionLogic();
         private MunchkinLogic munchkinLogic = new MunchkinLogic();
+        private GameLogic gameLogic = new GameLogic();
         private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
 
         [Authorize]
@@ -62,10 +63,18 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
-        public IActionResult MunchkinEdit(int id)
+        public IActionResult MunchkinEdit(int id, int diceInt)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
+            ViewBag.DiceInt = diceInt;
             return View(munchkin);
+        }
+
+        [Authorize]
+        public IActionResult RollDice(int id)
+        {
+            int diceInt = gameLogic.RollDice();
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id, diceInt });
         }
 
         [Authorize]

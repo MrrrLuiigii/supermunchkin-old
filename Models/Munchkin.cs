@@ -7,7 +7,7 @@ namespace Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public MunchkinGender Gender { get; set; }
+        public MunchkinGender? Gender { get; set; }
         public int Level { get; set; }
         public int Gear { get; set; }        
 
@@ -16,10 +16,12 @@ namespace Models
 
         }
 
-        public Munchkin(string name, MunchkinGender gender)
+        public Munchkin(string name, MunchkinGender? gender)
         {
             Name = name;
             Gender = gender;
+            Level = 0;
+            Gear = 0;
         }
         
         [JsonConstructor]

@@ -1,41 +1,126 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using DAL.Interfaces.Users;
-using Database;
+using Databases;
 using Models;
+using Models.Enums;
+using MySql.Data.MySqlClient;
 
 namespace DAL.Contexts.Users
 {
     public class UserContextSQL : IUserContext
     {
-        private CRUD crud = new CRUD();
+        private Database database = new Database();
 
         public void AddMunchkin(User user, Munchkin munchkin)
         {
-            string table = "munchkin";
-            string[] arguments = { "userId", "gender", "level", "gear" };
-            string[] values = { user.Id.ToString(), munchkin.Gender.ToString(), munchkin.Level.ToString(), munchkin.Gear.ToString() };
+            string sql = "insert into 'munchkin' ('UserId', 'Gender', 'Level', 'Gear') values (@UserId, @Gender, @Level, @Gear);";
 
-            crud.Write(table, arguments, values);
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
+            parameters.Add(new MySqlParameter("@UserId", user.Id));
+            parameters.Add(new MySqlParameter("@Gender", munchkin.Gender));
+            parameters.Add(new MySqlParameter("@Level", munchkin.Level));
+            parameters.Add(new MySqlParameter("@Gear", munchkin.Gear));
+
+            if (database.ExecuteStatusQuery(sql, parameters) != ExecuteStatus.OK)
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
         }
 
         public void AddUser(User user)
         {
-            throw new System.NotImplementedException();
+            string sql = "insert into 'user' ('Username', 'Password', 'Email') values (@Username, @Password, @Email);";
+
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
+            parameters.Add(new MySqlParameter("@Username", user.Username));
+            parameters.Add(new MySqlParameter("@Password", user.Password));
+            parameters.Add(new MySqlParameter("@Email", user.Email));
+
+            if (database.ExecuteStatusQuery(sql, parameters) != ExecuteStatus.OK)
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
         }
 
         public IEnumerable<Munchkin> GetAllMunchkins()
         {
-            throw new System.NotImplementedException();
+            List<Munchkin> munchkins = new List<Munchkin>();
+
+            string sql =
+                "select 'munchkin.munchkinId', 'user.Username', 'munchkin.Gender', 'munchkin.Level', 'munchkin.Gear'" +
+                " from 'munchkin'" +
+                " inner join 'user'" +
+                " on 'munchkin.UserId' = 'user.UserId'";
+
+            DataTable dt = database.ExecuteQuery(sql);
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int munchkinId = (int)dr["MunchkinId"];
+                    string name = dr["UserId"].ToString();
+
+                    MunchkinGender gender = MunchkinGender.Female;
+                    if (dr["Gender"].ToString() == "Male")
+                    {
+                        gender = MunchkinGender.Male;
+                    }
+
+                    int level = (int)dr["Level"];
+                    int gear = (int)dr["Gear"];
+
+                    Munchkin munchkin = new Munchkin(munchkinId, name, gender, level, gear);
+                    munchkins.Add(munchkin);
+                }
+            }
+            else
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
+
+            return munchkins;
         }
 
         public IEnumerable<User> GetAllUsers()
         {
-            throw new System.NotImplementedException();
+            List<User> users = new List<User>();
+
+            string sql = "select * from 'user'";
+
+            DataTable dt = database.ExecuteQuery(sql);
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int userId = (int)dr["UserId"];
+                    string username = dr["Username"].ToString();
+                    string password = dr["Password"].ToString();
+                    string email = dr["Email"].ToString();
+
+                    User user = new User(userId, username, password, email);
+                    users.Add(user);
+                }
+            }
+            else
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
+
+            return users;
         }
 
-        public void RemoveMunchkin(User user, Munchkin munchkin)
+        public void RemoveMunchkin(Munchkin munchkin)
         {
-            throw new System.NotImplementedException();
+            string sql = "delete from 'munchkin' where 'MunchkinId' = @munchkinId";
+
+            if (database.ExecuteStatusQuery(sql, new MySqlParameter("@munchkinId", munchkin.Id)) != ExecuteStatus.OK)
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
         }
     }
 }

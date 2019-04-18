@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj", "{CC5A2010-F262-4204-9F89-DF2520DB3D9E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{91B91DAE-5BD2-41BF-A2CD-7ECAF657ADB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Databases", "Database\Databases.csproj", "{91B91DAE-5BD2-41BF-A2CD-7ECAF657ADB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factories", "Factories\Factories.csproj", "{3B336047-76E0-46B1-90C7-7E0450FC74DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Factories", "Factories\Factories.csproj", "{3B336047-76E0-46B1-90C7-7E0450FC74DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

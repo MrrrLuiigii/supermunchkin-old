@@ -15,9 +15,9 @@ namespace Logic.Users
             userRepository.AddMunchkin(user, munchkin);
         }
 
-        public void RemoveMunchkin(User user, Munchkin munchkin)
+        public void RemoveMunchkin(Munchkin munchkin)
         {
-            userRepository.RemoveMunchkin(user, munchkin);
+            userRepository.RemoveMunchkin(munchkin);
         }
 
         public Munchkin GetLatestMunchkin()

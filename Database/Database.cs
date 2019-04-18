@@ -1,104 +1,148 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
+using System.Data;
 
-namespace Database
+namespace Databases
 {
+    public enum ExecuteStatus
+    {
+        Error,
+        OK
+    }
+
     public class Database
     {
-        private MySqlConnection conn;
-        private MySqlCommand cmd;
-        private MySqlDataReader reader;
+        private MySqlConnection conn = new MySqlConnection("server=127.0.0.1;uid=root;pwd=;database=supermunchkin");
 
-        public Database()
+        public DataTable ExecuteQuery(string query)
         {
-            EstablishConnection();
-        }
+            conn.Open();
 
-        private void EstablishConnection()
-        {
-            string myConnectionString = "server=127.0.0.1;uid=root;pwd=;database=supermunchkin";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            DataTable dt = new DataTable();
 
             try
             {
-                conn = new MySqlConnection();
-                conn.ConnectionString = myConnectionString;
+                MySqlDataReader reader = cmd.ExecuteReader();
+                dt.Load(reader);
             }
-            catch (MySqlException ex)
+            catch
             {
-                ex.ToString();
-            }
-        }
-
-        public List<string> Read(string[] arguments, string sql)
-        {
-            List<string> Output = new List<string>();
-
-            conn.Open();
-            cmd = new MySqlCommand(sql, conn);
-            reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                try
-                {
-                    string temp = "";
-                    for (int i = 0; i < arguments.Length; i++)
-                    {
-                        temp += reader.GetValue(i);
-
-                        if (i + 1 < arguments.Length)
-                        {
-                            temp += " ;; ";
-                        }
-                    }
-
-                    Output.Add(temp);
-                }
-                catch (Exception)
-                {
-                }
+                dt = null;
             }
 
-            reader.Close();
-            cmd.Dispose();
             conn.Close();
 
-            return Output;
+            return dt;
         }
 
-        public void Write(string table, string[] arguments, string[] values, string sql)
+        public DataTable ExecuteQuery(string query, List<MySqlParameter> parameters = null)
         {
-            bool notEmpty = false;
-
             conn.Open();
-            cmd = new MySqlCommand(sql, conn);
 
-            using (cmd = new MySqlCommand(sql, conn))
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            foreach (MySqlParameter sqlp in parameters)
             {
-                for (int i = 0; i < arguments.Length; i++)
-                {
-                    if (values[i] != "")
-                    {
-                        cmd.Parameters.AddWithValue(string.Format("@{0}", arguments[i]), values[i]);
-                        notEmpty = true;
-                    }
-                }
-
-                if (notEmpty)
-                {
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception)
-                    {
-                    }
-                }
+                cmd.Parameters.Add(sqlp);
             }
 
-            cmd.Dispose();
+            DataTable dt = new DataTable();
+
+            try
+            {
+                MySqlDataReader reader = cmd.ExecuteReader();
+                dt.Load(reader);
+            }
+            catch
+            {
+                dt = null;
+            }
+
+
             conn.Close();
+
+            return dt;
+        }
+
+        public DataTable ExecuteQuery(string query, MySqlParameter parameter = null)
+        {
+            conn.Open();
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            if (parameter != null)
+            {
+                cmd.Parameters.Add(parameter);
+            }
+
+            DataTable dt = new DataTable();
+
+            try
+            {
+                MySqlDataReader reader = cmd.ExecuteReader();
+                dt.Load(reader);
+            }
+            catch
+            {
+                dt = null;
+            }
+
+
+            conn.Close();
+
+            return dt;
+        }
+
+        public ExecuteStatus ExecuteStatusQuery(string query, List<MySqlParameter> parameters)
+        {
+            conn.Open();
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            foreach (MySqlParameter sqlp in parameters)
+            {
+                cmd.Parameters.Add(sqlp);
+            }
+
+            ExecuteStatus status = ExecuteStatus.OK;
+
+
+            cmd.ExecuteReader();
+            status = ExecuteStatus.OK;
+
+
+            conn.Close();
+
+            return status;
+        }
+
+        public ExecuteStatus ExecuteStatusQuery(string query, MySqlParameter parameter)
+        {
+            conn.Open();
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            if (parameter != null)
+            {
+                cmd.Parameters.Add(parameter);
+            }
+
+            ExecuteStatus status = ExecuteStatus.OK;
+
+            try
+            {
+                cmd.ExecuteReader();
+                status = ExecuteStatus.OK;
+            }
+            catch
+            {
+                status = ExecuteStatus.Error;
+            }
+
+            conn.Close();
+
+            return status;
         }
     }
 }

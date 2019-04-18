@@ -3,7 +3,7 @@ using Models.Enums;
 using System;
 using System.Collections.Generic;
 
-namespace Database
+namespace Databases
 {
     public class Memory
     {

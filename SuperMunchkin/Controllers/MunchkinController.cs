@@ -67,6 +67,8 @@ namespace SuperMunchkin.Controllers
             Game game = gameCollectionLogic.GetGameById(gameId);
 
             Munchkin munchkin = userLogic.GetMunchkinById(id);
+            userLogic.RemoveMunchkin(munchkin);
+
             return RedirectToAction("GameSetup", "Game", new { game.Id });
         }
 

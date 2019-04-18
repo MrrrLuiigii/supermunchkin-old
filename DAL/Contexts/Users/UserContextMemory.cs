@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using DAL.Interfaces.Users;
-using Database;
+using Databases;
 using Models;
 
 namespace DAL.Contexts.Users
@@ -44,7 +44,7 @@ namespace DAL.Contexts.Users
             throw new System.NotImplementedException();
         }
 
-        public void RemoveMunchkin(User user, Munchkin munchkin)
+        public void RemoveMunchkin(Munchkin munchkin)
         {
             throw new System.NotImplementedException();
         }

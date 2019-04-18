@@ -7,7 +7,7 @@ namespace DAL.Repositories
 {
     public class UserRepository : IUserRepository, IUserCollectionRepository
     {
-        private IUserContext userContext = new UserContextMemory();
+        private IUserContext userContext = new UserContextSQL();
 
         public void AddMunchkin(User user, Munchkin munchkin)
         {
@@ -29,9 +29,9 @@ namespace DAL.Repositories
             return userContext.GetAllUsers();
         }
 
-        public void RemoveMunchkin(User user, Munchkin munchkin)
+        public void RemoveMunchkin(Munchkin munchkin)
         {
-            userContext.RemoveMunchkin(user, munchkin);
+            userContext.RemoveMunchkin(munchkin);
         }
     }
 }

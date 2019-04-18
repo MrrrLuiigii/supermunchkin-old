@@ -10,20 +10,26 @@ namespace Logic.Users
     {
         IUserRepository userRepository = UserFactory.GetUserRepository();
 
-        public void CreateMunchkin(Munchkin munchkin)
+        public void CreateMunchkin(User user, Munchkin munchkin)
         {
-            userRepository.AddMunchkin(munchkin);
+            userRepository.AddMunchkin(user, munchkin);
         }
 
-        public void RemoveMunchkin(Munchkin munchkin)
+        public void RemoveMunchkin(User user, Munchkin munchkin)
         {
-            userRepository.RemoveMunchkin(munchkin);
+            userRepository.RemoveMunchkin(user, munchkin);
+        }
+
+        public Munchkin GetLatestMunchkin()
+        {
+            //Alexander pls
+            int highestId = userRepository.GetAllMunchkins().ToList().Max(m => m.Id);
+            return GetMunchkinById(highestId);
         }
 
         public Munchkin GetMunchkinById(int id)
         {
-            IEnumerable<Munchkin> munchkins = userRepository.GetAllMunchkins();
-            return munchkins.ToList().Find(m => m.Id == id);
+            return userRepository.GetAllMunchkins().ToList().Find(m => m.Id == id);
         }
     }
 }

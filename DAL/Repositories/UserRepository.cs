@@ -9,9 +9,9 @@ namespace DAL.Repositories
     {
         private IUserContext userContext = new UserContextMemory();
 
-        public void AddMunchkin(Munchkin munchkin)
+        public void AddMunchkin(User user, Munchkin munchkin)
         {
-            userContext.AddMunchkin(munchkin);
+            userContext.AddMunchkin(user, munchkin);
         }
 
         public void AddUser(User user)
@@ -29,9 +29,9 @@ namespace DAL.Repositories
             return userContext.GetAllUsers();
         }
 
-        public void RemoveMunchkin(Munchkin munchkin)
+        public void RemoveMunchkin(User user, Munchkin munchkin)
         {
-            userContext.RemoveMunchkin(munchkin);
+            userContext.RemoveMunchkin(user, munchkin);
         }
     }
 }

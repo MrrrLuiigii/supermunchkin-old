@@ -1,38 +1,35 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Data;
+using Models.Enums;
 
 namespace Databases
 {
-    public enum ExecuteStatus
-    {
-        Error,
-        OK
-    }
-
     public class Database
     {
         private MySqlConnection conn = new MySqlConnection("server=127.0.0.1;uid=root;pwd=;database=supermunchkin");
+        private MySqlCommand cmd;
+        private MySqlDataReader reader;
 
         public DataTable ExecuteQuery(string query)
         {
             conn.Open();
-
-            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd = new MySqlCommand(query, conn);
             DataTable dt = new DataTable();
 
             try
             {
-                MySqlDataReader reader = cmd.ExecuteReader();
+                reader = cmd.ExecuteReader();
                 dt.Load(reader);
+                reader.Close();
             }
             catch
             {
                 dt = null;
             }
-
+            
+            cmd.Dispose();
             conn.Close();
-
             return dt;
         }
 
@@ -40,36 +37,35 @@ namespace Databases
         {
             conn.Open();
 
-            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd = new MySqlCommand(query, conn);
 
-            foreach (MySqlParameter sqlp in parameters)
+            foreach (MySqlParameter p in parameters)
             {
-                cmd.Parameters.Add(sqlp);
+                cmd.Parameters.Add(p);
             }
 
             DataTable dt = new DataTable();
 
             try
             {
-                MySqlDataReader reader = cmd.ExecuteReader();
+                reader = cmd.ExecuteReader();
                 dt.Load(reader);
+                reader.Close();
             }
             catch
             {
                 dt = null;
             }
 
-
+            cmd.Dispose();
             conn.Close();
-
             return dt;
         }
 
         public DataTable ExecuteQuery(string query, MySqlParameter parameter = null)
         {
             conn.Open();
-
-            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd = new MySqlCommand(query, conn);
 
             if (parameter != null)
             {
@@ -80,68 +76,69 @@ namespace Databases
 
             try
             {
-                MySqlDataReader reader = cmd.ExecuteReader();
+                reader = cmd.ExecuteReader();
                 dt.Load(reader);
+                reader.Close();
             }
             catch
             {
                 dt = null;
             }
 
-
+            cmd.Dispose();
             conn.Close();
-
             return dt;
         }
 
-        public ExecuteStatus ExecuteStatusQuery(string query, List<MySqlParameter> parameters)
+        public ExecuteQueryStatus ExecuteQueryWithStatus(string query, List<MySqlParameter> parameters)
         {
             conn.Open();
+            cmd = new MySqlCommand(query, conn);
 
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-
-            foreach (MySqlParameter sqlp in parameters)
+            foreach (MySqlParameter p in parameters)
             {
-                cmd.Parameters.Add(sqlp);
+                cmd.Parameters.Add(p);
             }
 
-            ExecuteStatus status = ExecuteStatus.OK;
-
-
-            cmd.ExecuteReader();
-            status = ExecuteStatus.OK;
-
-
-            conn.Close();
-
-            return status;
-        }
-
-        public ExecuteStatus ExecuteStatusQuery(string query, MySqlParameter parameter)
-        {
-            conn.Open();
-
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-
-            if (parameter != null)
-            {
-                cmd.Parameters.Add(parameter);
-            }
-
-            ExecuteStatus status = ExecuteStatus.OK;
+            ExecuteQueryStatus status = ExecuteQueryStatus.OK;
 
             try
             {
                 cmd.ExecuteReader();
-                status = ExecuteStatus.OK;
             }
             catch
             {
-                status = ExecuteStatus.Error;
+                status = ExecuteQueryStatus.Error;
             }
 
+            cmd.Dispose();
             conn.Close();
+            return status;
+        }
 
+        public ExecuteQueryStatus ExecuteQueryWithStatus(string query, MySqlParameter p)
+        {
+            conn.Open();
+            cmd = new MySqlCommand(query, conn);
+
+            if (p != null)
+            {
+                cmd.Parameters.Add(p);
+            }
+
+            ExecuteQueryStatus status = ExecuteQueryStatus.OK;
+
+            try
+            {
+                cmd.ExecuteReader();
+            }
+            catch
+            {
+                status = ExecuteQueryStatus.Error;
+            }
+            
+            cmd.Dispose();
+            conn.Close();
             return status;
         }
     }

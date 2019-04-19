@@ -23,7 +23,7 @@ namespace DAL.Contexts.Users
             parameters.Add(new MySqlParameter("@Level", munchkin.Level));
             parameters.Add(new MySqlParameter("@Gear", munchkin.Gear));
 
-            if (database.ExecuteStatusQuery(sql, parameters) != ExecuteStatus.OK)
+            if (database.ExecuteQueryWithStatus(sql, parameters) != ExecuteQueryStatus.OK)
             {
                 throw new Exception("Something went wrong. Sorry for the inconvenience.");
             }
@@ -38,7 +38,7 @@ namespace DAL.Contexts.Users
             parameters.Add(new MySqlParameter("@Password", user.Password));
             parameters.Add(new MySqlParameter("@Email", user.Email));
 
-            if (database.ExecuteStatusQuery(sql, parameters) != ExecuteStatus.OK)
+            if (database.ExecuteQueryWithStatus(sql, parameters) != ExecuteQueryStatus.OK)
             {
                 throw new Exception("Something went wrong. Sorry for the inconvenience.");
             }
@@ -117,7 +117,7 @@ namespace DAL.Contexts.Users
         {
             string sql = "delete from 'munchkin' where 'MunchkinId' = @munchkinId";
 
-            if (database.ExecuteStatusQuery(sql, new MySqlParameter("@munchkinId", munchkin.Id)) != ExecuteStatus.OK)
+            if (database.ExecuteQueryWithStatus(sql, new MySqlParameter("@munchkinId", munchkin.Id)) != ExecuteQueryStatus.OK)
             {
                 throw new Exception("Something went wrong. Sorry for the inconvenience.");
             }

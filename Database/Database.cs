@@ -11,10 +11,10 @@ namespace Databases
         private MySqlCommand cmd;
         private MySqlDataReader reader;
 
-        public DataTable ExecuteQuery(string query)
+        public DataTable ExecuteQuery(string sql)
         {
             conn.Open();
-            cmd = new MySqlCommand(query, conn);
+            cmd = new MySqlCommand(sql, conn);
             DataTable dt = new DataTable();
 
             try
@@ -33,11 +33,11 @@ namespace Databases
             return dt;
         }
 
-        public DataTable ExecuteQuery(string query, List<MySqlParameter> parameters = null)
+        public DataTable ExecuteQuery(string sql, List<MySqlParameter> parameters = null)
         {
             conn.Open();
 
-            cmd = new MySqlCommand(query, conn);
+            cmd = new MySqlCommand(sql, conn);
 
             foreach (MySqlParameter p in parameters)
             {
@@ -62,10 +62,10 @@ namespace Databases
             return dt;
         }
 
-        public DataTable ExecuteQuery(string query, MySqlParameter parameter = null)
+        public DataTable ExecuteQuery(string sql, MySqlParameter parameter = null)
         {
             conn.Open();
-            cmd = new MySqlCommand(query, conn);
+            cmd = new MySqlCommand(sql, conn);
 
             if (parameter != null)
             {
@@ -90,10 +90,10 @@ namespace Databases
             return dt;
         }
 
-        public ExecuteQueryStatus ExecuteQueryWithStatus(string query, List<MySqlParameter> parameters)
+        public ExecuteQueryStatus ExecuteQueryWithStatus(string sql, List<MySqlParameter> parameters)
         {
             conn.Open();
-            cmd = new MySqlCommand(query, conn);
+            cmd = new MySqlCommand(sql, conn);
 
             foreach (MySqlParameter p in parameters)
             {
@@ -116,10 +116,10 @@ namespace Databases
             return status;
         }
 
-        public ExecuteQueryStatus ExecuteQueryWithStatus(string query, MySqlParameter p)
+        public ExecuteQueryStatus ExecuteQueryWithStatus(string sql, MySqlParameter p)
         {
             conn.Open();
-            cmd = new MySqlCommand(query, conn);
+            cmd = new MySqlCommand(sql, conn);
 
             if (p != null)
             {

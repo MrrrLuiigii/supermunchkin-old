@@ -86,7 +86,7 @@ namespace DAL.Contexts.Games
                         status = GameStatus.Finished;
                     }
 
-                    DateTime dateTime = (DateTime)dr["Level"];
+                    DateTime dateTime = (DateTime)dr["DateTime"];
                     int winnerId = (int)dr["WinnerId"];
 
                     Game game = new Game(gameId, status, dateTime, GetMunchkin(winnerId));
@@ -170,8 +170,8 @@ namespace DAL.Contexts.Games
                     int level = (int)dr["Level"];
                     int gear = (int)dr["Gear"];
 
-                    Munchkin munchkin = new Munchkin();
-                    game = GetAllMunchkinsInGame(game);
+                    Munchkin munchkin = new Munchkin(munchkinId, name, gender, level, gear);
+                    munchkins.Add(munchkin);
                 }
             }
             else

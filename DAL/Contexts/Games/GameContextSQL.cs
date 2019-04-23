@@ -75,7 +75,17 @@ namespace DAL.Contexts.Games
                 foreach (DataRow dr in dt.Rows)
                 {
                     int gameId = (int)dr["GameId"];
-                    GameStatus status = (GameStatus)dr["Status"];
+
+                    GameStatus status = GameStatus.Setup;
+                    if (dr["Status"].ToString() == "Playing")
+                    {
+                        status = GameStatus.Playing;
+                    }
+                    else if (dr["Status"].ToString() == "Finished")
+                    {
+                        status = GameStatus.Finished;
+                    }
+
                     DateTime dateTime = (DateTime)dr["Level"];
                     int winnerId = (int)dr["WinnerId"];
 
@@ -109,7 +119,13 @@ namespace DAL.Contexts.Games
                 {
                     int munchkinId = (int)dr["MunchkinId"];
                     string name = dr["Username"].ToString();
-                    MunchkinGender gender = (MunchkinGender)dr["Gender"];
+
+                    MunchkinGender gender = MunchkinGender.Male;
+                    if (dr["Gender"].ToString() == "Female")
+                    {
+                        gender = MunchkinGender.Female;
+                    }
+
                     int level = (int)dr["Level"];
                     int gear = (int)dr["Gear"];
 
@@ -144,7 +160,13 @@ namespace DAL.Contexts.Games
                 {
                     int munchkinId = (int)dr["MunchkinId"];
                     string name = dr["Username"].ToString();
-                    MunchkinGender gender = (MunchkinGender)dr["Gender"];
+
+                    MunchkinGender gender = MunchkinGender.Male;
+                    if (dr["Gender"].ToString() == "Female")
+                    {
+                        gender = MunchkinGender.Female;
+                    }
+
                     int level = (int)dr["Level"];
                     int gear = (int)dr["Gear"];
 

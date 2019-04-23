@@ -66,7 +66,13 @@ namespace DAL.Contexts.Users
                 {
                     int munchkinId = (int)dr["MunchkinId"];
                     string name = dr["UserId"].ToString();
-                    MunchkinGender gender = (MunchkinGender)dr["Gender"];
+
+                    MunchkinGender gender = MunchkinGender.Male;                        
+                    if (dr["Gender"].ToString() == "Female")
+                    {
+                        gender = MunchkinGender.Female;
+                    }
+
                     int level = (int)dr["Level"];
                     int gear = (int)dr["Gear"];
 

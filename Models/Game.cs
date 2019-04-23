@@ -9,15 +9,23 @@ namespace Models
     {
         public int Id { get; set; }
         public GameStatus Status { get; set; }
-        public DateTime DatePlayed { get; set; }
+        public DateTime DateTimePlayed { get; set; }
         public List<Munchkin> Munchkins { get; set; }
         public Munchkin Winner { get; set; }
 
         public Game()
         {
             Status = GameStatus.Setup;
-            DatePlayed = DateTime.Now;
+            DateTimePlayed = DateTime.Now;
             Munchkins = new List<Munchkin>();
+        }
+
+        public Game(int id, GameStatus status, DateTime dateTime, Munchkin winner)
+        {
+            Id = id;
+            Status = status;
+            DateTimePlayed = dateTime;
+            Winner = winner;
         }
 
         public Game(int id, GameStatus status, DateTime datePlayed, List<Munchkin> munchkins)
@@ -26,7 +34,7 @@ namespace Models
 
             Id = id;
             Status = status;
-            DatePlayed = datePlayed;
+            DateTimePlayed = datePlayed;
             Munchkins = munchkins;
         }
 
@@ -37,7 +45,7 @@ namespace Models
 
             Id = id;
             Status = status;
-            DatePlayed = datePlayed;
+            DateTimePlayed = datePlayed;
             Munchkins = munchkins;
             Winner = winner;
         }

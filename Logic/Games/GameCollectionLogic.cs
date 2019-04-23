@@ -18,13 +18,13 @@ namespace Logic.Games
         {
             IEnumerable<Game> games = gameCollectionRepository.GetAllGames();
 
-            while (games.ToList().Find(g => g.DatePlayed == game.DatePlayed && g.Status == game.Status) != null)
+            while (games.ToList().Find(g => g.DateTimePlayed == game.DateTimePlayed && g.Status == game.Status) != null)
             {
-                game.DatePlayed = game.DatePlayed.AddSeconds(1);
+                game.DateTimePlayed = game.DateTimePlayed.AddSeconds(1);
             }
 
             gameCollectionRepository.AddGame(game);
-            return GetGameByDateTimeAndStatus(game.DatePlayed, game.Status);
+            return GetGameByDateTimeAndStatus(game.DateTimePlayed, game.Status);
         }
 
         public Game GetGameById(int id)
@@ -36,7 +36,7 @@ namespace Logic.Games
         public Game GetGameByDateTimeAndStatus(DateTime dateTime, GameStatus status)
         {
             IEnumerable<Game> games = gameCollectionRepository.GetAllGames();
-            return games.ToList().Find(g => g.DatePlayed == dateTime && g.Status == status);
+            return games.ToList().Find(g => g.DateTimePlayed == dateTime && g.Status == status);
         }
 
         public List<Game> GetAllGamesByUser(User user)

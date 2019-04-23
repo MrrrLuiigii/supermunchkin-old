@@ -15,7 +15,9 @@ namespace DAL.Contexts.Users
 
         public void AddMunchkin(User user, Munchkin munchkin)
         {
-            string sql = "insert into 'munchkin' ('UserId', 'Gender', 'Level', 'Gear') values (@UserId, @Gender, @Level, @Gear);";
+            string sql =
+                "insert into `munchkin` (`UserId`, `Gender`, `Level`, `Gear`)" +
+                " values (@UserId, @Gender, @Level, @Gear);";
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
             parameters.Add(new MySqlParameter("@UserId", user.Id));
@@ -31,7 +33,9 @@ namespace DAL.Contexts.Users
 
         public void AddUser(User user)
         {
-            string sql = "insert into 'user' ('Username', 'Password', 'Email') values (@Username, @Password, @Email);";
+            string sql =
+                "insert into `user`(`Username`, `Password`, `Email`)" +
+                " values (@Username, @Password, @Email);";
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
             parameters.Add(new MySqlParameter("@Username", user.Username));
@@ -49,10 +53,10 @@ namespace DAL.Contexts.Users
             List<Munchkin> munchkins = new List<Munchkin>();
 
             string sql =
-                "select 'munchkin.munchkinId', 'user.Username', 'munchkin.Gender', 'munchkin.Level', 'munchkin.Gear'" +
-                " from 'munchkin'" +
-                " inner join 'user'" +
-                " on 'munchkin.UserId' = 'user.UserId'";
+                "select `munchkin.munchkinId`, `user.Username`, `munchkin.Gender`, `munchkin.Level`, `munchkin.Gear`" +
+                " from `munchkin`" +
+                " inner join `user`" +
+                " on `munchkin.UserId` = `user.UserId`";
 
             DataTable dt = database.ExecuteQuery(sql);
 
@@ -62,13 +66,7 @@ namespace DAL.Contexts.Users
                 {
                     int munchkinId = (int)dr["MunchkinId"];
                     string name = dr["UserId"].ToString();
-
-                    MunchkinGender gender = MunchkinGender.Female;
-                    if (dr["Gender"].ToString() == "Male")
-                    {
-                        gender = MunchkinGender.Male;
-                    }
-
+                    MunchkinGender gender = (MunchkinGender)dr["Gender"];
                     int level = (int)dr["Level"];
                     int gear = (int)dr["Gear"];
 
@@ -88,7 +86,7 @@ namespace DAL.Contexts.Users
         {
             List<User> users = new List<User>();
 
-            string sql = "select * from 'user'";
+            string sql = "select * from `user`";
 
             DataTable dt = database.ExecuteQuery(sql);
 
@@ -115,7 +113,9 @@ namespace DAL.Contexts.Users
 
         public void RemoveMunchkin(Munchkin munchkin)
         {
-            string sql = "delete from 'munchkin' where 'MunchkinId' = @munchkinId";
+            string sql = 
+                "delete from `munchkin` " +
+                "where `MunchkinId` = @munchkinId";
 
             if (database.ExecuteQueryWithStatus(sql, new MySqlParameter("@munchkinId", munchkin.Id)) != ExecuteQueryStatus.OK)
             {

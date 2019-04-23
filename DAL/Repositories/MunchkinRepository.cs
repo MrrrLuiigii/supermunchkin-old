@@ -7,7 +7,8 @@ namespace DAL.Repositories
 {
     public class MunchkinRepository : IMunchkinRepository
     {
-        private IMunchkinContext munchkinContext = new MunchkinContextMemory();
+        //private IMunchkinContext munchkinContext = new MunchkinContextMemory();
+        private IMunchkinContext munchkinContext = new MunchkinContextSQL();
 
         public void AdjustMunchkin(Munchkin munchkin)
         {

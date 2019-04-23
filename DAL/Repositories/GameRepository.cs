@@ -8,7 +8,8 @@ namespace DAL.Repositories
 {
     public class GameRepository : IGameRepository, IGameCollectionRepository
     {
-        private IGameContext context = new GameContextMemory();
+        //private IGameContext context = new GameContextMemory();
+        private IGameContext context = new GameContextSQL();
 
         public void AddGame(Game game)
         {

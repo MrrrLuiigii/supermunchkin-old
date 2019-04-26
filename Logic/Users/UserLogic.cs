@@ -1,7 +1,6 @@
 ﻿using DAL.Interfaces.Users;
 using Factories;
 using Models;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Logic.Users
@@ -10,9 +9,10 @@ namespace Logic.Users
     {
         IUserRepository userRepository = UserFactory.GetUserRepository();
 
-        public void CreateMunchkin(User user, Munchkin munchkin)
+        public Munchkin CreateMunchkin(User user, Munchkin munchkin)
         {
             userRepository.AddMunchkin(user, munchkin);
+            return GetLatestMunchkin(user);
         }
 
         public void RemoveMunchkin(Munchkin munchkin)
@@ -20,11 +20,10 @@ namespace Logic.Users
             userRepository.RemoveMunchkin(munchkin);
         }
 
-        public Munchkin GetLatestMunchkin()
+        private Munchkin GetLatestMunchkin(User user)
         {
-            //Alexander pls
-            int highestId = userRepository.GetAllMunchkins().ToList().Max(m => m.Id);
-            return GetMunchkinById(highestId);
+            Munchkin munchkin = userRepository.GetAllMunchkins().ToList().Where(m => m.Name == user.Username).OrderByDescending(m => m.Id).FirstOrDefault();
+            return munchkin;
         }
 
         public Munchkin GetMunchkinById(int id)

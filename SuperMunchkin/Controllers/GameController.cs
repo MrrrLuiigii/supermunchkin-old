@@ -8,7 +8,6 @@ using Models.Enums;
 using Logic.Users;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using System;
 
 namespace SuperMunchkin.Controllers
 {

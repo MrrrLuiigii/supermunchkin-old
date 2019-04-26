@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.Enums;
-using Newtonsoft.Json;
 using SuperMunchkin.ViewModels;
 
 namespace SuperMunchkin.Controllers
@@ -46,12 +45,7 @@ namespace SuperMunchkin.Controllers
                 if (user != null)
                 {
                     Munchkin munchkin = new Munchkin(user.Username, mvm.Gender);
-
-                    userLogic.CreateMunchkin(user, munchkin);
-
-                    //Alexander pls
-                    munchkin = userLogic.GetLatestMunchkin();
-
+                    munchkin = userLogic.CreateMunchkin(user, munchkin);
                     gameLogic.AddMunchkin(game, munchkin);
                     return RedirectToAction("GameSetup", "Game", new { id });
                 }

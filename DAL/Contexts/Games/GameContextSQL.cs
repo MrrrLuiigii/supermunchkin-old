@@ -112,9 +112,11 @@ namespace DAL.Contexts.Games
             Munchkin munchkin = null;
 
             string sql =
-                "select `MunchkinId`, `UserId`, `Gender`, `Level`, `Gear`" +
+                "select `munchkin`.`MunchkinId`, `user`.`Username`, `munchkin`.`Gender`, `munchkin`.`Level`, `munchkin`.`Gear`" +
                 " from `munchkin`" +
-                " where `MunchkinId` = @WinnerId";
+                " inner join `user`" +
+                " on `munchkin`.`UserId` = `user`.`UserId`" +
+                " where `MunchkinId` = @WinnerId";                
 
             DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@WinnerId", winnerId));
 
@@ -150,10 +152,10 @@ namespace DAL.Contexts.Games
             List<Munchkin> munchkins = new List<Munchkin>();
 
             string sql =
-                "select `munchkin.munchkinId`, `user.Username`, `munchkin.Gender`, `munchkin.Level`, `munchkin.Gear`" +
+                "select `munchkin`.`MunchkinId`, `user`.`Username`, `munchkin`.`Gender`, `munchkin`.`Level`, `munchkin`.`Gear`" +
                 " from `munchkin`" +
                 " inner join `user`" +
-                " on `munchkin.UserId` = `user.UserId`" +
+                " on `munchkin`.`UserId` = `user`.`UserId`" +
                 " inner join `munchkin-game`" +
                 " on `munchkin-game`.`MunchkinId` = `munchkin`.`MunchkinId`";
 

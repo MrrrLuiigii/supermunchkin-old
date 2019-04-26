@@ -1,7 +1,7 @@
 ﻿using Models;
 using Models.Enums;
 
-namespace DAL.Interfaces.Games
+namespace Interfaces.Games
 {
     public interface IGameRepository
     {

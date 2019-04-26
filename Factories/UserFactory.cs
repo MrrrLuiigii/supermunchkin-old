@@ -1,4 +1,4 @@
-﻿using DAL.Interfaces.Users;
+﻿using Interfaces.Users;
 using DAL.Repositories;
 
 namespace Factories

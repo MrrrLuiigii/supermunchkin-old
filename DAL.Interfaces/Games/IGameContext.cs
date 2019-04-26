@@ -1,4 +1,4 @@
-﻿namespace DAL.Interfaces.Games
+﻿namespace Interfaces.Games
 {
     public interface IGameContext : IGameRepository, IGameCollectionRepository
     {

@@ -1,4 +1,4 @@
-﻿using DAL.Interfaces.Munchkins;
+﻿using Interfaces.Munchkins;
 using Databases;
 using Models;
 using Models.Enums;

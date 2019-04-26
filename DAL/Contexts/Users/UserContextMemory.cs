@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DAL.Interfaces.Users;
+using Interfaces.Users;
 using Databases;
 using Models;
 

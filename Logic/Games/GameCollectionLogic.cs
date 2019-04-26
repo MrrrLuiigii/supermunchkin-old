@@ -1,5 +1,5 @@
-﻿using DAL.Interfaces.Games;
-using DAL.Interfaces.Users;
+﻿using Interfaces.Games;
+using Interfaces.Users;
 using Factories;
 using Models;
 using Models.Enums;

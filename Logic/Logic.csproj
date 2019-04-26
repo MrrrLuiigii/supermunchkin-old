@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\DAL.Interfaces\Interfaces.csproj" />
     <ProjectReference Include="..\Factories\Factories.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>

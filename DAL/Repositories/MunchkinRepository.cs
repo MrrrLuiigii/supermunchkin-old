@@ -1,5 +1,5 @@
 ﻿using DAL.Contexts.Munchkins;
-using DAL.Interfaces.Munchkins;
+using Interfaces.Munchkins;
 using Models;
 using Models.Enums;
 

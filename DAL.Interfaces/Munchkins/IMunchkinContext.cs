@@ -1,4 +1,4 @@
-﻿namespace DAL.Interfaces.Munchkins
+﻿namespace Interfaces.Munchkins
 {
     public interface IMunchkinContext : IMunchkinRepository
     {

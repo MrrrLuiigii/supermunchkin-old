@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DAL.Interfaces.Games;
+using Interfaces.Games;
 using Databases;
 using Models;
 using Models.Enums;

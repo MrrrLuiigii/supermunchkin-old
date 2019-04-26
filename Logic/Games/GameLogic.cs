@@ -1,4 +1,4 @@
-﻿using DAL.Interfaces.Games;
+﻿using Interfaces.Games;
 using Factories;
 using Models;
 using Models.Enums;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using DAL.Interfaces.Games;
+using Interfaces.Games;
 using Databases;
 using Models;
 using Models.Enums;

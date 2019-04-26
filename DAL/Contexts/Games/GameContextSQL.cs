@@ -87,7 +87,12 @@ namespace DAL.Contexts.Games
                     }
 
                     DateTime dateTime = (DateTime)dr["DateTime"];
-                    int winnerId = (int)dr["WinnerId"];
+
+                    int winnerId = -1;
+                    if (dr["WinnerId"] != DBNull.Value)
+                    {
+                        winnerId = (int)dr["WinnerId"];
+                    }
 
                     Game game = new Game(gameId, status, dateTime, GetMunchkin(winnerId));
                     game = GetAllMunchkinsInGame(game);

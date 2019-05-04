@@ -31,15 +31,10 @@ namespace Logic.Users
         {
             User user = GetAllUsers().ToList().Find(u => u.Username == username);
 
-            if (user != null && user.Password == password)
+            if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
                 return user;
             }
-
-            //if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
-            //{
-            //    return user;
-            //}
 
             return null;
         }

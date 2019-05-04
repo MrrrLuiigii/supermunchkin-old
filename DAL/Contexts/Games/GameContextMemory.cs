@@ -15,6 +15,11 @@ namespace DAL.Contexts.Games
             //Add game
         }
 
+        public void RemoveGame(Game game)
+        {
+            //Remove game
+        }
+
         public void AddMunchkin(Game game, Munchkin munchkin)
         {
             //Add munchkin

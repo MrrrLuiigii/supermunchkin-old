@@ -36,6 +36,11 @@ namespace DAL.Repositories
             return context.GetAllGamesByUser(user);
         }
 
+        public void RemoveGame(Game game)
+        {
+            context.RemoveGame(game);
+        }
+
         public void RemoveMunchkin(Game game, Munchkin munchkin)
         {
             context.RemoveMunchkin(game, munchkin);

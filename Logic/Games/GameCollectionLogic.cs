@@ -27,6 +27,11 @@ namespace Logic.Games
             return GetGameByDateTimeAndStatus(game.DateTimePlayed, game.Status);
         }
 
+        public void RemoveGame(Game game)
+        {
+            gameCollectionRepository.RemoveGame(game);
+        }
+
         public Game GetGameById(int id)
         {
             IEnumerable<Game> games = gameCollectionRepository.GetAllGames();

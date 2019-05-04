@@ -44,6 +44,14 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
+        public IActionResult Remove(int id)
+        {
+            Game game = gameCollectionLogic.GetGameById(id);
+            gameCollectionLogic.RemoveGame(game);
+            return RedirectToAction("GameLobby", "Game");
+        }
+
+        [Authorize]
         public IActionResult GameSetup(int id)
         {
             Game game = gameCollectionLogic.GetGameById(id);

@@ -32,19 +32,22 @@
             }
             else if (g.Status == GameStatus.Setup)
             {
-                <a href="@Url.Action("GameSetup", "Game", new { g.Id })">
-                    <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
+                <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
+                    <div class="custom-border" style="height: 30px; width: 30px; padding-top: 3px; padding-left: 1px; position: relative; top: -10px; left: -10px;">
+                        <a href="@Url.Action("Remove", "Game", new { g.Id })">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </div>
+                    <a href="@Url.Action("GameSetup", "Game", new { g.Id })">
                         <div class="d-inline-block w-100">
-                            <div class="pt-2">
-                                <h4>Start playing!</h4>
-                            </div>
+                            <h4>Start playing!</h4>
                             <div>
                                 <p class="float-left text-left ml-3" style="width: 30vw;">Number of players</p>
                                 <h1 class="float-right mr-3">@g.Munchkins.Count/6</h1>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             }
         }
     }

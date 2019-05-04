@@ -241,6 +241,27 @@ namespace DAL.Contexts.Games
             return game;
         }
 
+        public void RemoveGame(Game game)
+        {
+            string sql =
+                "delete from `munchkin-game`" +
+                " where `GameId` = @GameId";
+
+            if (database.ExecuteQueryWithStatus(sql, new MySqlParameter("@GameId", game.Id)) != ExecuteQueryStatus.OK)
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
+
+            sql =
+                "delete from `game`" +
+                " where `GameId` = @GameId";
+
+            if (database.ExecuteQueryWithStatus(sql, new MySqlParameter("@GameId", game.Id)) != ExecuteQueryStatus.OK)
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
+        }
+
         public void RemoveMunchkin(Game game, Munchkin munchkin)
         {
             string sql =

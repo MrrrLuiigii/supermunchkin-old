@@ -107,6 +107,56 @@ namespace DAL.Contexts.Games
             return games;
         }
 
+        public IEnumerable<Game> GetAllGamesByUser(User user)
+        {
+            List<Game> games = new List<Game>();
+
+            string sql = 
+                "select *" +
+                " from `game`" +
+                " inner join `user-game`" +
+                " on `game`.`GameId` = `user-game`.`GameId`" +
+                $" where `user-game`.`UserId` = {user.Id}";
+
+            DataTable dt = database.ExecuteQuery(sql);
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int gameId = (int)dr["GameId"];
+
+                    GameStatus status = GameStatus.Setup;
+                    if (dr["Status"].ToString() == "Playing")
+                    {
+                        status = GameStatus.Playing;
+                    }
+                    else if (dr["Status"].ToString() == "Finished")
+                    {
+                        status = GameStatus.Finished;
+                    }
+
+                    DateTime dateTime = (DateTime)dr["DateTime"];
+
+                    int winnerId = -1;
+                    if (dr["WinnerId"] != DBNull.Value)
+                    {
+                        winnerId = (int)dr["WinnerId"];
+                    }
+
+                    Game game = new Game(gameId, status, dateTime, GetMunchkin(winnerId));
+                    game = GetAllMunchkinsInGame(game);
+                    games.Add(game);
+                }
+            }
+            else
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
+
+            return games;
+        }
+
         private Munchkin GetMunchkin(int winnerId)
         {
             Munchkin munchkin = null;

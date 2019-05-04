@@ -41,22 +41,7 @@ namespace Logic.Games
 
         public List<Game> GetAllGamesByUser(User user)
         {
-            List<Game> games = gameCollectionRepository.GetAllGames().ToList();
-            List<Game> userGames = new List<Game>();
-
-            foreach (Game game in games)
-            {
-                foreach (Munchkin munchkin in user.Munchkins)
-                {
-                    if (game.Munchkins.Find(m => m.Id == munchkin.Id) != null)
-                    {
-                        userGames.Add(game);
-                        break;
-                    }
-                }
-            }
-
-            return userGames;
+            return gameCollectionRepository.GetAllGamesByUser(user).ToList();
         }
 
     }

@@ -7,5 +7,6 @@ namespace Interfaces.Games
     {
         void AddGame(Game game);
         IEnumerable<Game> GetAllGames();
+        IEnumerable<Game> GetAllGamesByUser(User user);
     }
 }

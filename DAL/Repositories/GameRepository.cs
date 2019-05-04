@@ -31,6 +31,11 @@ namespace DAL.Repositories
             return context.GetAllGames();
         }
 
+        public IEnumerable<Game> GetAllGamesByUser(User user)
+        {
+            return context.GetAllGamesByUser(user);
+        }
+
         public void RemoveMunchkin(Game game, Munchkin munchkin)
         {
             context.RemoveMunchkin(game, munchkin);

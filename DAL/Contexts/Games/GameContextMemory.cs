@@ -30,6 +30,11 @@ namespace DAL.Contexts.Games
             return memory.GetAllGames();
         }
 
+        public IEnumerable<Game> GetAllGamesByUser(User user)
+        {
+            return memory.GetAllGames();
+        }
+
         public Game GetGameById(int id)
         {
             return memory.GetGameById(id);

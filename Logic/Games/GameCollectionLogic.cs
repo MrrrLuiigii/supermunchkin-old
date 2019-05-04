@@ -43,6 +43,5 @@ namespace Logic.Games
         {
             return gameCollectionRepository.GetAllGamesByUser(user).ToList();
         }
-
     }
 }

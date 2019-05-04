@@ -53,10 +53,10 @@ namespace DAL.Contexts.Users
             List<Munchkin> munchkins = new List<Munchkin>();
 
             string sql =
-                "select `munchkin.munchkinId`, `user.Username`, `munchkin.Gender`, `munchkin.Level`, `munchkin.Gear`" +
+                "select `munchkin`.`MunchkinId`, `user`.`Username`, `munchkin`.`Gender`, `munchkin`.`Level`, `munchkin`.`Gear`" +
                 " from `munchkin`" +
                 " inner join `user`" +
-                " on `munchkin.UserId` = `user.UserId`";
+                " on `munchkin`.`UserId` = `user`.`UserId`";
 
             DataTable dt = database.ExecuteQuery(sql);
 
@@ -65,7 +65,7 @@ namespace DAL.Contexts.Users
                 foreach (DataRow dr in dt.Rows)
                 {
                     int munchkinId = (int)dr["MunchkinId"];
-                    string name = dr["UserId"].ToString();
+                    string name = dr["Username"].ToString();
 
                     MunchkinGender gender = MunchkinGender.Male;                        
                     if (dr["Gender"].ToString() == "Female")
@@ -106,6 +106,7 @@ namespace DAL.Contexts.Users
                     string email = dr["Email"].ToString();
 
                     User user = new User(userId, username, password, email);
+                    user.Munchkins = GetAllMunchkinsByUser(user);
                     users.Add(user);
                 }
             }
@@ -115,6 +116,47 @@ namespace DAL.Contexts.Users
             }
 
             return users;
+        }
+
+        private List<Munchkin> GetAllMunchkinsByUser(User user)
+        {
+            List<Munchkin> munchkins = new List<Munchkin>();
+
+            string sql =
+                "select `munchkin`.`MunchkinId`, `user`.`Username`, `munchkin`.`Gender`, `munchkin`.`Level`, `munchkin`.`Gear`" +
+                " from `munchkin`" +
+                " inner join `user`" +
+                " on `munchkin`.`UserId` = `user`.`UserId`" +
+                $" where `munchkin`.`UserId` = {user.Id}";
+
+            DataTable dt = database.ExecuteQuery(sql);
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int munchkinId = (int)dr["MunchkinId"];
+                    string name = dr["Username"].ToString();
+
+                    MunchkinGender gender = MunchkinGender.Male;
+                    if (dr["Gender"].ToString() == "Female")
+                    {
+                        gender = MunchkinGender.Female;
+                    }
+
+                    int level = (int)dr["Level"];
+                    int gear = (int)dr["Gear"];
+
+                    Munchkin munchkin = new Munchkin(munchkinId, name, gender, level, gear);
+                    munchkins.Add(munchkin);
+                }
+            }
+            else
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
+
+            return munchkins;
         }
 
         public void RemoveMunchkin(Munchkin munchkin)

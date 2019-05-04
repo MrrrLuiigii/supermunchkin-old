@@ -53,7 +53,7 @@ namespace DAL.Contexts.Games
                 " where `GameId` = @GameId";
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
-            parameters.Add(new MySqlParameter("@Status", game.Status));
+            parameters.Add(new MySqlParameter("@Status", status));
             parameters.Add(new MySqlParameter("@GameId", game.Id));
 
             if (database.ExecuteQueryWithStatus(sql, parameters) != ExecuteQueryStatus.OK)

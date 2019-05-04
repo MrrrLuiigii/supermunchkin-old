@@ -51,6 +51,14 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
+        public IActionResult AdjustGameStatus(int id)
+        {
+            Game game = gameCollectionLogic.GetGameById(id);
+            gameLogic.AdjustGameStatus(game, GameStatus.Playing);
+            return RedirectToAction("GameOverview", "Game", new { id });
+        }
+
+        [Authorize]
         public IActionResult GameOverview(int id, int diceInt)
         {
             Game game = gameCollectionLogic.GetGameById(id);

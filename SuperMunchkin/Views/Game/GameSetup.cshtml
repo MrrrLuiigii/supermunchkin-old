@@ -51,13 +51,24 @@
     <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
 </div>
 
-@{
-    //if (Model.Munchkins.Count < 6)
-    //{
-        <div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; right: 0; padding-top: 7px;">
-            <a href="@Url.Action("Add", "Munchkin", new { Model.Id })">
-                <i class="fas fa-plus fa-2x"></i>
-            </a>
-        </div>
-    //}
-}
+<div class="d-inline-block" style="position: fixed; bottom: 0; right: 0;">
+    @{
+        if (Model.Munchkins.Count >= 3)
+        {
+            <div class="custom-border button-small mr-1 mb-3 text-center float-left" style="padding-top: 7px;">
+                <a href="@Url.Action("AdjustGameStatus", "Game", new { Model.Id })">
+                    <i class="fas fa-play" style="font-size: x-large; padding-left: 3px; padding-top: 4px;"></i>
+                </a>
+            </div>
+        }
+
+        if (Model.Munchkins.Count < 6)
+        {
+            <div class="custom-border button-small mr-3 mb-3 text-center float-right" style="padding-top: 7px;">
+                <a href="@Url.Action("Add", "Munchkin", new { Model.Id })">
+                    <i class="fas fa-plus fa-2x"></i>
+                </a>
+            </div>
+        }
+    }
+</div>

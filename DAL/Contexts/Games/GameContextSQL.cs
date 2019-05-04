@@ -207,7 +207,8 @@ namespace DAL.Contexts.Games
                 " inner join `user`" +
                 " on `munchkin`.`UserId` = `user`.`UserId`" +
                 " inner join `munchkin-game`" +
-                " on `munchkin-game`.`MunchkinId` = `munchkin`.`MunchkinId`";
+                " on `munchkin-game`.`MunchkinId` = `munchkin`.`MunchkinId`" +
+                $" where `munchkin-game`.`GameId` = {game.Id}";
 
             DataTable dt = database.ExecuteQuery(sql);
 

@@ -14,7 +14,7 @@ namespace Logic.Games
         private IUserRepository userRepository = UserFactory.GetUserRepository();
         private IGameCollectionRepository gameCollectionRepository = GameFactory.GetGameCollectionRepository();
 
-        public Game AddGame(Game game)
+        public Game AddGame(Game game, User user)
         {
             IEnumerable<Game> games = gameCollectionRepository.GetAllGames();
 
@@ -23,8 +23,8 @@ namespace Logic.Games
                 game.DateTimePlayed = game.DateTimePlayed.AddSeconds(1);
             }
 
-            gameCollectionRepository.AddGame(game);
-            return GetGameByDateTimeAndStatus(game.DateTimePlayed, game.Status);
+            gameCollectionRepository.AddGame(game, user);
+            return game;
         }
 
         public void RemoveGame(Game game)
@@ -36,12 +36,6 @@ namespace Logic.Games
         {
             IEnumerable<Game> games = gameCollectionRepository.GetAllGames();
             return games.ToList().Find(g => g.Id == id);
-        }
-
-        public Game GetGameByDateTimeAndStatus(DateTime dateTime, GameStatus status)
-        {
-            IEnumerable<Game> games = gameCollectionRepository.GetAllGames();
-            return games.ToList().Find(g => g.DateTimePlayed == dateTime && g.Status == status);
         }
 
         public List<Game> GetAllGamesByUser(User user)

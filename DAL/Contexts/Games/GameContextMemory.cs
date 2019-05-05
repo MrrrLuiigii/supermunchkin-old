@@ -10,7 +10,7 @@ namespace DAL.Contexts.Games
     {
         private Memory memory = new Memory();
 
-        public void AddGame(Game game)
+        public void AddGame(Game game, User user)
         {
             //Add game
         }

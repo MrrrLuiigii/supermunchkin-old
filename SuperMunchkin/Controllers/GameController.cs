@@ -32,8 +32,10 @@ namespace SuperMunchkin.Controllers
         [Authorize]
         public IActionResult CreateNewGame()
         {
+            User user = JsonConvert.DeserializeObject<User>(((ClaimsIdentity)User.Identity).Claims.First().Value);
+
             Game game = new Game();
-            game = gameCollectionLogic.AddGame(game);
+            game = gameCollectionLogic.AddGame(game, user);
 
             if (game == null)
             {

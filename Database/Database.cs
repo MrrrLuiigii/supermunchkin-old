@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using Models.Enums;
-using System;
 
 namespace Databases
 {
@@ -161,7 +160,7 @@ namespace Databases
                 cmd.ExecuteNonQuery();
                 id = (int)cmd.Parameters["pGameId"].Value;
             }
-            catch(Exception ex)
+            catch
             {
                 id = 0;
             }

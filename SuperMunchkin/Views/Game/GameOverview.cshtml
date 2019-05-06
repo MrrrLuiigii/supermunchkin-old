@@ -15,7 +15,10 @@
     @{
         foreach (Munchkin m in Model.Munchkins)
         {
-            <a href="@Url.Action("MunchkinEdit", "Munchkin", new { m.Id })">
+            int diceInt = 0;
+            int gameId = Model.Id;
+
+            <a href="@Url.Action("MunchkinEdit", "Munchkin", new { m.Id, diceInt, gameId })">
                 <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
                     @{
                         if (Model.Status == GameStatus.Playing)

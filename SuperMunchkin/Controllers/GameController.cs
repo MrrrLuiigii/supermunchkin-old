@@ -109,13 +109,13 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
-        public IActionResult SetWinner(int gameId, int munchkinId)
+        public IActionResult SetWinner(int id, int winner)
         {
-            Game game = gameCollectionLogic.GetGameById(gameId);
-            Munchkin munchkin = userLogic.GetMunchkinById(munchkinId);
+            Game game = gameCollectionLogic.GetGameById(id);
+            Munchkin munchkin = userLogic.GetMunchkinById(winner);
             gameLogic.SetWinner(game, munchkin);
             gameLogic.AdjustGameStatus(game, GameStatus.Finished);
-            return RedirectToAction("GameLobby", "Game");
+            return RedirectToAction("HistoryOverview", "Game", new { id });
         }
     }
 }

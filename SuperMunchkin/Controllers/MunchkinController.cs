@@ -58,19 +58,25 @@ namespace SuperMunchkin.Controllers
         [Authorize]
         public IActionResult Remove(int id, int gameId)
         {
-            Game game = gameCollectionLogic.GetGameById(gameId);
-
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             userLogic.RemoveMunchkin(munchkin);
 
-            return RedirectToAction("GameSetup", "Game", new { game.Id });
+            return RedirectToAction("GameSetup", "Game", new { gameId });
         }
 
         [Authorize]
-        public IActionResult MunchkinEdit(int id, int diceInt)
+        public IActionResult MunchkinEdit(int id, int diceInt, int gameId)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             ViewBag.DiceInt = diceInt;
+            ViewBag.Winner = null;
+            ViewBag.GameId = gameId;
+
+            if (munchkin.Level == 10)
+            {
+                ViewBag.Winner = munchkin;
+            }
+
             return View(munchkin);
         }
 
@@ -90,47 +96,40 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
-        public IActionResult LevelUp(int id)
+        public IActionResult LevelUp(int id, int gameId)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
-            ViewBag.Winner = null;
 
             if (munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Up))
             {
-                ViewBag.Winner = munchkin;
+                
             }
 
-            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id, gameId });
         }
 
         [Authorize]
-        public IActionResult LevelDown(int id)
+        public IActionResult LevelDown(int id, int gameId)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
-            ViewBag.Winner = null;
-
-            if (munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Down))
-            {
-                ViewBag.Winner = munchkin;
-            }
-
-            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
+            munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Down);
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id, gameId });
         }
 
         [Authorize]
-        public IActionResult GearUp(int id)
+        public IActionResult GearUp(int id, int gameId)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Up);
-            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id, gameId });
         }
 
         [Authorize]
-        public IActionResult GearDown(int id)
+        public IActionResult GearDown(int id, int gameId)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Down);
-            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id, gameId });
         }
     }
 }

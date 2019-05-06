@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using Models.Enums;
+using System;
 
 namespace Databases
 {
@@ -140,6 +141,35 @@ namespace Databases
             cmd.Dispose();
             conn.Close();
             return status;
+        }
+
+        public int ExecuteStoredProcedure(string procedureName, List<MySqlParameter> parameters)
+        {
+            conn.Open();
+            cmd = new MySqlCommand(procedureName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            foreach (MySqlParameter p in parameters)
+            {
+                cmd.Parameters.Add(p);
+            }
+
+            int id = 0;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                id = (int)cmd.Parameters["pGameId"].Value;
+            }
+            catch(Exception ex)
+            {
+                id = 0;
+            }
+
+            cmd.Dispose();
+            conn.Close();
+
+            return id;
         }
     }
 }

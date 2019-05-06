@@ -16,15 +16,7 @@ namespace Logic.Games
 
         public Game AddGame(Game game, User user)
         {
-            IEnumerable<Game> games = gameCollectionRepository.GetAllGames();
-
-            while (games.ToList().Find(g => g.DateTimePlayed == game.DateTimePlayed && g.Status == game.Status) != null)
-            {
-                game.DateTimePlayed = game.DateTimePlayed.AddSeconds(1);
-            }
-
-            gameCollectionRepository.AddGame(game, user);
-            return game;
+            return gameCollectionRepository.AddGame(game, user);
         }
 
         public void RemoveGame(Game game)

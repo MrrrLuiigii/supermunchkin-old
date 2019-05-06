@@ -14,37 +14,83 @@ namespace DAL.Contexts.Games
     {
         private Database database = new Database();
 
-        public void AddGame(Game game, User user)
+        public Game AddGame(Game game, User user)
         {
-            string sql =
-                "insert into `game`(`Status`, `DateTime`)" +
-                " values (@Status, @DateTime)";
+            string sp = "AddGame";
+            DateTime dateAndTime = Convert.ToDateTime(game.DateTimePlayed.ToString("yyyy-MM-dd HH:mm:ss"));
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
-            parameters.Add(new MySqlParameter("@Status", game.Status));
-            DateTime time = Convert.ToDateTime(game.DateTimePlayed.ToString("yyyy-MM-dd HH:mm:ss"));
+            parameters.Add(new MySqlParameter("pStatus", game.Status));                        
+            parameters.Add(new MySqlParameter("pDateTime", dateAndTime));
+            parameters.Add(new MySqlParameter("pUserId", user.Id));
 
-            DateTime tomorrow = DateTime.Now.AddDays(1);
-            parameters.Add(new MySqlParameter("@DateTime", time));
+            MySqlParameter output = new MySqlParameter("pGameId", MySqlDbType.Int32);
+            output.Direction = ParameterDirection.Output;
+            parameters.Add(output);
 
-            if (database.ExecuteQueryWithStatus(sql, parameters) != ExecuteQueryStatus.OK)
+            return GetGameById(database.ExecuteStoredProcedure(sp, parameters));
+        }
+
+        private Game GetGameById(int id)
+        {
+            Game game = null;
+
+            string sql =
+                "select *" +
+                " from `game`" +
+                " where `GameId` = @GameId";
+
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
+            parameters.Add(new MySqlParameter("@GameId", id));
+
+            DataTable dt = database.ExecuteQuery(sql, parameters);
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int gameId = (int)dr["GameId"];
+
+                    GameStatus status = GameStatus.Setup;
+                    if (dr["Status"].ToString() == "Playing")
+                    {
+                        status = GameStatus.Playing;
+                    }
+                    else if (dr["Status"].ToString() == "Finished")
+                    {
+                        status = GameStatus.Finished;
+                    }
+
+                    DateTime dateTime = (DateTime)dr["DateTime"];
+
+                    int winnerId = -1;
+                    if (dr["WinnerId"] != DBNull.Value)
+                    {
+                        winnerId = (int)dr["WinnerId"];
+                    }
+
+                    game = new Game(gameId, status, dateTime, GetMunchkin(winnerId));
+                    game = GetAllMunchkinsInGame(game);
+                }
+            }
+            else
             {
                 throw new Exception("Something went wrong. Sorry for the inconvenience.");
             }
 
-            game = GetGameByDateTimeAndStatus(game);
-            AddGameToUser(game, user);
+            return game;
         }
 
         private Game GetGameByDateTimeAndStatus(Game game)
         {
-            string sql = "select *" +
+            string sql = 
+                "select *" +
                 " from `game`" +
                 " where `DateTime` = @DateTime" +
                 " and `Status` = @Status";
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
-            parameters.Add(new MySqlParameter("@DateTime", game.DateTimePlayed));
+            parameters.Add(new MySqlParameter("@DateTime", Convert.ToDateTime(game.DateTimePlayed.ToString("yyyy-MM-dd HH:mm:ss"))));
             parameters.Add(new MySqlParameter("@Status", game.Status));
 
             DataTable dt = database.ExecuteQuery(sql, parameters);

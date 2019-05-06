@@ -11,9 +11,9 @@ namespace DAL.Repositories
         //private IGameContext context = new GameContextMemory();
         private IGameContext context = new GameContextSQL();
 
-        public void AddGame(Game game, User user)
+        public Game AddGame(Game game, User user)
         {
-            context.AddGame(game, user);
+            return context.AddGame(game, user);
         }
 
         public void AddMunchkin(Game game, Munchkin munchkin)

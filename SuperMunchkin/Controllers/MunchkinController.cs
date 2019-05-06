@@ -50,7 +50,7 @@ namespace SuperMunchkin.Controllers
                     return RedirectToAction("GameSetup", "Game", new { id });
                 }
             }
-            
+
             ViewBag.ErrorMessage = "Make sure all fields are filled in correctly.";
             return View(mvm);
         }
@@ -90,12 +90,12 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
-        public IActionResult AdjustLevel(int id, AdjustMunchkinStats direction)
+        public IActionResult LevelUp(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             ViewBag.Winner = null;
 
-            if (munchkinLogic.AdjustLevel(munchkin, direction))
+            if (munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Up))
             {
                 ViewBag.Winner = munchkin;
             }
@@ -104,10 +104,32 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
-        public IActionResult AdjustGear(int id, AdjustMunchkinStats direction)
+        public IActionResult LevelDown(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
-            munchkinLogic.AdjustGear(munchkin, direction);
+            ViewBag.Winner = null;
+
+            if (munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Down))
+            {
+                ViewBag.Winner = munchkin;
+            }
+
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
+        }
+
+        [Authorize]
+        public IActionResult GearUp(int id)
+        {
+            Munchkin munchkin = userLogic.GetMunchkinById(id);
+            munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Up);
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
+        }
+
+        [Authorize]
+        public IActionResult GearDown(int id)
+        {
+            Munchkin munchkin = userLogic.GetMunchkinById(id);
+            munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Down);
             return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
     }

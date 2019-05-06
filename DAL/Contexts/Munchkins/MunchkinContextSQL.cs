@@ -14,7 +14,10 @@ namespace DAL.Contexts.Munchkins
 
         public void AdjustMunchkin(Munchkin munchkin)
         {
-            string sql = $"update `munchkin` set `Gender` = @Gender, `Level` = @Level, `Gear` = @Gear where `MunchkinId` = @MunchkinId";
+            string sql = 
+                "update `munchkin`" +
+                " set `Gender` = @Gender, `Level` = @Level, `Gear` = @Gear" +
+                " where `MunchkinId` = @MunchkinId";
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
             parameters.Add(new MySqlParameter("@Gender", munchkin.Gender));

@@ -2,6 +2,7 @@
 using Factories;
 using Models;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Logic.Users
 {
@@ -11,8 +12,7 @@ namespace Logic.Users
 
         public Munchkin CreateMunchkin(User user, Munchkin munchkin)
         {
-            userRepository.AddMunchkin(user, munchkin);
-            return GetLatestMunchkin(user);
+            return userRepository.AddMunchkin(user, munchkin);
         }
 
         public void RemoveMunchkin(Munchkin munchkin)
@@ -20,15 +20,14 @@ namespace Logic.Users
             userRepository.RemoveMunchkin(munchkin);
         }
 
-        private Munchkin GetLatestMunchkin(User user)
+        public IEnumerable<Munchkin> GetAllMunchkinsByUser(User user)
         {
-            Munchkin munchkin = userRepository.GetAllMunchkins().ToList().Where(m => m.Name == user.Username).OrderByDescending(m => m.Id).FirstOrDefault();
-            return munchkin;
+            return userRepository.GetAllMunchkinsByUser(user);
         }
 
         public Munchkin GetMunchkinById(int id)
         {
-            return userRepository.GetAllMunchkins().ToList().Find(m => m.Id == id);
+            return userRepository.GetMunchkinById(id);
         }
     }
 }

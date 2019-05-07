@@ -24,6 +24,12 @@ namespace DAL.Contexts.Users
             return memory.GetAllMunchkins();
         }
 
+        public IEnumerable<Munchkin> GetAllMunchkinsByUser(User user)
+        {
+            //Get all munchkins by user
+            return null;
+        }
+
         public IEnumerable<User> GetAllUsers()
         {
             return memory.GetAllUsers();

@@ -5,8 +5,10 @@ namespace Interfaces.Users
 {
     public interface IUserRepository
     {
-        void AddMunchkin(User user, Munchkin munchkin);
+        Munchkin AddMunchkin(User user, Munchkin munchkin);
         void RemoveMunchkin(Munchkin munchkin);
         IEnumerable<Munchkin> GetAllMunchkins();
+        IEnumerable<Munchkin> GetAllMunchkinsByUser(User user);
+        Munchkin GetMunchkinById(int id);
     }
 }

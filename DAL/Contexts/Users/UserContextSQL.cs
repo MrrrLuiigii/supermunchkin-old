@@ -6,6 +6,7 @@ using Databases;
 using Models;
 using Models.Enums;
 using MySql.Data.MySqlClient;
+using System.Linq;
 
 namespace DAL.Contexts.Users
 {
@@ -13,22 +14,21 @@ namespace DAL.Contexts.Users
     {
         private Database database = new Database();
 
-        public void AddMunchkin(User user, Munchkin munchkin)
+        public Munchkin AddMunchkin(User user, Munchkin munchkin)
         {
-            string sql =
-                "insert into `munchkin` (`UserId`, `Gender`, `Level`, `Gear`)" +
-                " values (@UserId, @Gender, @Level, @Gear);";
+            string sp = "AddMunchkin";
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
-            parameters.Add(new MySqlParameter("@UserId", user.Id));
-            parameters.Add(new MySqlParameter("@Gender", munchkin.Gender));
-            parameters.Add(new MySqlParameter("@Level", munchkin.Level));
-            parameters.Add(new MySqlParameter("@Gear", munchkin.Gear));
+            parameters.Add(new MySqlParameter("pUserId", user.Id));
+            parameters.Add(new MySqlParameter("pGender", munchkin.Gender));
+            parameters.Add(new MySqlParameter("pLevel", munchkin.Level));
+            parameters.Add(new MySqlParameter("pGear", munchkin.Gear));
 
-            if (database.ExecuteQueryWithStatus(sql, parameters) != ExecuteQueryStatus.OK)
-            {
-                throw new Exception("Something went wrong. Sorry for the inconvenience.");
-            }
+            MySqlParameter output = new MySqlParameter("pMunchkinId", MySqlDbType.Int32);
+            output.Direction = ParameterDirection.Output;
+            parameters.Add(output);
+
+            return GetMunchkinById(database.ExecuteStoredProcedure(sp, parameters));
         }
 
         public void AddUser(User user)
@@ -106,7 +106,7 @@ namespace DAL.Contexts.Users
                     string email = dr["Email"].ToString();
 
                     User user = new User(userId, username, password, email);
-                    user.Munchkins = GetAllMunchkinsByUser(user);
+                    user.Munchkins = GetAllMunchkinsByUser(user).ToList();
                     users.Add(user);
                 }
             }
@@ -118,7 +118,7 @@ namespace DAL.Contexts.Users
             return users;
         }
 
-        private List<Munchkin> GetAllMunchkinsByUser(User user)
+        public IEnumerable<Munchkin> GetAllMunchkinsByUser(User user)
         {
             List<Munchkin> munchkins = new List<Munchkin>();
 
@@ -157,6 +157,46 @@ namespace DAL.Contexts.Users
             }
 
             return munchkins;
+        }
+
+        private Munchkin GetMunchkinById(int id)
+        {
+            Munchkin munchkin = null;
+
+            string sql =
+                "select `munchkin`.`MunchkinId`, `user`.`Username`, `munchkin`.`Gender`, `munchkin`.`Level`, `munchkin`.`Gear`" +
+                " from `munchkin`" +
+                " inner join `user`" +
+                " on `munchkin`.`UserId` = `user`.`UserId`" +
+                " where `munchkin`.`MunchkinId` = @MunchkinId";
+
+            DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@MunchkinId", id));
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int munchkinId = (int)dr["MunchkinId"];
+                    string name = dr["Username"].ToString();
+
+                    MunchkinGender gender = MunchkinGender.Male;
+                    if (dr["Gender"].ToString() == "Female")
+                    {
+                        gender = MunchkinGender.Female;
+                    }
+
+                    int level = (int)dr["Level"];
+                    int gear = (int)dr["Gear"];
+
+                    munchkin = new Munchkin(munchkinId, name, gender, level, gear);
+                }
+            }
+            else
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
+
+            return munchkin;
         }
 
         public void RemoveMunchkin(Munchkin munchkin)

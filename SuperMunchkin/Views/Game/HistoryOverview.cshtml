@@ -49,6 +49,14 @@
                             @strength
                         </h1>
                     </div>
+                    <div class="d-inline-block pl-5 text-right">
+                        @{
+                            if (m.Id == Model.Winner.Id)
+                            {
+                                <i class="fas fa-trophy fa-2x"></i>
+                            }
+                        }
+                    </div>
                 </div>
             </div>
         }

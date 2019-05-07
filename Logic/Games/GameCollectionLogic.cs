@@ -26,8 +26,7 @@ namespace Logic.Games
 
         public Game GetGameById(int id)
         {
-            IEnumerable<Game> games = gameCollectionRepository.GetAllGames();
-            return games.ToList().Find(g => g.Id == id);
+            return gameCollectionRepository.GetGameById(id);
         }
 
         public List<Game> GetAllGamesByUser(User user)

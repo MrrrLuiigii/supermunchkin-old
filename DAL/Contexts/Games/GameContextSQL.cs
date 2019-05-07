@@ -30,7 +30,7 @@ namespace DAL.Contexts.Games
             return GetGameById(database.ExecuteStoredProcedure(sp, parameters));
         }
 
-        private Game GetGameById(int id)
+        public Game GetGameById(int id)
         {
             Game game = null;
 

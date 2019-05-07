@@ -9,5 +9,6 @@ namespace Interfaces.Games
         void RemoveGame(Game game);
         IEnumerable<Game> GetAllGames();
         IEnumerable<Game> GetAllGamesByUser(User user);
+        Game GetGameById(int id);
     }
 }

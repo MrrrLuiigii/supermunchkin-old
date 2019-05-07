@@ -8,47 +8,56 @@ namespace DAL.Repositories
 {
     public class GameRepository : IGameRepository, IGameCollectionRepository
     {
-        //private IGameContext context = new GameContextMemory();
-        private IGameContext context = new GameContextSQL();
+        private IGameContext gameContext;
+
+        public GameRepository(IGameContext context = null)
+        {
+            gameContext = context ?? new GameContextSQL();
+        }
 
         public Game AddGame(Game game, User user)
         {
-            return context.AddGame(game, user);
+            return gameContext.AddGame(game, user);
         }
 
         public void AddMunchkin(Game game, Munchkin munchkin)
         {
-            context.AddMunchkin(game, munchkin);
+            gameContext.AddMunchkin(game, munchkin);
         }
 
         public void AdjustGameStatus(Game game, GameStatus status)
         {
-            context.AdjustGameStatus(game, status);
+            gameContext.AdjustGameStatus(game, status);
         }
 
         public IEnumerable<Game> GetAllGames()
         {
-            return context.GetAllGames();
+            return gameContext.GetAllGames();
         }
 
         public IEnumerable<Game> GetAllGamesByUser(User user)
         {
-            return context.GetAllGamesByUser(user);
+            return gameContext.GetAllGamesByUser(user);
+        }
+
+        public Game GetGameById(int id)
+        {
+            return gameContext.GetGameById(id);
         }
 
         public void RemoveGame(Game game)
         {
-            context.RemoveGame(game);
+            gameContext.RemoveGame(game);
         }
 
         public void RemoveMunchkin(Game game, Munchkin munchkin)
         {
-            context.RemoveMunchkin(game, munchkin);
+            gameContext.RemoveMunchkin(game, munchkin);
         }
 
         public void SetWinner(Game game, Munchkin munchkin)
         {
-            context.SetWinner(game, munchkin);
+            gameContext.SetWinner(game, munchkin);
         }
     }
 }

@@ -7,8 +7,12 @@ namespace DAL.Repositories
 {
     public class UserRepository : IUserRepository, IUserCollectionRepository
     {
-        //private IUserContext userContext = new UserContextMemory();
-        private IUserContext userContext = new UserContextSQL();
+        private IUserContext userContext;
+
+        public UserRepository(IUserContext context = null)
+        {
+            userContext = context ?? new UserContextSQL();
+        }
 
         public Munchkin AddMunchkin(User user, Munchkin munchkin)
         {

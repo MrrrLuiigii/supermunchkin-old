@@ -1,14 +1,17 @@
 ﻿using DAL.Contexts.Munchkins;
 using Interfaces.Munchkins;
 using Models;
-using Models.Enums;
 
 namespace DAL.Repositories
 {
     public class MunchkinRepository : IMunchkinRepository
     {
-        //private IMunchkinContext munchkinContext = new MunchkinContextMemory();
-        private IMunchkinContext munchkinContext = new MunchkinContextSQL();
+        private IMunchkinContext munchkinContext;
+
+        public MunchkinRepository(IMunchkinContext context = null)
+        {
+            munchkinContext = context ?? new MunchkinContextSQL();
+        }
 
         public void AdjustMunchkin(Munchkin munchkin)
         {

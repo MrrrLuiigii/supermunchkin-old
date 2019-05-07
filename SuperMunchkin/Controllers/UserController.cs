@@ -115,6 +115,7 @@ namespace SuperMunchkin.Controllers
         public IActionResult Statistics()
         {
             User user = JsonConvert.DeserializeObject<User>(((ClaimsIdentity)User.Identity).Claims.First().Value);
+            user.Munchkins = userLogic.GetAllMunchkinsByUser(user).ToList();
             ViewBag.LoggedInUser = user;
 
             IEnumerable<Game> userGames = gameCollectionLogic.GetAllGamesByUser(user);

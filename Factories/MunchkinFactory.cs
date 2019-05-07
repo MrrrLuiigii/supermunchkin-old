@@ -1,5 +1,6 @@
 ﻿using Interfaces.Munchkins;
 using DAL.Repositories;
+using DAL.Contexts.Munchkins;
 
 namespace Factories
 {
@@ -10,9 +11,9 @@ namespace Factories
             return new MunchkinRepository();
         }
 
-        public static IMunchkinRepository GetMunchkinRepositoryTest(IMunchkinContext context)
+        public static IMunchkinRepository GetMunchkinRepositoryTest()
         {
-            return new MunchkinRepository(context);
+            return new MunchkinRepository(new MunchkinContextMemory());
         }
     }
 }

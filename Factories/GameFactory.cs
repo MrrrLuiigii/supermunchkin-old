@@ -1,5 +1,6 @@
 ﻿using Interfaces.Games;
 using DAL.Repositories;
+using DAL.Contexts.Games;
 
 namespace Factories
 {
@@ -15,14 +16,14 @@ namespace Factories
             return new GameRepository();
         }
 
-        public static IGameRepository GetGameRepositoryTest(IGameContext context)
+        public static IGameRepository GetGameRepositoryTest()
         {
-            return new GameRepository(context);
+            return new GameRepository(new GameContextMemory());
         }
 
-        public static IGameCollectionRepository GetGameCollectionRepositoryTest(IGameContext context)
+        public static IGameCollectionRepository GetGameCollectionRepositoryTest()
         {
-            return new GameRepository(context);
+            return new GameRepository(new GameContextMemory());
         }
     }
 }

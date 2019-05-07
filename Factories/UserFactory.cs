@@ -1,5 +1,6 @@
 ﻿using Interfaces.Users;
 using DAL.Repositories;
+using DAL.Contexts.Users;
 
 namespace Factories
 {
@@ -15,14 +16,14 @@ namespace Factories
             return new UserRepository();
         }
 
-        public static IUserRepository GetUserRepositoryTest(IUserContext context)
+        public static IUserRepository GetUserRepositoryTest()
         {
-            return new UserRepository(context);
+            return new UserRepository(new UserContextMemory());
         }
 
-        public static IUserRepository GetUserCollectionRepositoryTest(IUserContext context)
+        public static IUserRepository GetUserCollectionRepositoryTest()
         {
-            return new UserRepository(context);
+            return new UserRepository(new UserContextMemory());
         }
     }
 }

@@ -159,7 +159,7 @@ namespace DAL.Contexts.Users
             return munchkins;
         }
 
-        private Munchkin GetMunchkinById(int id)
+        public Munchkin GetMunchkinById(int id)
         {
             Munchkin munchkin = null;
 

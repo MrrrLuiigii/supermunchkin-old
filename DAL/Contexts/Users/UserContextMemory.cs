@@ -9,7 +9,7 @@ namespace DAL.Contexts.Users
     {
         private Memory memory = new Memory();
 
-        public void AddMunchkin(User user, Munchkin munchkin)
+        public Munchkin AddMunchkin(User user, Munchkin munchkin)
         {
             throw new System.NotImplementedException();
         }

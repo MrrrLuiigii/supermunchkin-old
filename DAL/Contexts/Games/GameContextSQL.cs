@@ -6,7 +6,6 @@ using Databases;
 using Models;
 using Models.Enums;
 using MySql.Data.MySqlClient;
-using System.Globalization;
 
 namespace DAL.Contexts.Games
 {
@@ -24,7 +23,7 @@ namespace DAL.Contexts.Games
             parameters.Add(new MySqlParameter("pDateTime", dateAndTime));
             parameters.Add(new MySqlParameter("pUserId", user.Id));
 
-            MySqlParameter output = new MySqlParameter("pGameId", MySqlDbType.Int32);
+            MySqlParameter output = new MySqlParameter("pOutId", MySqlDbType.Int32);
             output.Direction = ParameterDirection.Output;
             parameters.Add(output);
 

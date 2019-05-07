@@ -24,7 +24,7 @@ namespace DAL.Contexts.Users
             parameters.Add(new MySqlParameter("pLevel", munchkin.Level));
             parameters.Add(new MySqlParameter("pGear", munchkin.Gear));
 
-            MySqlParameter output = new MySqlParameter("pMunchkinId", MySqlDbType.Int32);
+            MySqlParameter output = new MySqlParameter("pOutId", MySqlDbType.Int32);
             output.Direction = ParameterDirection.Output;
             parameters.Add(output);
 

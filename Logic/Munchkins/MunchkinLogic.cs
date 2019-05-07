@@ -14,7 +14,7 @@ namespace Logic.Munchkins
             munchkinRepository = mRepository ?? MunchkinFactory.GetMunchkinRepository();
         }
 
-        public bool AdjustLevel(Munchkin munchkin, AdjustMunchkinStats direction)
+        public void AdjustLevel(Munchkin munchkin, AdjustMunchkinStats direction)
         {
             if (direction == AdjustMunchkinStats.Up)
             {
@@ -40,17 +40,6 @@ namespace Logic.Munchkins
             }
 
             munchkinRepository.AdjustMunchkin(munchkin);
-            return CheckWin(munchkin);
-        }
-
-        private bool CheckWin(Munchkin munchkin)
-        {
-            if (munchkin.Level == 10)
-            {
-                return true;
-            }
-
-            return false;
         }
 
         public void AdjustGear(Munchkin munchkin, AdjustMunchkinStats direction)

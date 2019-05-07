@@ -7,7 +7,12 @@ namespace Logic.Munchkins
 {
     public class MunchkinLogic
     {
-        IMunchkinRepository munchkinRepository = MunchkinFactory.GetMunchkinRepository();
+        IMunchkinRepository munchkinRepository;
+
+        public MunchkinLogic(IMunchkinRepository mRepository = null)
+        {
+            munchkinRepository = mRepository ?? MunchkinFactory.GetMunchkinRepository();
+        }
 
         public bool AdjustLevel(Munchkin munchkin, AdjustMunchkinStats direction)
         {

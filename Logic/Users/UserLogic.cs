@@ -7,7 +7,12 @@ namespace Logic.Users
 {
     public class UserLogic
     {
-        IUserRepository userRepository = UserFactory.GetUserRepository();
+        IUserRepository userRepository;
+
+        public UserLogic(IUserRepository uRepository)
+        {
+            userRepository = uRepository = UserFactory.GetUserRepository();
+        }
 
         public Munchkin CreateMunchkin(User user, Munchkin munchkin)
         {

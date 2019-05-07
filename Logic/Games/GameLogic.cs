@@ -8,7 +8,12 @@ namespace Logic.Games
 {
     public class GameLogic
     {
-        private IGameRepository gameRepository = GameFactory.GetGameRepository();
+        private IGameRepository gameRepository;
+
+        public GameLogic(IGameRepository repository = null)
+        {
+            gameRepository = repository ?? GameFactory.GetGameRepository();
+        }
 
         public void AddMunchkin(Game game, Munchkin munchkin)
         {

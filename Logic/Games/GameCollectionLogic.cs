@@ -2,8 +2,6 @@
 using Interfaces.Users;
 using Factories;
 using Models;
-using Models.Enums;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,8 +9,14 @@ namespace Logic.Games
 {
     public class GameCollectionLogic
     {
-        private IUserRepository userRepository = UserFactory.GetUserRepository();
-        private IGameCollectionRepository gameCollectionRepository = GameFactory.GetGameCollectionRepository();
+        private IUserRepository userRepository;
+        private IGameCollectionRepository gameCollectionRepository;
+
+        public GameCollectionLogic(IUserRepository uRepository = null, IGameCollectionRepository gcRepository = null)
+        {
+            userRepository = userRepository ?? UserFactory.GetUserRepository();
+            gameCollectionRepository = gcRepository ?? GameFactory.GetGameCollectionRepository();
+        }
 
         public Game AddGame(Game game, User user)
         {

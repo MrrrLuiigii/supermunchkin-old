@@ -8,7 +8,12 @@ namespace Logic.Users
 {
     public class UserCollectionLogic
     {
-        IUserCollectionRepository userRepo = UserFactory.GetUserCollectionRepository();
+        IUserCollectionRepository userCollectionRepository;
+
+        public UserCollectionLogic(IUserCollectionRepository ucRepository = null)
+        {
+            userCollectionRepository = ucRepository ?? UserFactory.GetUserCollectionRepository();
+        }
 
         public bool AddUser(User user)
         {
@@ -23,7 +28,7 @@ namespace Logic.Users
             }
 
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, BCrypt.Net.BCrypt.GenerateSalt());
-            userRepo.AddUser(user);
+            userCollectionRepository.AddUser(user);
             return true;
         }
 
@@ -41,13 +46,13 @@ namespace Logic.Users
 
         public User GetUserById(int id)
         {
-            IEnumerable<User> users = userRepo.GetAllUsers();
+            IEnumerable<User> users = userCollectionRepository.GetAllUsers();
             return users.ToList().Find(u => u.Id == id);
         }
 
         public IEnumerable<User> GetAllUsers()
         {
-            return userRepo.GetAllUsers();
+            return userCollectionRepository.GetAllUsers();
         }
     }
 }

@@ -14,5 +14,15 @@ namespace Factories
         {
             return new UserRepository();
         }
+
+        public static IUserRepository GetUserRepositoryTest(IUserContext context)
+        {
+            return new UserRepository(context);
+        }
+
+        public static IUserRepository GetUserCollectionRepositoryTest(IUserContext context)
+        {
+            return new UserRepository(context);
+        }
     }
 }

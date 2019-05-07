@@ -14,5 +14,15 @@ namespace Factories
         {
             return new GameRepository();
         }
+
+        public static IGameRepository GetGameRepositoryTest(IGameContext context)
+        {
+            return new GameRepository(context);
+        }
+
+        public static IGameCollectionRepository GetGameCollectionRepositoryTest(IGameContext context)
+        {
+            return new GameRepository(context);
+        }
     }
 }

@@ -9,5 +9,10 @@ namespace Factories
         {
             return new MunchkinRepository();
         }
+
+        public static IMunchkinRepository GetMunchkinRepositoryTest(IMunchkinContext context)
+        {
+            return new MunchkinRepository(context);
+        }
     }
 }

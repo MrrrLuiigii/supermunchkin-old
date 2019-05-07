@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.Enums;
 using SuperMunchkin.ViewModels;
+using System;
 
 namespace SuperMunchkin.Controllers
 {
@@ -60,17 +61,16 @@ namespace SuperMunchkin.Controllers
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             userLogic.RemoveMunchkin(munchkin);
-
             return RedirectToAction("GameSetup", "Game", new { gameId });
         }
 
         [Authorize]
-        public IActionResult MunchkinEdit(int id, int diceInt, int gameId)
+        public IActionResult MunchkinEdit(int id, int diceInt)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             ViewBag.DiceInt = diceInt;
             ViewBag.Winner = null;
-            ViewBag.GameId = gameId;
+            ViewBag.GameId = Convert.ToInt32(Request.Cookies["GameId"]);
 
             if (munchkin.Level == 10)
             {
@@ -96,40 +96,35 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
-        public IActionResult LevelUp(int id, int gameId)
+        public IActionResult LevelUp(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
-
-            if (munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Up))
-            {
-                
-            }
-
-            return RedirectToAction("MunchkinEdit", "Munchkin", new { id, gameId });
+            munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Up);
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
 
         [Authorize]
-        public IActionResult LevelDown(int id, int gameId)
+        public IActionResult LevelDown(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Down);
-            return RedirectToAction("MunchkinEdit", "Munchkin", new { id, gameId });
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
 
         [Authorize]
-        public IActionResult GearUp(int id, int gameId)
+        public IActionResult GearUp(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Up);
-            return RedirectToAction("MunchkinEdit", "Munchkin", new { id, gameId });
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
 
         [Authorize]
-        public IActionResult GearDown(int id, int gameId)
+        public IActionResult GearDown(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Down);
-            return RedirectToAction("MunchkinEdit", "Munchkin", new { id, gameId });
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
     }
 }

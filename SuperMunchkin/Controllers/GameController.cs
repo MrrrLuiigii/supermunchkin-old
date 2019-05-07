@@ -8,6 +8,7 @@ using Models.Enums;
 using Logic.Users;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace SuperMunchkin.Controllers
 {
@@ -72,6 +73,7 @@ namespace SuperMunchkin.Controllers
         public IActionResult GameOverview(int id, int diceInt)
         {
             Game game = gameCollectionLogic.GetGameById(id);
+            Response.Cookies.Append("GameId", game.Id.ToString());
 
             if (game.Status == GameStatus.Setup)
             {
@@ -105,17 +107,18 @@ namespace SuperMunchkin.Controllers
         public IActionResult HistoryOverview(int id)
         {
             Game game = gameCollectionLogic.GetGameById(id);
+            Response.Cookies.Append("GameId", id.ToString());
             return View(game);
         }
 
         [Authorize]
-        public IActionResult SetWinner(int id, int winner)
+        public IActionResult SetWinner(int id)
         {
-            Game game = gameCollectionLogic.GetGameById(id);
-            Munchkin munchkin = userLogic.GetMunchkinById(winner);
+            Game game = gameCollectionLogic.GetGameById(Convert.ToInt32(Request.Cookies["GameId"]));
+            Munchkin munchkin = userLogic.GetMunchkinById(id);
             gameLogic.SetWinner(game, munchkin);
             gameLogic.AdjustGameStatus(game, GameStatus.Finished);
-            return RedirectToAction("HistoryOverview", "Game", new { id });
+            return RedirectToAction("HistoryOverview", "Game", new { game.Id });
         }
     }
 }

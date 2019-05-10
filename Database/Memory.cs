@@ -70,7 +70,7 @@ namespace Databases
             Munchkins.AddRange(NewMunchkinsTwo);
 
             Users = new List<User>();
-            Users.Add(new User(1, "Nicky", "admin", "nicky@gmail.com", Munchkins));
+            Users.Add(new User(1, "Nicky", "admin", "nicky@gmail.com"));
             Users.Add(new User(2, "Mario", "user", "mario@gmail.com"));
             Users.Add(new User(3, "Sjoerd", "user", "sjoerd@gmail.com"));
             Users.Add(new User(4, "Nick", "user", "nick@gmail.com"));
@@ -93,7 +93,7 @@ namespace Databases
 
             foreach (User u in Users)
             {
-                if(u.Id == id)
+                if (u.Id == id)
                 {
                     user = u;
                 }
@@ -109,22 +109,33 @@ namespace Databases
 
         public Game GetGameById(int id)
         {
-            Game game = null;
+            return Games.Find(g => g.Id == id);
+        }
 
-            foreach (Game g in Games)
+        public List<Game> GetGamesByUser(User user)
+        {
+            List<Game> UserGames = new List<Game>();
+            foreach (Munchkin m in Munchkins.FindAll(m => m.Name == user.Username))
             {
-                if(g.Id == id)
-                {
-                    game = g;
-                }
+                UserGames.Add(Games.Find(g => g.Munchkins.Contains(m)));
             }
 
-            return game;
+            return UserGames;
         }
 
         public IEnumerable<Game> GetAllGames()
         {
             return Games;
+        }
+        
+        public Game AddGame(Game game, User user)
+        {
+
+        }
+
+        public void RemoveGame()
+        {
+
         }
 
         public Munchkin GetMunchkinById(int id)

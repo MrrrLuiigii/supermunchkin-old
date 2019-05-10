@@ -38,7 +38,7 @@ namespace DAL.Contexts.Games
 
         public IEnumerable<Game> GetAllGamesByUser(User user)
         {
-            return memory.GetAllGames();
+            return memory.GetGamesByUser(user);
         }
 
         public Game GetGameById(int id)

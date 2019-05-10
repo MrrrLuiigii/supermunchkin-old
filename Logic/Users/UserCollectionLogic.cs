@@ -17,7 +17,7 @@ namespace Logic.Users
 
         public bool AddUser(User user)
         {
-            List<User> users = GetAllUsers().ToList();
+            List<User> users = GetAllUsers();
             
             if (users.Find(u => u.Username == user.Username || u.Email == user.Email) != null)
             {
@@ -31,7 +31,7 @@ namespace Logic.Users
 
         public User Login(string username, string password)
         {
-            User user = GetAllUsers().ToList().Find(u => u.Username == username);
+            User user = GetAllUsers().Find(u => u.Username == username);
 
             if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
@@ -43,6 +43,6 @@ namespace Logic.Users
 
         public User GetUserById(int id) => userCollectionRepository.GetUserById(id);
 
-        public IEnumerable<User> GetAllUsers() => userCollectionRepository.GetAllUsers();
+        public List<User> GetAllUsers() => userCollectionRepository.GetAllUsers();
     }
 }

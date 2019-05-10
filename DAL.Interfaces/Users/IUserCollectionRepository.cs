@@ -6,7 +6,7 @@ namespace Interfaces.Users
     public interface IUserCollectionRepository
     {
         void AddUser(User user);
-        IEnumerable<User> GetAllUsers();
+        List<User> GetAllUsers();
         User GetUserById(int id);
     }
 }

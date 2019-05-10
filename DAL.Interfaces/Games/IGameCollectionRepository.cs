@@ -7,8 +7,8 @@ namespace Interfaces.Games
     {
         Game AddGame(Game game, User user);
         void RemoveGame(Game game);
-        IEnumerable<Game> GetAllGames();
-        IEnumerable<Game> GetAllGamesByUser(User user);
+        List<Game> GetAllGames();
+        List<Game> GetAllGamesByUser(User user);
         Game GetGameById(int id);
     }
 }

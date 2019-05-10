@@ -31,12 +31,12 @@ namespace DAL.Contexts.Games
             //Adjust gamestatus
         }
 
-        public IEnumerable<Game> GetAllGames()
+        public List<Game> GetAllGames()
         {
             return memory.GetAllGames();
         }
 
-        public IEnumerable<Game> GetAllGamesByUser(User user)
+        public List<Game> GetAllGamesByUser(User user)
         {
             return memory.GetGamesByUser(user);
         }

@@ -24,17 +24,17 @@ namespace DAL.Repositories
             userContext.AddUser(user);
         }
 
-        public IEnumerable<Munchkin> GetAllMunchkins()
+        public List<Munchkin> GetAllMunchkins()
         {
             return userContext.GetAllMunchkins();
         }
 
-        public IEnumerable<Munchkin> GetAllMunchkinsByUser(User user)
+        public List<Munchkin> GetAllMunchkinsByUser(User user)
         {
             return userContext.GetAllMunchkinsByUser(user);
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public List<User> GetAllUsers()
         {
             return userContext.GetAllUsers();
         }

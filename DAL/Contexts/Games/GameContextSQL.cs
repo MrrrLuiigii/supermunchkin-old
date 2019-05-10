@@ -179,7 +179,7 @@ namespace DAL.Contexts.Games
             }
         }
 
-        public IEnumerable<Game> GetAllGames()
+        public List<Game> GetAllGames()
         {
             List<Game> games = new List<Game>();
 
@@ -224,7 +224,7 @@ namespace DAL.Contexts.Games
             return games;
         }
 
-        public IEnumerable<Game> GetAllGamesByUser(User user)
+        public List<Game> GetAllGamesByUser(User user)
         {
             List<Game> games = new List<Game>();
 

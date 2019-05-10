@@ -7,8 +7,8 @@ namespace Interfaces.Users
     {
         Munchkin AddMunchkin(User user, Munchkin munchkin);
         void RemoveMunchkin(Munchkin munchkin);
-        IEnumerable<Munchkin> GetAllMunchkins();
-        IEnumerable<Munchkin> GetAllMunchkinsByUser(User user);
+        List<Munchkin> GetAllMunchkins();
+        List<Munchkin> GetAllMunchkinsByUser(User user);
         Munchkin GetMunchkinById(int id);
     }
 }

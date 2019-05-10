@@ -19,17 +19,17 @@ namespace DAL.Contexts.Users
             memory.AddUser(user);
         }
 
-        public IEnumerable<Munchkin> GetAllMunchkins()
+        public List<Munchkin> GetAllMunchkins()
         {
             return memory.GetAllMunchkins();
         }
 
-        public IEnumerable<Munchkin> GetAllMunchkinsByUser(User user)
+        public List<Munchkin> GetAllMunchkinsByUser(User user)
         {
             return memory.GetMunchkinsByUser(user);
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public List<User> GetAllUsers()
         {
             return memory.GetAllUsers();
         }

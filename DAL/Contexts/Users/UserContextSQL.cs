@@ -48,7 +48,7 @@ namespace DAL.Contexts.Users
             }
         }
 
-        public IEnumerable<Munchkin> GetAllMunchkins()
+        public List<Munchkin> GetAllMunchkins()
         {
             List<Munchkin> munchkins = new List<Munchkin>();
 
@@ -88,7 +88,7 @@ namespace DAL.Contexts.Users
             return munchkins;
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public List<User> GetAllUsers()
         {
             List<User> users = new List<User>();
 
@@ -118,7 +118,7 @@ namespace DAL.Contexts.Users
             return users;
         }
 
-        public IEnumerable<Munchkin> GetAllMunchkinsByUser(User user)
+        public List<Munchkin> GetAllMunchkinsByUser(User user)
         {
             List<Munchkin> munchkins = new List<Munchkin>();
 

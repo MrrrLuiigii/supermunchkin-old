@@ -102,7 +102,7 @@ namespace Databases
             return user;
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public List<User> GetAllUsers()
         {
             return Users;
         }
@@ -123,7 +123,7 @@ namespace Databases
             return UserGames;
         }
 
-        public IEnumerable<Game> GetAllGames()
+        public List<Game> GetAllGames()
         {
             return Games;
         }
@@ -145,12 +145,12 @@ namespace Databases
             return Munchkins.Find(m => m.Id == id);
         }
 
-        public IEnumerable<Munchkin> GetMunchkinsByUser(User user)
+        public List<Munchkin> GetMunchkinsByUser(User user)
         {
             return Munchkins.FindAll(m => m.Name == user.Username); 
         }
 
-        public IEnumerable<Munchkin> GetAllMunchkins()
+        public List<Munchkin> GetAllMunchkins()
         {
             return Munchkins;
         }

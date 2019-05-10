@@ -18,7 +18,7 @@ namespace Logic.Users
 
         public void RemoveMunchkin(Munchkin munchkin) => userRepository.RemoveMunchkin(munchkin);
 
-        public IEnumerable<Munchkin> GetAllMunchkinsByUser(User user) => userRepository.GetAllMunchkinsByUser(user);
+        public List<Munchkin> GetAllMunchkinsByUser(User user) => userRepository.GetAllMunchkinsByUser(user);
 
         public Munchkin GetMunchkinById(int id) => userRepository.GetMunchkinById(id);
     }

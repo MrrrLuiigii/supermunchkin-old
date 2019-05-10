@@ -30,12 +30,12 @@ namespace DAL.Repositories
             gameContext.AdjustGameStatus(game, status);
         }
 
-        public IEnumerable<Game> GetAllGames()
+        public List<Game> GetAllGames()
         {
             return gameContext.GetAllGames();
         }
 
-        public IEnumerable<Game> GetAllGamesByUser(User user)
+        public List<Game> GetAllGamesByUser(User user)
         {
             return gameContext.GetAllGamesByUser(user);
         }

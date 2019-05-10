@@ -23,14 +23,14 @@ namespace Logic.Test.Munchkins
         public void AdjustLevelUpTest()
         {
             munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Up);
-            Assert.AreEqual(munchkin.Level, 6);
+            Assert.AreEqual(6, munchkin.Level);
         }
 
         [TestMethod]
         public void AdjustLevelDownTest()
         {
             munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Down);
-            Assert.AreEqual(munchkin.Level, 4);
+            Assert.AreEqual(4, munchkin.Level);
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace Logic.Test.Munchkins
         {
             munchkin.Level = 10;
             munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Up);
-            Assert.AreEqual(munchkin.Level, 10);
+            Assert.AreEqual(10, munchkin.Level);
         }
 
         [TestMethod]
@@ -46,21 +46,21 @@ namespace Logic.Test.Munchkins
         {
             munchkin.Level = 0;
             munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Down);
-            Assert.AreEqual(munchkin.Level, 0);
+            Assert.AreEqual(0, munchkin.Level);
         }
 
         [TestMethod]
         public void AdjustGearUpTest()
         {
             munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Up);
-            Assert.AreEqual(munchkin.Gear, 6);
+            Assert.AreEqual(6, munchkin.Gear);
         }
 
         [TestMethod]
         public void AdjustGearDownTest()
         {
             munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Down);
-            Assert.AreEqual(munchkin.Gear, 4);
+            Assert.AreEqual(4, munchkin.Gear);
         }
 
         [TestMethod]
@@ -68,14 +68,14 @@ namespace Logic.Test.Munchkins
         {
             munchkin.Gear = 0;
             munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Down);
-            Assert.AreEqual(munchkin.Gear, 0);
+            Assert.AreEqual(0, munchkin.Gear);
         }
 
         [TestMethod]
         public void AdjustGenderMaleToFemaleTest()
         {
             munchkinLogic.AdjustGender(munchkin);
-            Assert.AreEqual(munchkin.Gender, MunchkinGender.Female);
+            Assert.AreEqual(MunchkinGender.Female, munchkin.Gender);
         }
 
         [TestMethod]
@@ -83,7 +83,7 @@ namespace Logic.Test.Munchkins
         {
             munchkin.Gender = MunchkinGender.Female;
             munchkinLogic.AdjustGender(munchkin);
-            Assert.AreEqual(munchkin.Gender, MunchkinGender.Male);
+            Assert.AreEqual(MunchkinGender.Male,  munchkin.Gender);
         }
     }
 }

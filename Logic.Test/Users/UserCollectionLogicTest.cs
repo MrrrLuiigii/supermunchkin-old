@@ -1,4 +1,6 @@
-﻿using Factories;
+﻿using DAL.Contexts.Users;
+using DAL.Repositories;
+using Factories;
 using Logic.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
@@ -10,18 +12,37 @@ namespace Logic.Test.Users
     public class UserCollectionLogicTest
     {
         UserCollectionLogic userCollectionLogic;
+        User user;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            userCollectionLogic = new UserCollectionLogic();
+            user = new User(1, "Nicky", "admin", "nicky@gmail.com");
+            userCollectionLogic = new UserCollectionLogic(new UserRepository(new UserContextMemory()));
         }
 
         [TestMethod]
         public void AddUserTest()
         {
-            User user = new User("NewUser", "password", "new@email.com");
-            userCollectionLogic.AddUser(user);
+            Assert.AreEqual(true, userCollectionLogic.AddUser(user));
+        }
+
+        [TestMethod]
+        public void LoginTest()
+        {
+            Assert.AreEqual(user, userCollectionLogic.Login(user.Username, user.Password));
+        }
+
+        [TestMethod]
+        public void LoginWrongUsernameTest()
+        {
+
+        }
+
+        [TestMethod]
+        public void LoginWrongPasswordTest()
+        {
+
         }
     }
 }

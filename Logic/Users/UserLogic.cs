@@ -14,7 +14,7 @@ namespace Logic.Users
             userRepository = uRepository ?? UserFactory.GetUserRepository();
         }
 
-        public Munchkin CreateMunchkin(User user, Munchkin munchkin) =>  userRepository.AddMunchkin(user, munchkin);
+        public Munchkin CreateMunchkin(User user, Munchkin munchkin) => userRepository.AddMunchkin(user, munchkin);
 
         public void RemoveMunchkin(Munchkin munchkin) => userRepository.RemoveMunchkin(munchkin);
 

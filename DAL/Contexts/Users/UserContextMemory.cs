@@ -11,12 +11,12 @@ namespace DAL.Contexts.Users
 
         public Munchkin AddMunchkin(User user, Munchkin munchkin)
         {
-            throw new System.NotImplementedException();
+            return memory.AddMunchkin(user, munchkin);
         }
 
         public void AddUser(User user)
         {
-            //Add user
+            memory.AddUser(user);
         }
 
         public IEnumerable<Munchkin> GetAllMunchkins()
@@ -26,8 +26,7 @@ namespace DAL.Contexts.Users
 
         public IEnumerable<Munchkin> GetAllMunchkinsByUser(User user)
         {
-            //Get all munchkins by user
-            return null;
+            return memory.GetMunchkinsByUser(user);
         }
 
         public IEnumerable<User> GetAllUsers()
@@ -37,7 +36,7 @@ namespace DAL.Contexts.Users
 
         public Munchkin GetMunchkinById(int id)
         {
-            throw new System.NotImplementedException();
+            return memory.GetMunchkinById(id);
         }
 
         public User GetUserById(int id)
@@ -45,14 +44,9 @@ namespace DAL.Contexts.Users
             return memory.GetUserById(id);
         }
 
-        public User Login(string username, string password)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void RemoveMunchkin(Munchkin munchkin)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

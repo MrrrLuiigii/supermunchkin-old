@@ -130,7 +130,9 @@ namespace Databases
         
         public Game AddGame(Game game, User user)
         {
-
+            game.Id = Games.Count + 1;
+            Games.Add(game);
+            return game;
         }
 
         public void RemoveGame()

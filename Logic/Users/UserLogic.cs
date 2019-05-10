@@ -9,9 +9,9 @@ namespace Logic.Users
     {
         IUserRepository userRepository;
 
-        public UserLogic(IUserRepository uRepository)
+        public UserLogic(IUserRepository uRepository = null)
         {
-            userRepository = uRepository = UserFactory.GetUserRepository();
+            userRepository = uRepository ?? UserFactory.GetUserRepository();
         }
 
         public Munchkin CreateMunchkin(User user, Munchkin munchkin) =>  userRepository.AddMunchkin(user, munchkin);

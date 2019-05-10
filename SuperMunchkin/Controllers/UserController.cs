@@ -140,8 +140,11 @@ namespace SuperMunchkin.Controllers
                 AvgLevel += m.Level;
             }
 
-            AvgGear = AvgGear / user.Munchkins.Count;
-            AvgLevel = AvgLevel / user.Munchkins.Count;
+            if (user.Munchkins.Count != 0)
+            {
+                AvgGear = AvgGear / user.Munchkins.Count;
+                AvgLevel = AvgLevel / user.Munchkins.Count;
+            }
 
             ViewBag.AvgGear = AvgGear;
             ViewBag.AvgLevel = AvgLevel;

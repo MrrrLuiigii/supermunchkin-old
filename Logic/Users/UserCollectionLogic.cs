@@ -17,14 +17,11 @@ namespace Logic.Users
 
         public bool AddUser(User user)
         {
-            IEnumerable<User> users = GetAllUsers();
-
-            foreach (User u in users)
+            List<User> users = GetAllUsers().ToList();
+            
+            if (users.Find(u => u.Username == user.Username || u.Email == user.Email) != null)
             {
-                if (u.Username == user.Username || u.Email == user.Email)
-                {
-                    return false;
-                }
+                return false;
             }
 
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, BCrypt.Net.BCrypt.GenerateSalt());
@@ -44,15 +41,8 @@ namespace Logic.Users
             return null;
         }
 
-        public User GetUserById(int id)
-        {
-            IEnumerable<User> users = userCollectionRepository.GetAllUsers();
-            return users.ToList().Find(u => u.Id == id);
-        }
+        public User GetUserById(int id) => userCollectionRepository.GetUserById(id);
 
-        public IEnumerable<User> GetAllUsers()
-        {
-            return userCollectionRepository.GetAllUsers();
-        }
+        public IEnumerable<User> GetAllUsers() => userCollectionRepository.GetAllUsers();
     }
 }

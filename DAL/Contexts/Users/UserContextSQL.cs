@@ -199,11 +199,42 @@ namespace DAL.Contexts.Users
             return munchkin;
         }
 
+        public User GetUserById(int id)
+        {
+            User user = null;
+
+            string sql = 
+                "select * from `user`" +
+                " where `user`.`UserId` = @UserId";
+
+            DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@UserID", id));
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int userId = (int)dr["UserId"];
+                    string username = dr["Username"].ToString();
+                    string password = dr["Password"].ToString();
+                    string email = dr["Email"].ToString();
+
+                    user = new User(userId, username, password, email);
+                    user.Munchkins = GetAllMunchkinsByUser(user).ToList();
+                }
+            }
+            else
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
+
+            return user;
+        }
+
         public void RemoveMunchkin(Munchkin munchkin)
         {
             string sql = 
-                "delete from `munchkin` " +
-                "where `MunchkinId` = @munchkinId";
+                "delete from `munchkin`" +
+                " where `MunchkinId` = @munchkinId";
 
             if (database.ExecuteQueryWithStatus(sql, new MySqlParameter("@munchkinId", munchkin.Id)) != ExecuteQueryStatus.OK)
             {

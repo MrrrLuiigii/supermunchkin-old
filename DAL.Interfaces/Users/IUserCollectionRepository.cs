@@ -7,5 +7,6 @@ namespace Interfaces.Users
     {
         void AddUser(User user);
         IEnumerable<User> GetAllUsers();
+        User GetUserById(int id);
     }
 }

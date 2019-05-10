@@ -23,6 +23,8 @@ namespace Logic.Test.Munchkins
         public void AdjustLevelTest()
         {
             munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Up);
+
+            //Assert.AreEqual();
         }
 
         [TestMethod]

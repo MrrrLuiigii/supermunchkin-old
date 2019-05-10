@@ -157,9 +157,9 @@ namespace Databases
             Users.Add(user);
         }
 
-        public void RemoveMunchkin()
+        public void RemoveMunchkin(Munchkin munchkin)
         {
-
+            Munchkins.Remove(munchkin);            
         }
     }
 }

@@ -46,7 +46,7 @@ namespace DAL.Contexts.Users
 
         public void RemoveMunchkin(Munchkin munchkin)
         {
-            
+            memory.RemoveMunchkin(munchkin);
         }
     }
 }

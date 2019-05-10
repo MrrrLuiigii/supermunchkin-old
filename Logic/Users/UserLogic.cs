@@ -14,24 +14,12 @@ namespace Logic.Users
             userRepository = uRepository = UserFactory.GetUserRepository();
         }
 
-        public Munchkin CreateMunchkin(User user, Munchkin munchkin)
-        {
-            return userRepository.AddMunchkin(user, munchkin);
-        }
+        public Munchkin CreateMunchkin(User user, Munchkin munchkin) =>  userRepository.AddMunchkin(user, munchkin);
 
-        public void RemoveMunchkin(Munchkin munchkin)
-        {
-            userRepository.RemoveMunchkin(munchkin);
-        }
+        public void RemoveMunchkin(Munchkin munchkin) => userRepository.RemoveMunchkin(munchkin);
 
-        public IEnumerable<Munchkin> GetAllMunchkinsByUser(User user)
-        {
-            return userRepository.GetAllMunchkinsByUser(user);
-        }
+        public IEnumerable<Munchkin> GetAllMunchkinsByUser(User user) => userRepository.GetAllMunchkinsByUser(user);
 
-        public Munchkin GetMunchkinById(int id)
-        {
-            return userRepository.GetMunchkinById(id);
-        }
+        public Munchkin GetMunchkinById(int id) => userRepository.GetMunchkinById(id);
     }
 }

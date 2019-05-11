@@ -1,10 +1,7 @@
-﻿using DAL.Contexts.Users;
-using DAL.Repositories;
-using Factories;
+﻿using Factories;
 using Logic.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
-using Models.Enums;
 
 namespace Logic.Test.Users
 {

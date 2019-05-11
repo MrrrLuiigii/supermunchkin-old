@@ -17,14 +17,30 @@ namespace Logic.Test.Users
         [TestInitialize]
         public void TestInitialize()
         {
-            user = new User(1, "Nicky", "admin", "nicky@gmail.com");
-            userCollectionLogic = new UserCollectionLogic(new UserRepository(new UserContextMemory()));
+            user = new User("Nicky", "admin", "nicky@gmail.com");
+            userCollectionLogic = new UserCollectionLogic(UserFactory.GetUserCollectionRepositoryTest());
         }
 
         [TestMethod]
         public void AddUserTest()
         {
+            user.Username = "NewUser";
+            user.Email = "newuser@gmail.com";
             Assert.AreEqual(true, userCollectionLogic.AddUser(user));
+        }
+
+        [TestMethod]
+        public void AddUserUsernameTakenTest()
+        {
+            user.Email = "newemail@gmail.com";
+            Assert.AreEqual(false, userCollectionLogic.AddUser(user));
+        }
+
+        [TestMethod]
+        public void AddUserEmailTakenTest()
+        {
+            user.Username = "NewUser";
+            Assert.AreEqual(false, userCollectionLogic.AddUser(user));
         }
 
         [TestMethod]
@@ -36,13 +52,13 @@ namespace Logic.Test.Users
         [TestMethod]
         public void LoginWrongUsernameTest()
         {
-
+            Assert.AreEqual(null, userCollectionLogic.Login("Nickyy", "admin"));
         }
 
         [TestMethod]
         public void LoginWrongPasswordTest()
         {
-
+            Assert.AreEqual(null, userCollectionLogic.Login("Nicky", "wrong"));
         }
     }
 }

@@ -15,30 +15,14 @@ namespace Logic.Games
             gameRepository = repository ?? GameFactory.GetGameRepository();
         }
 
-        public void AddMunchkin(Game game, Munchkin munchkin)
-        {
-            gameRepository.AddMunchkin(game, munchkin);
-        }
+        public void AddMunchkin(Game game, Munchkin munchkin) => gameRepository.AddMunchkin(game, munchkin);
 
-        public void RemoveMunchkin(Game game, Munchkin munchkin)
-        {
-            gameRepository.RemoveMunchkin(game, munchkin);
-        }
+        public void RemoveMunchkin(Game game, Munchkin munchkin) => gameRepository.RemoveMunchkin(game, munchkin);
 
-        public void SetWinner(Game game, Munchkin munchkin)
-        {
-            gameRepository.SetWinner(game, munchkin);
-        }
+        public void SetWinner(Game game, Munchkin munchkin) => gameRepository.SetWinner(game, munchkin);
 
-        public void AdjustGameStatus(Game game, GameStatus status)
-        {
-            gameRepository.AdjustGameStatus(game, status);
-        }
+        public void AdjustGameStatus(Game game, GameStatus status) => gameRepository.AdjustGameStatus(game, status);
 
-        public int RollDice()
-        {
-            Random rnd = new Random();
-            return rnd.Next(1, 7);
-        }
+        public int RollDice() => new Random().Next(1, 7);
     }
 }

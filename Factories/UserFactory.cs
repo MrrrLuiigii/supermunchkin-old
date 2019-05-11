@@ -21,7 +21,7 @@ namespace Factories
             return new UserRepository(new UserContextMemory());
         }
 
-        public static IUserRepository GetUserCollectionRepositoryTest()
+        public static IUserCollectionRepository GetUserCollectionRepositoryTest()
         {
             return new UserRepository(new UserContextMemory());
         }

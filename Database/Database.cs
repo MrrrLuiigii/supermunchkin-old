@@ -8,7 +8,8 @@ namespace Databases
 {
     public class Database
     {
-        private MySqlConnection conn = new MySqlConnection("server=127.0.0.1;uid=root;pwd=;database=supermunchkin");
+        //private MySqlConnection conn = new MySqlConnection("server=127.0.0.1;uid=root;pwd=;database=supermunchkin");
+        private MySqlConnection conn = new MySqlConnection("Server=studmysql01.fhict.local;Uid=dbi421118;Database=dbi421118;Pwd=SuperMunchkinDatabase1;");
         private MySqlCommand cmd;
         private MySqlDataReader reader;
 

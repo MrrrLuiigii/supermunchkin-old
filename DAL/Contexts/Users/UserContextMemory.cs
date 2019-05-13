@@ -9,6 +9,11 @@ namespace DAL.Contexts.Users
     {
         private Memory memory = new Memory();
 
+        public void AddGame(User user, Game game)
+        {
+            //
+        }
+
         public Munchkin AddMunchkin(User user, Munchkin munchkin)
         {
             return memory.AddMunchkin(user, munchkin);

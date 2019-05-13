@@ -10,5 +10,6 @@ namespace Interfaces.Users
         List<Munchkin> GetAllMunchkins();
         List<Munchkin> GetAllMunchkinsByUser(User user);
         Munchkin GetMunchkinById(int id);
+        void AddGame(User user, Game game);
     }
 }

@@ -233,9 +233,9 @@ namespace DAL.Contexts.Games
                 " from `game`" +
                 " inner join `user-game`" +
                 " on `game`.`GameId` = `user-game`.`GameId`" +
-                $" where `user-game`.`UserId` = {user.Id}";
+                " where `user-game`.`UserId` = @UserId";
 
-            DataTable dt = database.ExecuteQuery(sql);
+            DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@UserId", user.Id));
 
             if (dt != null)
             {

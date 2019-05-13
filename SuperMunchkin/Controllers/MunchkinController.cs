@@ -48,6 +48,7 @@ namespace SuperMunchkin.Controllers
                     Munchkin munchkin = new Munchkin(user.Username, mvm.Gender);
                     munchkin = userLogic.CreateMunchkin(user, munchkin);
                     gameLogic.AddMunchkin(game, munchkin);
+                    userLogic.AddGame(user, game);
                     return RedirectToAction("GameSetup", "Game", new { id });
                 }
             }

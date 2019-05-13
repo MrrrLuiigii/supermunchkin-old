@@ -14,6 +14,22 @@ namespace DAL.Contexts.Users
     {
         private Database database = new Database();
 
+        public void AddGame(User user, Game game)
+        {
+            string sql = 
+                "insert into `user-game`(`GameId`, `UserId`)" +
+                " values(@GameId, @UserId)";
+
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
+            parameters.Add(new MySqlParameter("@GameId", game.Id));
+            parameters.Add(new MySqlParameter("@UserId", user.Id));
+
+            if (database.ExecuteQueryWithStatus(sql, parameters) != ExecuteQueryStatus.OK)
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
+        }
+
         public Munchkin AddMunchkin(User user, Munchkin munchkin)
         {
             string sp = "AddMunchkin";

@@ -14,6 +14,11 @@ namespace DAL.Repositories
             userContext = context ?? new UserContextSQL();
         }
 
+        public void AddGame(User user, Game game)
+        {
+            userContext.AddGame(user, game);
+        }
+
         public Munchkin AddMunchkin(User user, Munchkin munchkin)
         {
             return userContext.AddMunchkin(user, munchkin);

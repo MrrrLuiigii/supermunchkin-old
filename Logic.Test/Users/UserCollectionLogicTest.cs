@@ -14,8 +14,8 @@ namespace Logic.Test.Users
         [TestInitialize]
         public void TestInitialize()
         {
-            user = new User("Nicky", "admin", "nicky@gmail.com");
             userCollectionLogic = new UserCollectionLogic(UserFactory.GetUserCollectionRepositoryTest());
+            user = new User(1, "Nicky", "admin", "nicky@gmail.com");
         }
 
         [TestMethod]
@@ -43,19 +43,27 @@ namespace Logic.Test.Users
         [TestMethod]
         public void LoginTest()
         {
-            Assert.AreEqual(user, userCollectionLogic.Login(user.Username, user.Password));
+            Assert.AreEqual(user.Id, userCollectionLogic.Login(user.Username, user.Password).Id);
         }
 
         [TestMethod]
         public void LoginWrongUsernameTest()
         {
-            Assert.AreEqual(null, userCollectionLogic.Login("Nickyy", "admin"));
+            user.Username = "Nickyy";
+            Assert.AreEqual(null, userCollectionLogic.Login(user.Username, user.Password));
         }
 
         [TestMethod]
         public void LoginWrongPasswordTest()
         {
-            Assert.AreEqual(null, userCollectionLogic.Login("Nicky", "wrong"));
+            user.Username = "Nicky";
+            user.Password = HashPassword("wrong");
+            Assert.AreEqual(null, userCollectionLogic.Login(user.Username, user.Password));
+        }
+
+        private string HashPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt());
         }
     }
 }

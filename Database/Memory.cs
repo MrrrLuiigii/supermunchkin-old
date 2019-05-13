@@ -70,12 +70,12 @@ namespace Databases
             Munchkins.AddRange(NewMunchkinsTwo);
 
             Users = new List<User>();
-            Users.Add(new User(1, "Nicky", "admin", "nicky@gmail.com"));
-            Users.Add(new User(2, "Mario", "user", "mario@gmail.com"));
-            Users.Add(new User(3, "Sjoerd", "user", "sjoerd@gmail.com"));
-            Users.Add(new User(4, "Nick", "user", "nick@gmail.com"));
-            Users.Add(new User(5, "Tom", "user", "tom@gmail.com"));
-            Users.Add(new User(6, "Beau", "user", "beau@gmail.com"));
+            Users.Add(new User(1, "Nicky", HashPassword("admin"), "nicky@gmail.com"));
+            Users.Add(new User(2, "Mario", HashPassword("user"), "mario@gmail.com"));
+            Users.Add(new User(3, "Sjoerd", HashPassword("user"), "sjoerd@gmail.com"));
+            Users.Add(new User(4, "Nick", HashPassword("user"), "nick@gmail.com"));
+            Users.Add(new User(5, "Tom", HashPassword("user"), "tom@gmail.com"));
+            Users.Add(new User(6, "Beau", HashPassword("user"), "beau@gmail.com"));
 
             Games = new List<Game>();
 
@@ -85,6 +85,11 @@ namespace Databases
             Games.Add(new Game(4, GameStatus.Setup, DateTime.Now, NewMunchkinsTwo));
             Games.Add(new Game(5, GameStatus.Playing, DateTime.Now, PlayingMunchkinsOne));
             Games.Add(new Game(6, GameStatus.Playing, DateTime.Now, PlayingMunchkinsTwo));
+        }
+
+        private string HashPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt());
         }
 
         public User GetUserById(int id)

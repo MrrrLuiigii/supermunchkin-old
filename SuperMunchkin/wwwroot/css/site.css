@@ -11,17 +11,26 @@ body{
 .button-tiny{
     height: 30px;
     width: 30px;
+    outline: none;
 }
 
 .button-small{
     height: 50px;
     width: 50px;
+    outline: none;
+}
+
+.button-medium{
+    height: 40px;
+    width: 60px;
+    outline: none;
 }
 
 .button-big{
     height: 50px;
     width: 100px;
     text-align: center;
+    outline: none;
 }
 
 .overview{
@@ -34,6 +43,7 @@ body{
     background-color: #F6F1DF;
     border: 2px solid black;
     border-radius: 10px;
+    outline: none;
 }
 
 .hiddenscroll::-webkit-scrollbar{

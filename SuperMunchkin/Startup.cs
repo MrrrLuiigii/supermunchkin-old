@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Databases;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +42,10 @@ namespace SuperMunchkin
                 options.LogoutPath = "/User/Logout";
                 //options.AccessDeniedPath = "/Forbidden/Index";
             });
+
+            DatabaseConnection dbc = new DatabaseConnection();
+            dbc.SetConnectionString(Configuration.GetConnectionString("databaseConnectionHost"));
+            //dbc.SetConnectionString(Configuration.GetConnectionString("databaseConnectionLocal"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -38,6 +38,16 @@ body{
     width: 90%;
 }
 
+.munchkinspopup{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: auto;
+    width: auto;
+    display: none;
+    z-index: 1;
+}
+
 .custom-border {
     color: black;
     background-color: #F6F1DF;

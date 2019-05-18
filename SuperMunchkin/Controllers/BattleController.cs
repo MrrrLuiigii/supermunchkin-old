@@ -15,6 +15,8 @@ namespace SuperMunchkin.Controllers
             Game game = gameCollectionLogic.GetGameById(gameId);
 
 
+
+
             return View();
         }
 

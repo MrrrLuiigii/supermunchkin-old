@@ -72,11 +72,11 @@
 
         if (Model.Munchkins.Count < 6)
         {
-            <div class="custom-border button-small mr-3 mb-3 text-center float-right" style="padding-top: 7px;">
-                <a href="@Url.Action("Add", "Munchkin", new { Model.Id })">
+            <a href="@Url.Action("Add", "Munchkin", new { Model.Id })">
+                <div class="custom-border button-small mr-3 mb-3 text-center float-right" style="padding-top: 7px;">
                     <i class="fas fa-plus fa-2x"></i>
-                </a>
-            </div>
+                </div>
+            </a>
         }
     }
 </div>

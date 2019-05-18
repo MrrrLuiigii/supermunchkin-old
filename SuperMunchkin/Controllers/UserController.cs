@@ -53,7 +53,7 @@ namespace SuperMunchkin.Controllers
                     var authProperties = new AuthenticationProperties
                     {
                         AllowRefresh = true,
-                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                        ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1),
 
                         IsPersistent = true,
                         // Whether the authentication session is persisted across 

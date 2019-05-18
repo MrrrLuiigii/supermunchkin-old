@@ -60,8 +60,16 @@
     }
 </div>
 
-<div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; left: 0; padding-top: 3px;">
-    <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
+<div class="d-inline-block" style="position: fixed; bottom: 0; left: 0;">
+    <div class="custom-border button-small m-3 text-center float-left" style="padding-top: 3px;">
+        <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
+    </div>
+
+    <div class="custom-border button-small my-3 text-center float-right" style="padding-top: 7px; padding-left: -1px;">
+        <a href="@Url.Action("GameLobby", "Game")">
+            <i class="fas fa-chevron-left fa-2x"></i>
+        </a>
+    </div>
 </div>
 
 <a href="@Url.Action("RollDice", "Game", new { Model.Id })">

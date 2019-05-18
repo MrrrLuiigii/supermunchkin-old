@@ -22,13 +22,35 @@
                             <div class="pt-2">
                                 <h4>@g.Winner.Name won!</h4>
                             </div>
-                            <div>
-                                <p class="float-left text-left ml-3" style="width: 30vw;">Number of players</p>
-                                <h1 class="float-right mr-3">@g.Munchkins.Count/6</h1>
+                            <div class="d-inline-block float-left text-left ml-3" ontouchstart="showPopup(@g.Id)" ontouchend="hidePopup(@g.Id)">
+                                @g.Munchkins.Count/6<br />
+                                munchkins
+                            </div>
+                            <div class="d-inline-block float-right text-right mr-3">
+                                @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
+                                @g.DateTimePlayed.ToString("HH:mm")
                             </div>
                         </div>
                     </div>
                 </a>
+                <div id="@g.Id" class="d-none custom-border munchkinspopup mb-4">
+                    <div class="text-left px-3 pt-2 pb-1">
+                        <h5>Munchkins<br />in game:</h5>
+                        @{
+                            foreach (Munchkin m in g.Munchkins)
+                            {
+                                if (g.Winner.Id == m.Id)
+                                {
+                                    <i class="fas fa-trophy" style="margin-right: 5px;"></i>@m.Name;<br />
+                                }
+                                else
+                                {
+                                    <i class="fas fa-shield-alt" style="margin-right: 1px;"></i> @m.Name;<br />
+                                }
+                            }
+                        }
+                    </div>
+                </div>
             }
         }
     }

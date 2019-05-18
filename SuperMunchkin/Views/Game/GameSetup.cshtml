@@ -47,15 +47,23 @@
     }
 </div>
 
-<div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; left: 0; padding-top: 3px;">
-    <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
+<div class="d-inline-block" style="position: fixed; bottom: 0; left: 0;">
+    <div class="custom-border button-small m-3 text-center float-left" style="padding-top: 3px;">
+        <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
+    </div>
+
+    <div class="custom-border button-small my-3 text-center float-right" style="padding-top: 7px; padding-left: -1px;">
+        <a href="@Url.Action("GameLobby", "Game")">
+            <i class="fas fa-chevron-left fa-2x"></i>
+        </a>
+    </div>
 </div>
 
 <div class="d-inline-block" style="position: fixed; bottom: 0; right: 0;">
     @{
         if (Model.Munchkins.Count >= 3)
         {
-            <div class="custom-border button-small mr-1 mb-3 text-center float-left" style="padding-top: 7px;">
+            <div class="custom-border button-small mr-3 mb-3 text-center float-left" style="padding-top: 7px;">
                 <a href="@Url.Action("AdjustGameStatus", "Game", new { Model.Id })">
                     <i class="fas fa-play" style="font-size: x-large; padding-left: 3px; padding-top: 4px;"></i>
                 </a>

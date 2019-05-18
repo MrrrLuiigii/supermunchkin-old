@@ -29,13 +29,13 @@ namespace Logic.Munchkins
             }
             else if (direction == AdjustMunchkinStats.Down)
             {
-                if (munchkin.Level > 0)
+                if (munchkin.Level > 1)
                 {
                     munchkin.Level -= 1;
                 }
                 else
                 {
-                    munchkin.Level = 0;
+                    munchkin.Level = 1;
                 }
             }
 

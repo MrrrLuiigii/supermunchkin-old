@@ -20,7 +20,7 @@ namespace Models
         {
             Name = name;
             Gender = gender;
-            Level = 0;
+            Level = 1;
             Gear = 0;
         }
         

@@ -18,10 +18,12 @@
         User user = JsonConvert.DeserializeObject<User>(((ClaimsIdentity)User.Identity).Claims.First().Value);
     }
 
-    <nav class="navbar navbar-expand-lg justify-content-sm-start" style="position: absolute; z-index: 99;">        
-        <div class="navbar-collapse w-50 p-3 p-lg-0 mt-lg-0 d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end mobileMenu" id="navbarSupportedContent">
+    <nav class="navbar" style="position: absolute; z-index: 99;">        
+        <div class="navbar-collapse w-50 p-3 d-flex flex-column justify-content-lg-end mobileMenu" id="navbarSupportedContent">
             <div>
-                <h5 class="mb-4 pt-sm-0 p-lg-0 mr-lg-5 mt-lg-2" style="text-decoration: underline;">@user.Username</h5>
+                <h5 id="username" class="mb-4" style="text-decoration: underline;">
+                    @user.Username
+                </h5>
             </div>
             <ul class="navbar-nav align-self-stretch float-right">
                 <li class="nav-item active">
@@ -33,7 +35,7 @@
                 <li class="nav-item active">
                     <div class="nav-link">@Html.ActionLink("Statistics", "Statistics", "User")</div>
                 </li>
-                <li class="nav-item active mt-5">                    
+                <li class="nav-item active mt-5">
                     <div class="nav-link">
                         <a href="@Url.Action("Logout", "User")">
                             <i class="fas fa-sign-out-alt"></i> Logout

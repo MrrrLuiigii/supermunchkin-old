@@ -8,7 +8,14 @@
 @model Munchkin
 
 <div class="w-100 text-center mt-3 mb-3">
-    <h1>Edit @Model.Name</h1>
+    <h1>
+        Edit
+        @if (Model.Name.Length > 7)
+        {
+            <br />
+        }
+        @Model.Name
+    </h1>
 </div>
 
 <div class="text-center">
@@ -75,9 +82,23 @@
         }
     }
 </div>
-<div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; left: 0; padding-top: 3px;">
-    <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
+
+<div class="d-inline-block" style="position: fixed; bottom: 0; left: 0;">
+    <div class="custom-border button-small m-3 text-center float-left" style="padding-top: 3px;">
+        <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
+    </div>
+
+    @{ 
+        int Id = ViewBag.GameId;
+    }
+
+    <div class="custom-border button-small my-3 text-center float-right" style="padding-top: 7px; padding-left: -1px;">
+        <a href="@Url.Action("GameOverview", "Game", new { Id })">
+            <i class="fas fa-chevron-left fa-2x"></i>
+        </a>
+    </div>
 </div>
+
 @{
     if (ViewBag.Winner != null)
     {

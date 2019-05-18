@@ -17,8 +17,8 @@
         <p class="mb-0">Games won: @ViewBag.GamesWon</p>
     </div>
     <div class="mr-3 d-inline-block float-right">
-        <p class="mb-0 text-left">Avg gear: @ViewBag.AvgGear</p>
         <p class="mb-0 text-left">Avg level: @ViewBag.AvgLevel</p>
+        <p class="mb-0 text-left">Avg gear: @ViewBag.AvgGear</p>
     </div>
 </div>
 
@@ -33,26 +33,26 @@
                         {
                             if (g.Status == GameStatus.Finished)
                             {
-                                if (g.Winner.Id == m.Id)
+                                if (g.Munchkins.Find(gm => gm.Id == m.Id) != null)
                                 {
-                                    <h2 class="pl-2 pt-1 mb-0 float-left text-left" style="width: 70vw;">Winner!</h2>
-                                    break;
+                                    if (g.Winner.Id == m.Id)
+                                    {
+                                        <h4 class="pl-3 pt-3 mb-0 float-left text-left" style="width: 70vw;">Winner!</h4>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="pl-3 pt-3 mb-0 float-left text-left" style="width: 70vw;">Loser!</h4>
+                                    }
                                 }
                                 else
                                 {
-                                    <h2 class="pl-2 pt-1 mb-0 float-left text-left" style="width: 70vw;">Loser!</h2>
-                                    break;
+                                    <h4 class="pl-3 pt-3 mb-0 float-left text-left" style="width: 70vw;">Playing!</h4>
                                 }
-                            }
-                            else
-                            {
-                                <h2 class="pl-2 pt-1 mb-0 float-left text-left" style="width: 70vw;">Ongoing!</h2>
-                                break;
                             }
                         }
                     }
                 </div>
-                <div class="d-inline-block float-right pt-2 pr-2">
+                <div class="d-inline-block float-right pt-3 pr-3">
                     @{
                         if (m.Gender == MunchkinGender.Male)
                         {
@@ -64,7 +64,7 @@
                         }
                     }
                 </div>
-                <div class="text-left float-left pl-2">
+                <div class="text-left float-left pl-3">
                     <div class="d-inline-block">
                         <p class="mb-0">Level @m.Level</p>
                         <p class="mb-0">Gear @m.Gear</p>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Models.Enums;
 using Newtonsoft.Json;
 using SuperMunchkin.ViewModels;
 using System;
@@ -115,18 +116,21 @@ namespace SuperMunchkin.Controllers
         public IActionResult Statistics()
         {
             User user = JsonConvert.DeserializeObject<User>(((ClaimsIdentity)User.Identity).Claims.First().Value);
-            user.Munchkins = userLogic.GetAllMunchkinsByUser(user).ToList();
+            user.Munchkins = userLogic.GetAllMunchkinsByUser(user);
             ViewBag.LoggedInUser = user;
 
-            IEnumerable<Game> userGames = gameCollectionLogic.GetAllGamesByUser(user);
+            List<Game> userGames = gameCollectionLogic.GetAllGamesByUser(user);
             ViewBag.UserGames = userGames;
 
             int gamesWon = 0;
             foreach (Game g in ViewBag.UserGames)
             {
-                if (user.Munchkins.ToList().Where(m => m.Id == g.Winner.Id) != null)
+                if (g.Status == GameStatus.Finished)
                 {
-                    gamesWon += 1;
+                    if (user.Munchkins.Find(m => m.Id == g.Winner.Id) != null)
+                    {
+                        gamesWon += 1;
+                    }
                 }
             }
 

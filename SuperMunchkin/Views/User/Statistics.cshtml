@@ -27,7 +27,7 @@
         foreach (Munchkin m in ViewBag.LoggedInUser.Munchkins)
         {
             <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
-                <div class="d-inline-block float-left">
+                <div class="d-inline">
                     @{
                         foreach (Game g in ViewBag.UserGames)
                         {
@@ -37,48 +37,74 @@
                                 {
                                     if (g.Winner.Id == m.Id)
                                     {
-                                        <h4 class="pl-3 pt-3 mb-0 float-left text-left" style="width: 70vw;">Winner!</h4>
+                                        <div class="d-inline-block float-left text-left">
+                                            <h4 class="pl-3 pt-3 mb-0 float-left text-left">Won!</h4>
+                                        </div>
+                                        <div class="d-inline-block float-right text-right pr-3 pt-3">
+                                            @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
+                                            @g.DateTimePlayed.ToString("HH:mm")
+                                        </div>
                                         break;
                                     }
                                     else
                                     {
-                                        <h4 class="pl-3 pt-3 mb-0 float-left text-left" style="width: 70vw;">Loser!</h4>
+                                        <div class="d-inline-block float-left text-left">
+                                            <h4 class="pl-3 pt-3 mb-0 float-left text-left">Lost!</h4>
+                                        </div>
+                                        <div class="d-inline-block float-right text-right pr-3 pt-3">
+                                            @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
+                                            @g.DateTimePlayed.ToString("HH:mm")
+                                        </div>
                                         break;
                                     }
                                 }
-                                else
+                            }
+                            else
+                            {
+                                if (g.Munchkins.Find(gm => gm.Id == m.Id) != null)
                                 {
-                                    <h4 class="pl-3 pt-3 mb-0 float-left text-left" style="width: 70vw;">Playing!</h4>
-                                    break;
+                                    <div class="d-inline-block float-left text-left">
+                                        <h4 class="pl-3 pt-3 mb-0 float-left text-left">Playing!</h4>
+                                    </div>
+                                    <div class="d-inline-block float-right text-right pr-3 pt-3">
+                                        @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
+                                        @g.DateTimePlayed.ToString("HH:mm")
+                                    </div>
                                 }
                             }
                         }
                     }
                 </div>
-                <div class="d-inline-block float-right pt-3 pr-3">
-                    @{
-                        if (m.Gender == MunchkinGender.Male)
-                        {
-                            <i class="fas fa-mars" style="font-size: xx-large;"></i>
-                        }
-                        else
-                        {
-                            <i class="fas fa-venus" style="font-size: xx-large;"></i>
-                        }
-                    }
-                </div>
-                <div class="text-left float-left pl-3">
-                    <div class="d-inline-block">
-                        <p class="mb-0">Level @m.Level</p>
-                        <p class="mb-0">Gear @m.Gear</p>
+                <div ontouchstart="showPopup(@m.Id)" ontouchend="hidePopup(@m.Id)">
+                    <div class="text-left float-left pl-3">
+                        <div class="d-inline-block">
+                            <p class="mb-0">Level @m.Level</p>
+                            <p class="mb-0">Gear @m.Gear</p>
+                        </div>
+                        <div class="d-inline-block">
+                            <h1 class="pl-4 mb-0">
+                                @{
+                                    int strength = m.Level + m.Gear;
+                                }
+                                @strength
+                            </h1>
+                        </div>
                     </div>
-                    <div class="d-inline-block">
-                        <h1 class="pl-4 mb-0">
+                </div>                
+                <div id="@m.Id" class="d-none custom-border munchkinspopup mb-4">
+                    <div class="text-left px-3 pt-2 pb-1">
+                        <h5>Gender:
                             @{
-                                int strength = m.Level + m.Gear;
+                                if (m.Gender == MunchkinGender.Male)
+                                {
+                                    <i class="fas fa-mars" style="font-size: xx-large;"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-venus" style="font-size: xx-large;"></i>
+                                }
                             }
-                            @strength
-                        </h1>
+                        </h5>
                     </div>
                 </div>
             </div>

@@ -22,6 +22,21 @@
     </div>
 </div>
 
+@if (ViewBag.UserGames.Count == 0 && ViewBag.LoggedInUser.Munchkins.Count == 0)
+{
+    <div class="text-center mt-5 pt-5">
+        <p class="mb-0">You have no munchkins yet.</p>
+        @Html.Raw("Click ")
+        <a href="@Url.Action("CreateNewGame", "Game")">
+            <div class="d-inline-block custom-border button-small-half">
+                here
+            </div>
+        </a>
+        @Html.Raw(" to start a new game")<br />
+        @Html.Raw("and become a real munchkin!")
+    </div>
+}
+
 <div class="hiddenscroll text-center m-auto" style="height: 55vh; overflow-y: scroll;">
     @{
         foreach (Munchkin m in ViewBag.LoggedInUser.Munchkins)

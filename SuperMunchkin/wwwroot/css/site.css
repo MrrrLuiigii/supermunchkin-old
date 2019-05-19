@@ -20,6 +20,12 @@ body{
     outline: none;
 }
 
+.button-small-half{
+    height: 25px;
+    width: 50px;
+    outline: none;
+}
+
 .button-medium{
     height: 40px;
     width: 60px;

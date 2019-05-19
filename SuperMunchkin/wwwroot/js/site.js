@@ -20,12 +20,12 @@ $(document).ready(function () {
 });
 
 // Popup with munchkin names
-function showPopup(gameId) {
-    var popup = document.getElementById(gameId);
+function showPopup(id) {
+    var popup = document.getElementById(id);
     popup.classList.replace("d-none", "d-inline-block");
     popup.style.marginLeft = -(popup.offsetWidth / 2) + 'px';
     popup.style.marginTop = -(popup.offsetHeight / 2) + 'px';
 }
-function hidePopup(gameId) {
-    document.getElementById(gameId).classList.replace("d-inline-block", "d-none");
+function hidePopup(id) {
+    document.getElementById(id).classList.replace("d-inline-block", "d-none");
 }

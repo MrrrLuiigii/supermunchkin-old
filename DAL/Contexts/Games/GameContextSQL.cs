@@ -360,23 +360,46 @@ namespace DAL.Contexts.Games
 
         public void RemoveGame(Game game)
         {
-            string sql =
-                "delete from `munchkin-game`" +
-                " where `GameId` = @GameId";
+            string sp = "RemoveGame";
 
-            if (database.ExecuteQueryWithStatus(sql, new MySqlParameter("@GameId", game.Id)) != ExecuteQueryStatus.OK)
+            if (database.ExecuteStoredProcedure(sp, new MySqlParameter("pGameId", game.Id)) != ExecuteQueryStatus.OK)
             {
                 throw new Exception("Something went wrong. Sorry for the inconvenience.");
             }
 
-            sql =
-                "delete from `game`" +
-                " where `GameId` = @GameId";
+            //List<MySqlParameter> parameters = new List<MySqlParameter>();
+            //parameters.Add(new MySqlParameter("pGameId", game.Id));
 
-            if (database.ExecuteQueryWithStatus(sql, new MySqlParameter("@GameId", game.Id)) != ExecuteQueryStatus.OK)
-            {
-                throw new Exception("Something went wrong. Sorry for the inconvenience.");
-            }
+            //int counter = 0;
+
+            //foreach (Munchkin m in game.Munchkins)
+            //{
+            //    counter++;
+            //    parameters.Add(new MySqlParameter("pMunchkinId" + counter, m.Id));                
+            //}
+
+            //for (counter = counter + 1; counter <= 6; counter++)
+            //{
+            //    parameters.Add(new MySqlParameter("pMunchkinId" + counter, 0));
+            //}
+
+            //string sql =
+            //    "delete from `munchkin-game`" +
+            //    " where `GameId` = @GameId";
+
+            //if (database.ExecuteQueryWithStatus(sql, new MySqlParameter("@GameId", game.Id)) != ExecuteQueryStatus.OK)
+            //{
+            //    throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            //}
+
+            //sql =
+            //    "delete from `game`" +
+            //    " where `GameId` = @GameId";
+
+            //if (database.ExecuteQueryWithStatus(sql, new MySqlParameter("@GameId", game.Id)) != ExecuteQueryStatus.OK)
+            //{
+            //    throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            //}
         }
 
         public void RemoveMunchkin(Game game, Munchkin munchkin)

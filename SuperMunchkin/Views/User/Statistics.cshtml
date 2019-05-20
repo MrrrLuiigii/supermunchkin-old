@@ -41,7 +41,7 @@
     @{
         foreach (Munchkin m in ViewBag.LoggedInUser.Munchkins)
         {
-            <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
+            <div class="overview custom-border mx-auto mb-3 mt-2">
                 <div class="d-inline">
                     @{
                         foreach (Game g in ViewBag.UserGames)
@@ -52,23 +52,47 @@
                                 {
                                     if (g.Winner.Id == m.Id)
                                     {
-                                        <div class="d-inline-block float-left text-left">
-                                            <h4 class="pl-3 pt-3 mb-0 float-left text-left">Won!</h4>
+                                        <h4 class="pl-3 pt-3 mb-0 text-left">Won!</h4>
+                                        <div class="d-inline-block float-left text-left pl-3" ontouchstart="showPopup(@m.Id)" ontouchend="hidePopup(@m.Id)">
+                                            <div class="d-inline-block">
+                                                <p class="d-block mb-0">Level @m.Level</p>
+                                                <p class="d-block mb-0">Gear @m.Gear</p>
+                                            </div>
+                                            <div class="d-inline-block">
+                                                <h1 class="pl-4 mb-0">
+                                                    @{
+                                                        int strength = m.Level + m.Gear;
+                                                    }
+                                                    @strength
+                                                </h1>
+                                            </div>
                                         </div>
-                                        <div class="d-inline-block float-right text-right pr-3 pt-3">
-                                            @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
-                                            @g.DateTimePlayed.ToString("HH:mm")
+                                        <div class="d-block float-right text-right pr-3">
+                                            @g.DateTimePlayed.ToString("HH:mm")<br />
+                                            @g.DateTimePlayed.ToString("dd-MM-yyyy")
                                         </div>
                                         break;
                                     }
                                     else
                                     {
-                                        <div class="d-inline-block float-left text-left">
-                                            <h4 class="pl-3 pt-3 mb-0 float-left text-left">Lost!</h4>
+                                        <h4 class="pl-3 pt-3 mb-0 text-left">Lost!</h4>
+                                        <div class="d-inline-block float-left text-left pl-3" ontouchstart="showPopup(@m.Id)" ontouchend="hidePopup(@m.Id)">
+                                            <div class="d-inline-block">
+                                                <p class="d-block mb-0">Level @m.Level</p>
+                                                <p class="d-block mb-0">Gear @m.Gear</p>
+                                            </div>
+                                            <div class="d-inline-block">
+                                                <h1 class="pl-4 mb-0">
+                                                    @{
+                                                        int strength = m.Level + m.Gear;
+                                                    }
+                                                    @strength
+                                                </h1>
+                                            </div>
                                         </div>
-                                        <div class="d-inline-block float-right text-right pr-3 pt-3">
-                                            @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
-                                            @g.DateTimePlayed.ToString("HH:mm")
+                                        <div class="d-block float-right text-right pr-3">
+                                            @g.DateTimePlayed.ToString("HH:mm")<br />
+                                            @g.DateTimePlayed.ToString("dd-MM-yyyy")
                                         </div>
                                         break;
                                     }
@@ -78,34 +102,44 @@
                             {
                                 if (g.Munchkins.Find(gm => gm.Id == m.Id) != null)
                                 {
-                                    <div class="d-inline-block float-left text-left">
-                                        <h4 class="pl-3 pt-3 mb-0 float-left text-left">Playing!</h4>
+                                    <h4 class="pl-3 pt-3 mb-0 text-left">Playing!</h4>
+                                    <div class="d-inline-block float-left text-left pl-3" ontouchstart="showPopup(@m.Id)" ontouchend="hidePopup(@m.Id)">
+                                        <div class="d-inline-block">
+                                            <p class="d-block mb-0">Level @m.Level</p>
+                                            <p class="d-block mb-0">Gear @m.Gear</p>
+                                        </div>
+                                        <div class="d-inline-block">
+                                            <h1 class="pl-4 mb-0">
+                                                @{
+                                                    int strength = m.Level + m.Gear;
+                                                }
+                                                @strength
+                                            </h1>
+                                        </div>
                                     </div>
-                                    <div class="d-inline-block float-right text-right pr-3 pt-3">
-                                        @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
-                                        @g.DateTimePlayed.ToString("HH:mm")
+                                    <div class="d-block float-right text-right pr-3">
+                                        @g.DateTimePlayed.ToString("HH:mm")<br />
+                                        @g.DateTimePlayed.ToString("dd-MM-yyyy")
                                     </div>
                                 }
                             }
                         }
                     }
                 </div>
-                <div ontouchstart="showPopup(@m.Id)" ontouchend="hidePopup(@m.Id)">
-                    <div class="text-left float-left pl-3">
-                        <div class="d-inline-block">
-                            <p class="mb-0">Level @m.Level</p>
-                            <p class="mb-0">Gear @m.Gear</p>
-                        </div>
-                        <div class="d-inline-block">
-                            <h1 class="pl-4 mb-0">
-                                @{
-                                    int strength = m.Level + m.Gear;
-                                }
-                                @strength
-                            </h1>
-                        </div>
+                @*<div class="d-inline text-left float-left pl-3" ontouchstart="showPopup(@m.Id)" ontouchend="hidePopup(@m.Id)">
+                    <div class="d-inline-block">
+                        <p class="d-block mb-0">Level @m.Level</p>
+                        <p class="d-block mb-0">Gear @m.Gear</p>
                     </div>
-                </div>                
+                    <div class="d-inline-block">
+                        <h1 class="pl-4 mb-0">
+                            @{
+                                int strength = m.Level + m.Gear;
+                            }
+                            @strength
+                        </h1>
+                    </div>
+                </div>*@
                 <div id="@m.Id" class="d-none custom-border munchkinspopup mb-4">
                     <div class="text-left px-3 pt-2 pb-1">
                         <h5>Gender:

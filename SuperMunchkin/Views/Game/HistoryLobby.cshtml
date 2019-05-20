@@ -10,22 +10,22 @@
     <h1>Game History</h1>
 </div>
 
-@if (ViewBag.UserGames.Count == 0)
-{
-    <div class="text-center mt-5 pt-5">
-        <p class="mb-0">You have no finished games yet.</p>
-        @Html.Raw("Click ")
-        <a href="@Url.Action("GameLobby", "Game")">
-            <div class="d-inline-block custom-border button-small-half">
-                here
-            </div>
-        </a>
-        @Html.Raw(" to start/continue playing!")
-    </div>
-}
-
 <div class="hiddenscroll text-center m-auto" style="height: 70vh; overflow-y: scroll;">
     @{
+        if (ViewBag.UserGames.Count == 0)
+        {
+            <div class="text-center mt-5 pt-5">
+                <p class="mb-0">You have no finished games yet.</p>
+                @Html.Raw("Click ")
+                <a href="@Url.Action("GameLobby", "Game")">
+                    <div class="d-inline-block custom-border button-small-half">
+                        here
+                    </div>
+                </a>
+                @Html.Raw(" to start/continue playing!")
+            </div>
+        }
+
         foreach (Game g in ViewBag.UserGames)
         {
             if (g.Status == GameStatus.Finished)

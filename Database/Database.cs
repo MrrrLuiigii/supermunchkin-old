@@ -142,6 +142,30 @@ namespace Databases
             return status;
         }
 
+        public ExecuteQueryStatus ExecuteStoredProcedure(string procedureName, MySqlParameter parameter)
+        {
+            conn.Open();
+            cmd = new MySqlCommand(procedureName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add(parameter);
+
+            ExecuteQueryStatus status = ExecuteQueryStatus.OK;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                status = ExecuteQueryStatus.Error;
+            }
+
+            cmd.Dispose();
+            conn.Close();
+            return status;
+        }
+
         public int ExecuteStoredProcedure(string procedureName, List<MySqlParameter> parameters)
         {
             conn.Open();

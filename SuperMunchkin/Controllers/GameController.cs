@@ -24,7 +24,7 @@ namespace SuperMunchkin.Controllers
             User user = JsonConvert.DeserializeObject<User>(((ClaimsIdentity)User.Identity).Claims.First().Value);
             ViewBag.LoggedInUser = user;
 
-            List<Game> userGames = gameCollectionLogic.GetAllGamesByUser(user);
+            List<Game> userGames = gameCollectionLogic.GetAllGamesByUser(user).Where(g => g.Status == GameStatus.Playing || g.Status == GameStatus.Setup).ToList();
             ViewBag.UserGames = userGames;
             
             return View();
@@ -97,7 +97,7 @@ namespace SuperMunchkin.Controllers
             User user = JsonConvert.DeserializeObject<User>(((ClaimsIdentity)User.Identity).Claims.First().Value);
             ViewBag.LoggedInUser = user;
 
-            List<Game> userGames = gameCollectionLogic.GetAllGamesByUser(user);
+            List<Game> userGames = gameCollectionLogic.GetAllGamesByUser(user).Where(g => g.Status == GameStatus.Finished).ToList();
             ViewBag.UserGames = userGames;
 
             return View();

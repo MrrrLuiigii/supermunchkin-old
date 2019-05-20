@@ -56,20 +56,42 @@
             else if (g.Status == GameStatus.Setup)
             {
                 <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
-                    <div class="custom-border" style="height: 30px; width: 30px; padding-top: 3px; padding-left: 1px; position: relative; top: -10px; left: -10px;">
+                    <div class="custom-border" style="height: 30px; width: 30px; padding-top: 3px; position: relative; top: -10px; left: -10px; z-index: 1;">
                         <a href="@Url.Action("Remove", "Game", new { g.Id })">
                             <i class="fas fa-times"></i>
                         </a>
                     </div>
                     <a href="@Url.Action("GameSetup", "Game", new { g.Id })">
-                        <div class="d-inline-block w-100" style="position: relative; top: -20px;">
-                            <h4>Start playing!</h4>
-                            <div>
-                                <p class="float-left text-left ml-3" style="width: 30vw;">Number of players</p>
-                                <h1 class="float-right mr-3">@g.Munchkins.Count/6</h1>
+                        <div class="w-100" style="position: relative; top: -30px;">
+                            <div class="pt-2">
+                                <h4>Start playing!</h4>
+                            </div>
+                            <div class="d-inline-block float-left text-left ml-3" ontouchstart="showPopup(@g.Id)" ontouchend="hidePopup(@g.Id)">
+                                @g.Munchkins.Count/6<br />
+                                munchkins
+                            </div>
+                            <div class="d-inline-block float-right text-right mr-3">
+                                @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
+                                @g.DateTimePlayed.ToString("HH:mm")
                             </div>
                         </div>
                     </a>
+                    @{
+                        if (g.Munchkins.Count != 0)
+                        {
+                            <div id="@g.Id" class="d-none custom-border munchkinspopup mb-4">
+                                <div class="text-left px-3 pt-2 pb-1">
+                                    <h5>Munchkins<br />in game:</h5>
+                                    @{
+                                        foreach (Munchkin m in g.Munchkins)
+                                        {
+                                            <i class="fas fa-shield-alt" style="margin-right: 1px;"></i> @m.Name;<br />
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
                 </div>
             }
         }

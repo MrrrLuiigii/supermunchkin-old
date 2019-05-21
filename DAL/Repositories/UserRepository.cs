@@ -14,49 +14,22 @@ namespace DAL.Repositories
             userContext = context ?? new UserContextSQL();
         }
 
-        public void AddGame(User user, Game game)
-        {
-            userContext.AddGame(user, game);
-        }
+        public void AddGame(User user, Game game) => userContext.AddGame(user, game);
 
-        public Munchkin AddMunchkin(User user, Munchkin munchkin)
-        {
-            return userContext.AddMunchkin(user, munchkin);
-        }
+        public Munchkin AddMunchkin(User user, Munchkin munchkin) => userContext.AddMunchkin(user, munchkin);
 
-        public void AddUser(User user)
-        {
-            userContext.AddUser(user);
-        }
+        public void AddUser(User user) => userContext.AddUser(user);
 
-        public List<Munchkin> GetAllMunchkins()
-        {
-            return userContext.GetAllMunchkins();
-        }
+        public List<Munchkin> GetAllMunchkins() => userContext.GetAllMunchkins();
 
-        public List<Munchkin> GetAllMunchkinsByUser(User user)
-        {
-            return userContext.GetAllMunchkinsByUser(user);
-        }
+        public List<Munchkin> GetAllMunchkinsByUser(User user) => userContext.GetAllMunchkinsByUser(user);
 
-        public List<User> GetAllUsers()
-        {
-            return userContext.GetAllUsers();
-        }
+        public List<User> GetAllUsers() => userContext.GetAllUsers();
 
-        public Munchkin GetMunchkinById(int id)
-        {
-            return userContext.GetMunchkinById(id);
-        }
+        public Munchkin GetMunchkinById(int id) => userContext.GetMunchkinById(id);
 
-        public User GetUserById(int id)
-        {
-            return userContext.GetUserById(id);
-        }
+        public User GetUserById(int id) => userContext.GetUserById(id);
 
-        public void RemoveMunchkin(Munchkin munchkin)
-        {
-            userContext.RemoveMunchkin(munchkin);
-        }
+        public void RemoveMunchkin(Munchkin munchkin) => userContext.RemoveMunchkin(munchkin);
     }
 }

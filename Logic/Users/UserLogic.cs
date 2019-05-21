@@ -22,6 +22,6 @@ namespace Logic.Users
 
         public Munchkin GetMunchkinById(int id) => userRepository.GetMunchkinById(id);
 
-        public void AddGame(User user , Game game) => userRepository.AddGame(user, game);
+        public void AddGame(User user, Game game) => userRepository.AddGame(user, game);
     }
 }

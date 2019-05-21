@@ -13,9 +13,6 @@ namespace DAL.Repositories
             munchkinContext = context ?? new MunchkinContextSQL();
         }
 
-        public void AdjustMunchkin(Munchkin munchkin)
-        {
-            munchkinContext.AdjustMunchkin(munchkin);
-        }
+        public void AdjustMunchkin(Munchkin munchkin) => munchkinContext.AdjustMunchkin(munchkin);
     }
 }

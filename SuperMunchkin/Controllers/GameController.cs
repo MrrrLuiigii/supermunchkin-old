@@ -43,7 +43,7 @@ namespace SuperMunchkin.Controllers
                 return RedirectToAction("GameLobby", "Game");
             }
 
-            return RedirectToAction("GameSetup", "Game", new { game.Id });
+            return RedirectToAction("GameSetup", "Game", new { id = game.Id });
         }
 
         [Authorize]
@@ -118,7 +118,7 @@ namespace SuperMunchkin.Controllers
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             gameLogic.SetWinner(game, munchkin);
             gameLogic.AdjustGameStatus(game, GameStatus.Finished);
-            return RedirectToAction("HistoryOverview", "Game", new { game.Id });
+            return RedirectToAction("HistoryOverview", "Game", new { id = game.Id });
         }
     }
 }

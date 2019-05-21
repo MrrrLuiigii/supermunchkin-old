@@ -13,7 +13,7 @@
         Female = 2
     }
 
-    public enum AdjustMunchkinStats
+    public enum AdjustStats
     {
         Up = 1,
         Down = 2
@@ -23,5 +23,12 @@
     {
         Error,
         OK
+    }
+
+    public enum BattleStatus
+    {
+        Won,
+        Lost,
+        Ongoing
     }
 }

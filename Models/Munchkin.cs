@@ -9,7 +9,8 @@ namespace Models
         public string Name { get; set; }
         public MunchkinGender? Gender { get; set; }
         public int Level { get; set; }
-        public int Gear { get; set; }        
+        public int Gear { get; set; }
+        public int Modifier { get; set; }
 
         public Munchkin()
         {

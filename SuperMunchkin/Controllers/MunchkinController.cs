@@ -100,7 +100,7 @@ namespace SuperMunchkin.Controllers
         public IActionResult LevelUp(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
-            munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Up);
+            munchkinLogic.AdjustLevel(munchkin, AdjustStats.Up);
             return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
 
@@ -108,7 +108,7 @@ namespace SuperMunchkin.Controllers
         public IActionResult LevelDown(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
-            munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Down);
+            munchkinLogic.AdjustLevel(munchkin, AdjustStats.Down);
             return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
 
@@ -116,7 +116,7 @@ namespace SuperMunchkin.Controllers
         public IActionResult GearUp(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
-            munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Up);
+            munchkinLogic.AdjustGear(munchkin, AdjustStats.Up);
             return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
 
@@ -124,7 +124,7 @@ namespace SuperMunchkin.Controllers
         public IActionResult GearDown(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
-            munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Down);
+            munchkinLogic.AdjustGear(munchkin, AdjustStats.Down);
             return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
     }

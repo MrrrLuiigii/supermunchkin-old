@@ -22,14 +22,14 @@ namespace Logic.Test.Munchkins
         [TestMethod]
         public void AdjustLevelUpTest()
         {
-            munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Up);
+            munchkinLogic.AdjustLevel(munchkin, AdjustStats.Up);
             Assert.AreEqual(6, munchkin.Level);
         }
 
         [TestMethod]
         public void AdjustLevelDownTest()
         {
-            munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Down);
+            munchkinLogic.AdjustLevel(munchkin, AdjustStats.Down);
             Assert.AreEqual(4, munchkin.Level);
         }
 
@@ -37,7 +37,7 @@ namespace Logic.Test.Munchkins
         public void AdjustLevelTooHighTest()
         {
             munchkin.Level = 10;
-            munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Up);
+            munchkinLogic.AdjustLevel(munchkin, AdjustStats.Up);
             Assert.AreEqual(10, munchkin.Level);
         }
 
@@ -45,21 +45,21 @@ namespace Logic.Test.Munchkins
         public void AdjustLevelTooLowTest()
         {
             munchkin.Level = 0;
-            munchkinLogic.AdjustLevel(munchkin, AdjustMunchkinStats.Down);
+            munchkinLogic.AdjustLevel(munchkin, AdjustStats.Down);
             Assert.AreEqual(0, munchkin.Level);
         }
 
         [TestMethod]
         public void AdjustGearUpTest()
         {
-            munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Up);
+            munchkinLogic.AdjustGear(munchkin, AdjustStats.Up);
             Assert.AreEqual(6, munchkin.Gear);
         }
 
         [TestMethod]
         public void AdjustGearDownTest()
         {
-            munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Down);
+            munchkinLogic.AdjustGear(munchkin, AdjustStats.Down);
             Assert.AreEqual(4, munchkin.Gear);
         }
 
@@ -67,7 +67,7 @@ namespace Logic.Test.Munchkins
         public void AdjustGearTooLowTest()
         {
             munchkin.Gear = 0;
-            munchkinLogic.AdjustGear(munchkin, AdjustMunchkinStats.Down);
+            munchkinLogic.AdjustGear(munchkin, AdjustStats.Down);
             Assert.AreEqual(0, munchkin.Gear);
         }
 

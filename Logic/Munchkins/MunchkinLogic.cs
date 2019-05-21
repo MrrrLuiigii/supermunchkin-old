@@ -14,9 +14,9 @@ namespace Logic.Munchkins
             munchkinRepository = mRepository ?? MunchkinFactory.GetMunchkinRepository();
         }
 
-        public void AdjustLevel(Munchkin munchkin, AdjustMunchkinStats direction)
+        public void AdjustLevel(Munchkin munchkin, AdjustStats direction)
         {
-            if (direction == AdjustMunchkinStats.Up)
+            if (direction == AdjustStats.Up)
             {
                 if (munchkin.Level < 10)
                 {
@@ -27,7 +27,7 @@ namespace Logic.Munchkins
                     munchkin.Level = 10;
                 }
             }
-            else if (direction == AdjustMunchkinStats.Down)
+            else if (direction == AdjustStats.Down)
             {
                 if (munchkin.Level > 1)
                 {
@@ -42,13 +42,13 @@ namespace Logic.Munchkins
             munchkinRepository.AdjustMunchkin(munchkin);
         }
 
-        public void AdjustGear(Munchkin munchkin, AdjustMunchkinStats direction)
+        public void AdjustGear(Munchkin munchkin, AdjustStats direction)
         {
-            if (direction == AdjustMunchkinStats.Up)
+            if (direction == AdjustStats.Up)
             {
                 munchkin.Gear += 1;
             }
-            else if (direction == AdjustMunchkinStats.Down)
+            else if (direction == AdjustStats.Down)
             {
                 if (munchkin.Gear > 0)
                 {

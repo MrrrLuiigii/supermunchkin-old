@@ -62,7 +62,7 @@ namespace SuperMunchkin.Controllers
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             userLogic.RemoveMunchkin(munchkin);
-            return RedirectToAction("GameSetup", "Game", new { gameId });
+            return RedirectToAction("GameSetup", "Game", new { id = gameId });
         }
 
         [Authorize]

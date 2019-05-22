@@ -3,7 +3,7 @@ using Interfaces.Monsters;
 
 namespace DAL.Repositories
 {
-    public class MonsterRepository : IMonsterRepository
+    public class MonsterRepository : IMonsterRepository, IMonsterCollectionRepository
     {
         private IMonsterContext monsterContext;
 

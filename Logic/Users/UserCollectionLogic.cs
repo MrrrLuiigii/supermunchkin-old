@@ -26,14 +26,23 @@ namespace Logic.Users
 
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, BCrypt.Net.BCrypt.GenerateSalt());
             userCollectionRepository.AddUser(user);
-            string subject = "Registration";
-            string body =
-                $"Dear munchkin {user.Username}, \r\n \r\n" +
-                $"You have succesfully registered an account for SuperMunchkin! \r\n" +
-                $"Enjoy playing! \r\n \r\n" +
-                $"Kind regards, \r\n \r\n" +
-                $"Net Troll";
-            MailHandler.SendMail(user.Email, subject, body);
+
+            try
+            {
+                string subject = "Registration";
+                string body =
+                    $"Dear munchkin {user.Username}, \r\n \r\n" +
+                    $"You have succesfully registered an account for SuperMunchkin! \r\n" +
+                    $"Enjoy playing! \r\n \r\n" +
+                    $"Kind regards, \r\n \r\n" +
+                    $"Net Troll";
+                MailHandler.SendMail(user.Email, subject, body);
+            }
+            catch
+            {
+                return true;
+            }
+            
             return true;
         }
 

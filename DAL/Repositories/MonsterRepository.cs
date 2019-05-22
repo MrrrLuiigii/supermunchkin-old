@@ -1,5 +1,6 @@
 ﻿using DAL.Contexts.Monsters;
 using Interfaces.Monsters;
+using Models;
 
 namespace DAL.Repositories
 {
@@ -11,5 +12,7 @@ namespace DAL.Repositories
         {
             monsterContext = context ?? new MonsterContextSQL();
         }
+
+        public void AdjustMonster(Monster monster) => monsterContext.AdjustMonster(monster);
     }
 }

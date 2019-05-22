@@ -44,7 +44,7 @@ namespace DAL.Contexts.Users
             output.Direction = ParameterDirection.Output;
             parameters.Add(output);
 
-            return GetMunchkinById(database.ExecuteStoredProcedure(sp, parameters));
+            return GetMunchkinById(database.ExecuteStoredProcedureWithOutput(sp, parameters));
         }
 
         public void AddUser(User user)

@@ -27,7 +27,7 @@ namespace DAL.Contexts.Games
             output.Direction = ParameterDirection.Output;
             parameters.Add(output);
 
-            return GetGameById(database.ExecuteStoredProcedure(sp, parameters));
+            return GetGameById(database.ExecuteStoredProcedureWithOutput(sp, parameters));
         }
 
         public Game GetGameById(int id)

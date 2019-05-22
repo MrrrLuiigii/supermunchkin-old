@@ -193,6 +193,32 @@ namespace Databases
             return status;
         }
 
+        public int ExecuteStoredProcedureWithOutput(string procedureName, MySqlParameter parameter)
+        {
+            conn.Open();
+            cmd = new MySqlCommand(procedureName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add(parameter);
+
+            int id = 0;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                id = (int)cmd.Parameters["pOutId"].Value;
+            }
+            catch
+            {
+                id = 0;
+            }
+
+            cmd.Dispose();
+            conn.Close();
+
+            return id;
+        }
+
         public int ExecuteStoredProcedureWithOutput(string procedureName, List<MySqlParameter> parameters)
         {
             conn.Open();

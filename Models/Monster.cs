@@ -7,6 +7,13 @@
         public int Level { get; set; }
         public int Modifier { get; set; }
 
+        public Monster(int id, int level, int modifier)
+        {
+            Id = id;
+            Level = level;
+            Modifier = modifier;
+        }
+
         public Monster(string name)
         {
             Name = name;

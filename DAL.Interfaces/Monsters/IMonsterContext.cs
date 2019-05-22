@@ -1,6 +1,6 @@
 ﻿namespace Interfaces.Monsters
 {
-    public interface IMonsterContext : IMonsterRepository
+    public interface IMonsterContext : IMonsterRepository, IMonsterCollectionRepository
     {
     }
 }

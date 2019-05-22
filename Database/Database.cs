@@ -166,7 +166,34 @@ namespace Databases
             return status;
         }
 
-        public int ExecuteStoredProcedure(string procedureName, List<MySqlParameter> parameters)
+        public ExecuteQueryStatus ExecuteStoredProcedure(string procedureName, List<MySqlParameter> parameters)
+        {
+            conn.Open();
+            cmd = new MySqlCommand(procedureName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            foreach (MySqlParameter p in parameters)
+            {
+                cmd.Parameters.Add(p);
+            }
+
+            ExecuteQueryStatus status = ExecuteQueryStatus.OK;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                status = ExecuteQueryStatus.Error;
+            }
+
+            cmd.Dispose();
+            conn.Close();
+            return status;
+        }
+
+        public int ExecuteStoredProcedureWithOutput(string procedureName, List<MySqlParameter> parameters)
         {
             conn.Open();
             cmd = new MySqlCommand(procedureName, conn);
@@ -184,7 +211,7 @@ namespace Databases
                 cmd.ExecuteNonQuery();
                 id = (int)cmd.Parameters["pOutId"].Value;
             }
-            catch(Exception ex)
+            catch
             {
                 id = 0;
             }

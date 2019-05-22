@@ -11,17 +11,7 @@ namespace Factories
             return new BattleRepository();
         }
 
-        public static IBattleCollectionRepository GetBattleCollectionRepository()
-        {
-            return new BattleRepository();
-        }
-
         public static IBattleRepository GetBattleRepositoryTest()
-        {
-            return new BattleRepository(new BattleContextMemory());
-        }
-
-        public static IBattleCollectionRepository GetBattleCollectionRepositoryTest()
         {
             return new BattleRepository(new BattleContextMemory());
         }

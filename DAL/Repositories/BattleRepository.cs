@@ -3,7 +3,7 @@ using Interfaces.Battles;
 
 namespace DAL.Repositories
 {
-    public class BattleRepository : IBattleRepository, IBattleCollectionRepository
+    public class BattleRepository : IBattleRepository
     {
         private IBattleContext battleContext;
 

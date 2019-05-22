@@ -1,6 +1,6 @@
 ﻿namespace Interfaces.Battles
 {
-    public interface IBattleContext : IBattleRepository, IBattleCollectionRepository
+    public interface IBattleContext : IBattleRepository
     {
     }
 }

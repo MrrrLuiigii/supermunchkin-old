@@ -35,6 +35,7 @@ namespace SuperMunchkin.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(UserViewModel uvm)
         {
             if (ModelState.IsValid)
@@ -90,6 +91,7 @@ namespace SuperMunchkin.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public IActionResult Register(RegisterUserViewModel uvm)
         {
             if (ModelState.IsValid)
@@ -100,8 +102,7 @@ namespace SuperMunchkin.Controllers
                     
                     if (userCollectionLogic.AddUser(user))
                     {
-                        return Redirect("/User/Login");
-                        //return RedirectToAction("Login", "User");
+                        return RedirectToAction("Login", "User");
                     }
 
                     ViewBag.ErrorMessage = "This username and/or email has already been taken.";

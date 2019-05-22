@@ -34,6 +34,7 @@ namespace SuperMunchkin.Controllers
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public IActionResult Add(MunchkinViewModel mvm, int id)
         {
             Game game = gameCollectionLogic.GetGameById(id);

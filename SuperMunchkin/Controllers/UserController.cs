@@ -100,7 +100,8 @@ namespace SuperMunchkin.Controllers
                     
                     if (userCollectionLogic.AddUser(user))
                     {
-                        return RedirectToAction("Login", "User");
+                        return Redirect("/User/Login");
+                        //return RedirectToAction("Login", "User");
                     }
 
                     ViewBag.ErrorMessage = "This username and/or email has already been taken.";

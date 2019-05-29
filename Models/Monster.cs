@@ -20,5 +20,13 @@
             Level = 0;
             Modifier = 0;
         }
+
+        public Monster(int id, string name, int level, int modifier)
+        {
+            Id = id;
+            Name = name;
+            Level = level;
+            Modifier = modifier;
+        }
     }
 }

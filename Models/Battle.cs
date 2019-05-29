@@ -28,5 +28,14 @@ namespace Models
             Munchkins = munchkins;
             Monsters = monsters;
         }
+
+        public Battle(int id, BattleStatus status, DateTime dateTimeBattled)
+        {
+            Id = id;
+            Status = status;
+            DateTimeBattled = dateTimeBattled;
+            Munchkins = new List<Munchkin>();
+            Monsters = new List<Monster>();
+        }
     }
 }

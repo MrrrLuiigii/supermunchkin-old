@@ -34,5 +34,15 @@ namespace Models
             Level = level;
             Gear = gear;
         }
+
+        public Munchkin(int id, string name, MunchkinGender? gender, int level, int gear, int modifier)
+        {
+            Id = id;
+            Name = name;
+            Gender = gender;
+            Level = level;
+            Gear = gear;
+            Modifier = modifier;
+        }
     }
 }

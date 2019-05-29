@@ -55,5 +55,30 @@ namespace DAL.Contexts.Games
         {
             //Set winner
         }
+
+        public void AddBattle(Game game, Battle battle)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveBattle(Game game, Battle battle)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<Battle> GetAllBattlesByGame(Game game)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Battle GetBattleById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<Battle> GetAllBattlesByMunchkin(Munchkin munchkin)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

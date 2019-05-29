@@ -362,41 +362,7 @@ namespace DAL.Contexts.Games
             if (database.ExecuteStoredProcedure(sp, new MySqlParameter("pGameId", game.Id)) != ExecuteQueryStatus.OK)
             {
                 throw new Exception("Something went wrong. Sorry for the inconvenience.");
-            }
-
-            //List<MySqlParameter> parameters = new List<MySqlParameter>();
-            //parameters.Add(new MySqlParameter("pGameId", game.Id));
-
-            //int counter = 0;
-
-            //foreach (Munchkin m in game.Munchkins)
-            //{
-            //    counter++;
-            //    parameters.Add(new MySqlParameter("pMunchkinId" + counter, m.Id));                
-            //}
-
-            //for (counter = counter + 1; counter <= 6; counter++)
-            //{
-            //    parameters.Add(new MySqlParameter("pMunchkinId" + counter, 0));
-            //}
-
-            //string sql =
-            //    "delete from `munchkin-game`" +
-            //    " where `GameId` = @GameId";
-
-            //if (database.ExecuteQueryWithStatus(sql, new MySqlParameter("@GameId", game.Id)) != ExecuteQueryStatus.OK)
-            //{
-            //    throw new Exception("Something went wrong. Sorry for the inconvenience.");
-            //}
-
-            //sql =
-            //    "delete from `game`" +
-            //    " where `GameId` = @GameId";
-
-            //if (database.ExecuteQueryWithStatus(sql, new MySqlParameter("@GameId", game.Id)) != ExecuteQueryStatus.OK)
-            //{
-            //    throw new Exception("Something went wrong. Sorry for the inconvenience.");
-            //}
+            }            
         }
 
         public void RemoveMunchkin(Game game, Munchkin munchkin)
@@ -445,6 +411,220 @@ namespace DAL.Contexts.Games
             {
                 throw new Exception("Something went wrong. Sorry for the inconvenience.");
             }
+        }
+
+        public void AddBattle(Game game, Battle battle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveBattle(Game game, Battle battle)
+        {
+            string sql =
+                "delete from `battle`" +
+                "where `BattleId` = @BattleId" +
+                "and `GameId` = @GameId";
+
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
+            parameters.Add(new MySqlParameter("@BattleId", battle.Id));
+            parameters.Add(new MySqlParameter("@GameId", game.Id));
+
+            if (database.ExecuteQueryWithStatus(sql, parameters) != ExecuteQueryStatus.OK)
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
+        }
+
+        public List<Battle> GetAllBattlesByGame(Game game)
+        {
+            List<Battle> battles = new List<Battle>();
+
+            string sql =
+                "select `BattleId`, `Status`, `DateTime`" +
+                "from `Battle`" +
+                "where `GameId` = @GameId";
+
+            DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@GameId", game.Id));
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int battleId = (int)dr["BattleId"];
+
+                    BattleStatus battleStatus = BattleStatus.Ongoing;
+                    if (dr["Status"].ToString() == "Lost")
+                    {
+                        battleStatus = BattleStatus.Lost;
+                    }
+                    else if (dr["Status"].ToString() == "Won")
+                    {
+                        battleStatus = BattleStatus.Won;
+                    }
+
+                    DateTime dateTime = (DateTime)dr["DateTime"];
+
+                    Battle battle = new Battle(battleId, battleStatus, dateTime);
+                    battle.Munchkins = GetAllMunchkinsInBattle(battleId);
+                    battle.Monsters = GetAllMonstersInBattle(battleId);
+
+                    battles.Add(battle);
+                }
+            }
+
+            return battles;
+        }
+
+        private List<Munchkin> GetAllMunchkinsInBattle(int battleId)
+        {
+            List<Munchkin> munchkins = new List<Munchkin>();
+
+            string sql =
+                "select `munchkin`.`MunchkinId`, `user`.`Username`, `munchkin`.`Gender`, `munchkin`.`Level`, `munchkin`.`Gear`, `munchkin-battle`.`Modifier`" +
+                "from `munchkin`" +
+                "inner join `user`" +
+                "on `munchkin`.`UserId` = `user`.`UserId`" +
+                "inner join `muchkin-battle`" +
+                "on `munchkin`.`MunchkinId` = `munchkin-battle`.`MunchkinId`" +
+                "where `munchkin-battle`.`BattleId` = @BattleId";
+
+            DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@BattleId", battleId));
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int munchkinId = (int)dr["MunchkinId"];
+                    string name = dr["Username"].ToString();
+
+                    MunchkinGender gender = MunchkinGender.Male;
+                    if (dr["Gender"].ToString() == "Female")
+                    {
+                        gender = MunchkinGender.Female;
+                    }
+
+                    int level = (int)dr["Level"];
+                    int gear = (int)dr["Gear"];
+                    int modifier = (int)dr["Modifier"];
+
+                    Munchkin munchkin = new Munchkin(munchkinId, name, gender, level, gear, modifier);
+                    munchkins.Add(munchkin);
+                }
+            }
+
+            return munchkins;
+        }
+
+        private List<Monster> GetAllMonstersInBattle(int battleId)
+        {
+            List<Monster> monsters = new List<Monster>();
+
+            string sql =
+                "select `monster`.`MonsterId`, `monster`.`Level`, `monster-battle`.`Modifier`" +
+                "from `monster`" +
+                "inner join `monster-battle`" +
+                "on `monster`.`MonsterId` = `monster-battle`.`MonsterId`" +
+                "where `monster-battle`.`BattleId` = @BattleId";
+
+            DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@BattleId", battleId));
+
+            if (dt != null)
+            {
+                int monstername = 1;
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int monsterId = (int)dr["MonsterId"];
+                    int level = (int)dr["Level"];
+                    int modifier = (int)dr["Modifier"];
+
+                    Monster monster = new Monster(monsterId, "Monster" + monstername, level, modifier);
+                    monsters.Add(monster);
+                    monstername += 1;
+                }
+            }
+
+            return monsters;
+        }
+
+        public Battle GetBattleById(int id)
+        {
+            Battle battle = null;
+
+            string sql =
+                "select `BattleId`, `Status`, `DateTime`" +
+                "from `Battle`" +                
+                "where `BattleId` = @BattleId";
+
+            DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@BattleId", id));
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int battleId = (int)dr["BattleId"];
+
+                    BattleStatus battleStatus = BattleStatus.Ongoing;
+                    if (dr["Status"].ToString() == "Lost")
+                    {
+                        battleStatus = BattleStatus.Lost;
+                    }
+                    else if (dr["Status"].ToString() == "Won")
+                    {
+                        battleStatus = BattleStatus.Won;
+                    }
+
+                    DateTime dateTime = (DateTime)dr["DateTime"];
+
+                    battle = new Battle(battleId, battleStatus, dateTime);
+                    battle.Munchkins = GetAllMunchkinsInBattle(battleId);
+                    battle.Monsters = GetAllMonstersInBattle(battleId);
+                }
+            }
+
+            return battle;
+        }
+
+        public List<Battle> GetAllBattlesByMunchkin(Munchkin munchkin)
+        {
+            List<Battle> battles = new List<Battle>();
+
+            string sql =
+                "select `Battle`.`BattleId`, `Battle`.`Status`, `Battle`.`DateTime`" +
+                "from `Battle`" +
+                "inner join `munchkin-battle`" +
+                "on `battle`.`BattleId` = `munchkin-battle`.`BattleId" +
+                "where `MunchkinId` = @MunchkinId";
+
+            DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@MunchkinId", munchkin.Id));
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int battleId = (int)dr["BattleId"];
+
+                    BattleStatus battleStatus = BattleStatus.Ongoing;
+                    if (dr["Status"].ToString() == "Lost")
+                    {
+                        battleStatus = BattleStatus.Lost;
+                    }
+                    else if (dr["Status"].ToString() == "Won")
+                    {
+                        battleStatus = BattleStatus.Won;
+                    }
+
+                    DateTime dateTime = (DateTime)dr["DateTime"];
+
+                    Battle battle = new Battle(battleId, battleStatus, dateTime);
+                    battle.Munchkins = GetAllMunchkinsInBattle(battleId);
+                    battle.Monsters = GetAllMonstersInBattle(battleId);
+
+                    battles.Add(battle);
+                }
+            }
+
+            return battles;
         }
     }
 }

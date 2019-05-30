@@ -21,14 +21,14 @@
 
     public enum ExecuteQueryStatus
     {
-        Error,
-        OK
+        Error = 1,
+        OK = 2
     }
 
     public enum BattleStatus
     {
-        Won,
-        Lost,
-        Ongoing
+        Won = 1,
+        Lost = 2,
+        Ongoing = 3
     }
 }

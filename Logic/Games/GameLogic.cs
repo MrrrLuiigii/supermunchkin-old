@@ -52,5 +52,7 @@ namespace Logic.Games
 
             return battle;
         }
+
+        public Battle GetBattleById(int id) => gameRepository.GetBattleById(id);
     }
 }

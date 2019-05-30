@@ -3,6 +3,7 @@ using Factories;
 using Models;
 using Models.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace Logic.Games
 {
@@ -24,5 +25,34 @@ namespace Logic.Games
         public void AdjustGameStatus(Game game, GameStatus status) => gameRepository.AdjustGameStatus(game, status);
 
         public int RollDice() => new Random().Next(1, 7);
+
+        public Battle GetActiveBattleByMunchkinAndGame(Game game, Munchkin munchkin)
+        {
+            List<Battle> battles = new List<Battle>();
+            battles = gameRepository.GetAllBattlesByGame(game);
+
+            Battle battle = null;
+
+            if (battles != null)
+            {
+                battle = battles.Find(b => b.Munchkins.Find(m => m.Id == munchkin.Id).Id == munchkin.Id && b.Status == BattleStatus.Ongoing);
+            }
+
+            if (battle == null)
+            {
+                return AddBattle(game, munchkin);
+            }
+
+            return battle;
+        }
+
+        public Battle AddBattle(Game game, Munchkin munchkin)
+        {
+            Battle battle = new Battle();
+            battle.Munchkins.Add(munchkin);
+            gameRepository.AddBattle(game, battle);
+
+            return battle;
+        }
     }
 }

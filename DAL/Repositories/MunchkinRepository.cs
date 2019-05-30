@@ -14,5 +14,7 @@ namespace DAL.Repositories
         }
 
         public void AdjustMunchkin(Munchkin munchkin) => munchkinContext.AdjustMunchkin(munchkin);
+
+        public void AdjustMunchkin(Munchkin munchkin, Battle battle) => munchkinContext.AdjustMunchkin(munchkin, battle);
     }
 }

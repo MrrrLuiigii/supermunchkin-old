@@ -13,5 +13,10 @@ namespace DAL.Contexts.Munchkins
         {
             //Update munchkin
         }
+
+        public void AdjustMunchkin(Munchkin munchkin, Battle battle)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

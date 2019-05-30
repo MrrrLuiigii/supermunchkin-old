@@ -28,8 +28,7 @@ namespace Logic.Games
 
         public Battle GetActiveBattleByMunchkinAndGame(Game game, Munchkin munchkin)
         {
-            List<Battle> battles = new List<Battle>();
-            battles = gameRepository.GetAllBattlesByGame(game);
+            List<Battle> battles = gameRepository.GetAllBattlesByGame(game);
 
             foreach (Battle b in battles)
             {

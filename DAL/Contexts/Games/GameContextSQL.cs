@@ -356,7 +356,7 @@ namespace DAL.Contexts.Games
             parameters.Add(new MySqlParameter("pDateTime", battle.DateTimeBattled));
             parameters.Add(new MySqlParameter("pGameId", game.Id));
             parameters.Add(new MySqlParameter("pMunchkinId", battle.Munchkins[0].Id));
-            parameters.Add(new MySqlParameter("pMunchkinModifier", 0));
+            parameters.Add(new MySqlParameter("pModifier", battle.Munchkins[0].Modifier));
 
             MySqlParameter output = new MySqlParameter("pOutId", MySqlDbType.Int32);
             output.Direction = ParameterDirection.Output;

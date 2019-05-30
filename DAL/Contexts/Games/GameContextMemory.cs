@@ -80,5 +80,10 @@ namespace DAL.Contexts.Games
         {
             throw new System.NotImplementedException();
         }
+
+        Battle IGameRepository.AddBattle(Game game, Battle battle)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

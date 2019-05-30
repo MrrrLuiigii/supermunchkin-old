@@ -11,7 +11,7 @@ namespace Interfaces.Games
         void AddMunchkin(Game game, Munchkin munchkin);
         void RemoveMunchkin(Game game, Munchkin munchkin);
 
-        void AddBattle(Game game, Battle battle);
+        Battle AddBattle(Game game, Battle battle);
         void RemoveBattle(Game game, Battle battle);
         List<Battle> GetAllBattlesByGame(Game game);
         Battle GetBattleById(int id);

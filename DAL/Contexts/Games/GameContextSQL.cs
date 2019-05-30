@@ -77,72 +77,6 @@ namespace DAL.Contexts.Games
             return game;
         }
 
-        private Game GetGameByDateTimeAndStatus(Game game)
-        {
-            string sql = 
-                "select *" +
-                " from `game`" +
-                " where `DateTime` = @DateTime" +
-                " and `Status` = @Status";
-
-            List<MySqlParameter> parameters = new List<MySqlParameter>();
-            parameters.Add(new MySqlParameter("@DateTime", Convert.ToDateTime(game.DateTimePlayed.ToString("yyyy-MM-dd HH:mm:ss"))));
-            parameters.Add(new MySqlParameter("@Status", game.Status));
-
-            DataTable dt = database.ExecuteQuery(sql, parameters);
-
-            if (dt != null)
-            {
-                foreach (DataRow dr in dt.Rows)
-                {
-                    int gameId = (int)dr["GameId"];
-
-                    GameStatus status = GameStatus.Setup;
-                    if (dr["Status"].ToString() == "Playing")
-                    {
-                        status = GameStatus.Playing;
-                    }
-                    else if (dr["Status"].ToString() == "Finished")
-                    {
-                        status = GameStatus.Finished;
-                    }
-
-                    DateTime dateTime = (DateTime)dr["DateTime"];
-
-                    int winnerId = -1;
-                    if (dr["WinnerId"] != DBNull.Value)
-                    {
-                        winnerId = (int)dr["WinnerId"];
-                    }
-
-                    game = new Game(gameId, status, dateTime, GetMunchkin(winnerId));
-                    game = GetAllMunchkinsInGame(game);
-                }
-            }
-            else
-            {
-                throw new Exception("Something went wrong. Sorry for the inconvenience.");
-            }
-
-            return game;
-        }
-
-        private void AddGameToUser(Game game, User user)
-        {
-            string sql =
-                "insert into `user-game`(`GameId`, `UserId`)" +
-                " values (@GameId, @UserId)";
-
-            List<MySqlParameter> parameters = new List<MySqlParameter>();
-            parameters.Add(new MySqlParameter("@GameId", game.Id));
-            parameters.Add(new MySqlParameter("@UserId", user.Id));
-
-            if (database.ExecuteQueryWithStatus(sql, parameters) != ExecuteQueryStatus.OK)
-            {
-                throw new Exception("Something went wrong. Sorry for the inconvenience.");
-            }
-        }
-
         public void AddMunchkin(Game game, Munchkin munchkin)
         {
             string sql =
@@ -413,9 +347,23 @@ namespace DAL.Contexts.Games
             }
         }
 
-        public void AddBattle(Game game, Battle battle)
+        public Battle AddBattle(Game game, Battle battle)
         {
-            throw new NotImplementedException();
+            string sp = "AddBattle";
+
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
+            parameters.Add(new MySqlParameter("pStatus", battle.Status));
+            parameters.Add(new MySqlParameter("pDateTime", battle.DateTimeBattled));
+            parameters.Add(new MySqlParameter("pGameId", game.Id));
+            parameters.Add(new MySqlParameter("pMunchkinId", battle.Munchkins[0].Id));
+            parameters.Add(new MySqlParameter("pMunchkinModifier", 0));
+
+            MySqlParameter output = new MySqlParameter("pOutId", MySqlDbType.Int32);
+            output.Direction = ParameterDirection.Output;
+            parameters.Add(output);
+
+            return GetBattleById(database.ExecuteStoredProcedureWithOutput(sp, parameters));
+
         }
 
         public void RemoveBattle(Game game, Battle battle)

@@ -15,7 +15,7 @@ namespace DAL.Repositories
             gameContext = context ?? new GameContextSQL();
         }
 
-        public void AddBattle(Game game, Battle battle) => gameContext.AddBattle(game, battle);
+        public Battle AddBattle(Game game, Battle battle) => gameContext.AddBattle(game, battle);
 
         public Game AddGame(Game game, User user) => gameContext.AddGame(game, user);
 

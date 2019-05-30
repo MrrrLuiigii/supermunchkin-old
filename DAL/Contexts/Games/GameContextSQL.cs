@@ -432,7 +432,7 @@ namespace DAL.Contexts.Games
                 "from `munchkin`" +
                 "inner join `user`" +
                 "on `munchkin`.`UserId` = `user`.`UserId`" +
-                "inner join `muchkin-battle`" +
+                "inner join `munchkin-battle`" +
                 "on `munchkin`.`MunchkinId` = `munchkin-battle`.`MunchkinId`" +
                 "where `munchkin-battle`.`BattleId` = @BattleId";
 

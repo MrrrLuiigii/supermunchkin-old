@@ -44,6 +44,11 @@ namespace DAL.Contexts.Users
             return memory.GetMunchkinById(id);
         }
 
+        public Munchkin GetMunchkinById(int id, int battleId)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public User GetUserById(int id)
         {
             return memory.GetUserById(id);

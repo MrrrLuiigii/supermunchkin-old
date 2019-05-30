@@ -257,5 +257,53 @@ namespace DAL.Contexts.Users
                 throw new Exception("Something went wrong. Sorry for the inconvenience.");
             }
         }
+
+        public Munchkin GetMunchkinById(int id, int battleId)
+        {
+            Munchkin munchkin = null;
+
+            string sql =
+                "select `munchkin`.`MunchkinId`, `user`.`Username`, `munchkin`.`Gender`, `munchkin`.`Level`, `munchkin`.`Gear`, `munchkin-battle`.`Modifier`" +
+                " from `munchkin`" +
+                " inner join `user`" +
+                " on `munchkin`.`UserId` = `user`.`UserId`" +
+                " inner join `munchkin-battle`" +
+                " on `munchkin`.`MunchkinId` = `munchkin-battle`.`MunchkinId`" +
+                " where `munchkin`.`MunchkinId` = @MunchkinId" +
+                " and `munchkin-battle`.`BattleId` = @BattleId";
+
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
+            parameters.Add(new MySqlParameter("@MunchkinId", id));
+            parameters.Add(new MySqlParameter("@BattleId", battleId));
+
+            DataTable dt = database.ExecuteQuery(sql, parameters);
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int munchkinId = (int)dr["MunchkinId"];
+                    string name = dr["Username"].ToString();
+
+                    MunchkinGender gender = MunchkinGender.Male;
+                    if (dr["Gender"].ToString() == "Female")
+                    {
+                        gender = MunchkinGender.Female;
+                    }
+
+                    int level = (int)dr["Level"];
+                    int gear = (int)dr["Gear"];
+                    int modifier = (int)dr["Modifier"];
+
+                    munchkin = new Munchkin(munchkinId, name, gender, level, gear, modifier);
+                }
+            }
+            else
+            {
+                throw new Exception("Something went wrong. Sorry for the inconvenience.");
+            }
+
+            return munchkin;
+        }
     }
 }

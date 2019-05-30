@@ -90,13 +90,6 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
-        public IActionResult RollDiceInGame(int id)
-        {
-            int diceInt = gameLogic.RollDice();
-            return RedirectToAction("Index", "Game", new { id, diceInt });
-        }
-
-        [Authorize]
         public IActionResult AdjustGender(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
@@ -113,27 +106,11 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
-        public IActionResult LevelUpInBattle(int id)
-        {
-            Munchkin munchkin = userLogic.GetMunchkinById(id);
-            munchkinLogic.AdjustLevel(munchkin, AdjustStats.Up);
-            return RedirectToAction("Index", "Battle", new { id });
-        }
-
-        [Authorize]
         public IActionResult LevelDown(int id)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             munchkinLogic.AdjustLevel(munchkin, AdjustStats.Down);
             return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
-        }
-
-        [Authorize]
-        public IActionResult LevelDownInBattle(int id)
-        {
-            Munchkin munchkin = userLogic.GetMunchkinById(id);
-            munchkinLogic.AdjustLevel(munchkin, AdjustStats.Down);
-            return RedirectToAction("Index", "Battle", new { id });
         }
 
         [Authorize]

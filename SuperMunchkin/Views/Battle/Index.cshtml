@@ -3,8 +3,88 @@
     ViewData["Title"] = "Index";
 }
 
+@using Models;
+@using Models.Enums;
+@model Battle
+
 <div class="w-100 text-center mt-3 mb-3">
     <h1>
         Battle
     </h1>
+</div>
+
+<div class="text-center">
+    <div>
+        Monsters
+    </div>
+
+    <div class="d-inline-block text-center mr-4">
+        <div>
+            Strength
+        </div>
+
+
+        <h3 class="mb-0">Level</h3>
+        <div class="d-inline-block" style="width: 30px;">
+            <a href="@Url.Action("LevelUp", "Munchkin", new { Model.Id, AdjustStats.Up, ViewBag.GameId })">
+                <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
+            </a>
+            <a href="@Url.Action("LevelDown", "Munchkin", new { Model.Id, AdjustStats.Down, ViewBag.GameId })">
+                <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
+            </a>
+        </div>
+        <div class="d-inline-block ml-2" style="width: 30px;">
+            <h1>@Model.Munchkins[0].Level</h1>
+        </div>
+    </div>
+    <div class="d-inline-block text-center mt-4 ml-4">
+        <h3 class="mb-0">Gear</h3>
+        <div class="d-inline-block" style="width: 30px;">
+            <a href="@Url.Action("ModifierUp", "Munchkin", new { Model.Id, AdjustStats.Up, ViewBag.GameId })">
+                <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
+            </a>
+            <a href="@Url.Action("ModifierDown", "Munchkin", new { Model.Id, AdjustStats.Down, ViewBag.GameId })">
+                <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
+            </a>
+        </div>
+        <div class="d-inline-block ml-2" style="width: 30px;">
+            <h1>@Model.Munchkins[0].Modifier</h1>
+        </div>
+    </div>
+</div>
+
+<div class="d-inline-block" style="position: fixed; bottom: 0; left: 0;">
+    <div class="custom-border button-small m-3 text-center float-left" style="padding-top: 3px;">
+        <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
+    </div>
+
+    <a href="@Url.Action("MunchkinEdit", "Munchkin", new { ViewBag.Munchkin.Id })">
+        <div class="custom-border button-small my-3 text-center float-right" style="padding-top: 7px; padding-left: -1px;">
+            <i class="fas fa-chevron-left fa-2x"></i>
+        </div>
+    </a>
+</div>
+
+<div class="d-inline-block" style="position: fixed; bottom: 0; right: 0;">
+    <a href="@Url.Action("RollDice", "Munchkin", new { Model.Id })">
+        <div class="custom-border button-small m-3 text-center float-left" style="padding-top: 3px;">
+            @{
+                switch (ViewBag.DiceInt)
+                {
+                    case 1: <i class="fas fa-dice-one fa-2x" style="padding-top: 4px;"></i>break;
+                    case 2: <i class="fas fa-dice-two fa-2x" style="padding-top: 4px;"></i>break;
+                    case 3: <i class="fas fa-dice-three fa-2x" style="padding-top: 4px;"></i>break;
+                    case 4: <i class="fas fa-dice-four fa-2x" style="padding-top: 4px;"></i>break;
+                    case 5: <i class="fas fa-dice-five fa-2x" style="padding-top: 4px;"></i>break;
+                    case 6: <i class="fas fa-dice-six fa-2x" style="padding-top: 4px;"></i>break;
+                    default: <i class="fas fa-dice fa-2x" style="padding-top: 4px;"></i>break;
+                }
+            }
+        </div>
+    </a>
+    <a href="@Url.Action("Index", "Battle", new { Model.Id })">
+        <div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; right: 0; padding-top: 6px;">
+            <i class="fas fa-flag-checkered fa-2x"></i>
+        </div>
+    </a>
 </div>

@@ -127,13 +127,11 @@
                     }
                 </div>
             </a>
-            <a href="@Url.Action("Index", "Battle")">
+            <a href="@Url.Action("Index", "Battle", new { Model.Id })">
                 <div class="custom-border button-small mr-3 my-3 text-center float-right" style="padding-top: 3px;">
                     <i class="fas fa-fist-raised fa-2x"></i>
                 </div>
             </a>
         </div>
-
-
     }
 }

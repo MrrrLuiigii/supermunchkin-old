@@ -31,19 +31,18 @@ namespace Logic.Games
             List<Battle> battles = new List<Battle>();
             battles = gameRepository.GetAllBattlesByGame(game);
 
-            Battle battle = null;
-
-            if (battles != null)
+            foreach (Battle b in battles)
             {
-                battle = battles.Find(b => b.Munchkins.Find(m => m.Id == munchkin.Id).Id == munchkin.Id && b.Status == BattleStatus.Ongoing);
+                if (b.Status == BattleStatus.Ongoing)
+                {
+                    if (b.Munchkins.Find(m => m.Id == munchkin.Id) != null)
+                    {
+                        return b;
+                    }
+                }
             }
 
-            if (battle == null)
-            {
-                return AddBattle(game, munchkin);
-            }
-
-            return battle;
+            return AddBattle(game, munchkin);
         }
 
         public Battle AddBattle(Game game, Munchkin munchkin)

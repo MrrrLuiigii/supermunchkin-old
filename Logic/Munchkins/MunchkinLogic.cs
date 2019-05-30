@@ -63,6 +63,27 @@ namespace Logic.Munchkins
             munchkinRepository.AdjustMunchkin(munchkin);
         }
 
+        public void AdjustModifier(Munchkin munchkin, AdjustStats direction, Battle battle)
+        {
+            if (direction == AdjustStats.Up)
+            {
+                munchkin.Modifier += 1;
+            }
+            else if (direction == AdjustStats.Down)
+            {
+                if (munchkin.Modifier > 0)
+                {
+                    munchkin.Modifier -= 1;
+                }
+                else
+                {
+                    munchkin.Modifier = 0;
+                }
+            }
+
+            munchkinRepository.AdjustMunchkin(munchkin, battle);
+        }
+
         public void AdjustGender(Munchkin munchkin)
         {
             MunchkinGender gender = MunchkinGender.Male;

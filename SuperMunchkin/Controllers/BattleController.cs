@@ -1,4 +1,5 @@
-﻿using Logic.Games;
+﻿using Logic.Battles;
+using Logic.Games;
 using Logic.Munchkins;
 using Logic.Users;
 using Microsoft.AspNetCore.Authorization;
@@ -9,14 +10,17 @@ using System;
 
 namespace SuperMunchkin.Controllers
 {
+    [Authorize]
     public class BattleController : Controller
     {
         private UserLogic userLogic = new UserLogic();
         private MunchkinLogic munchkinLogic = new MunchkinLogic();
+        private BattleLogic battleLogic = new BattleLogic();
         private GameLogic gameLogic = new GameLogic();
         private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
 
-        public IActionResult Index(int id)
+        [Authorize]
+        public IActionResult Index(int id, int diceInt)
         {
             Munchkin munchkin = userLogic.GetMunchkinById(id);
 
@@ -26,20 +30,36 @@ namespace SuperMunchkin.Controllers
             Battle battle = gameLogic.GetActiveBattleByMunchkinAndGame(game, munchkin);
 
             ViewBag.Munchkin = munchkin;
+            ViewBag.DiceInt = diceInt;
 
             return View(battle);
         }
 
-        public IActionResult AddMunchkin()
+        [Authorize]
+        public IActionResult AddMunchkin(int id, int munchkinId)
         {
-            return RedirectToAction("Index");
+            Game game = gameCollectionLogic.GetGameById(Convert.ToInt32(Request.Cookies["GameId"]));
+            ViewBag.Munchkins = game.Munchkins.FindAll(m => m.Id != munchkinId);
+            ViewBag.BattleId = id;
+            ViewBag.MunchkinId = munchkinId;
+            return View();
+        }
+
+        [Authorize]        
+        public IActionResult AddMunchkinToBattle(int id, int battle, int munchkin)
+        {
+            Battle b = gameLogic.GetBattleById(battle);
+            Munchkin m = userLogic.GetMunchkinById(id);
+            battleLogic.AddMunchkin(b, m);
+            id = munchkin;
+            return RedirectToAction("Index", "Battle", new { id });
         }
 
         [Authorize]
         public IActionResult RollDice(int id)
         {
             int diceInt = gameLogic.RollDice();
-            return RedirectToAction("Index", "Game", new { id, diceInt });
+            return RedirectToAction("Index", "Battle", new { id, diceInt });
         }
 
         [Authorize]
@@ -90,6 +110,15 @@ namespace SuperMunchkin.Controllers
             Munchkin munchkin = userLogic.GetMunchkinById(id, battleId);
             munchkinLogic.AdjustModifier(munchkin, AdjustStats.Down, battle);
             return RedirectToAction("Index", "Battle", new { id });
+        }
+
+        [Authorize]
+        public IActionResult Finish(int id, BattleStatus result)
+        {
+            //Battle battle = gameLogic.GetBattleById(battleId);
+            //Munchkin munchkin = userLogic.GetMunchkinById(id, battleId);
+            //munchkinLogic.AdjustModifier(munchkin, AdjustStats.Down, battle);
+            return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
     }
 }

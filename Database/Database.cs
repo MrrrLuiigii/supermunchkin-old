@@ -22,6 +22,7 @@ namespace Databases
                 reader = cmd.ExecuteReader();
                 dt.Load(reader);
                 reader.Close();
+                reader.Dispose();
             }
             catch
             {
@@ -30,6 +31,7 @@ namespace Databases
             
             cmd.Dispose();
             conn.Close();
+            conn.Dispose();
             return dt;
         }
 
@@ -51,6 +53,7 @@ namespace Databases
                 reader = cmd.ExecuteReader();
                 dt.Load(reader);
                 reader.Close();
+                reader.Dispose();
             }
             catch
             {
@@ -59,6 +62,7 @@ namespace Databases
 
             cmd.Dispose();
             conn.Close();
+            conn.Dispose();
             return dt;
         }
 
@@ -79,6 +83,7 @@ namespace Databases
                 reader = cmd.ExecuteReader();
                 dt.Load(reader);
                 reader.Close();
+                reader.Dispose();
             }
             catch
             {
@@ -87,6 +92,7 @@ namespace Databases
 
             cmd.Dispose();
             conn.Close();
+            conn.Dispose();
             return dt;
         }
 
@@ -104,7 +110,7 @@ namespace Databases
 
             try
             {
-                cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
             }
             catch
             {
@@ -113,6 +119,7 @@ namespace Databases
 
             cmd.Dispose();
             conn.Close();
+            conn.Dispose();
             return status;
         }
 
@@ -130,7 +137,7 @@ namespace Databases
 
             try
             {
-                cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
             }
             catch
             {
@@ -139,6 +146,7 @@ namespace Databases
             
             cmd.Dispose();
             conn.Close();
+            conn.Dispose();
             return status;
         }
 
@@ -163,6 +171,7 @@ namespace Databases
 
             cmd.Dispose();
             conn.Close();
+            conn.Dispose();
             return status;
         }
 
@@ -190,6 +199,7 @@ namespace Databases
 
             cmd.Dispose();
             conn.Close();
+            conn.Dispose();
             return status;
         }
 
@@ -215,7 +225,7 @@ namespace Databases
 
             cmd.Dispose();
             conn.Close();
-
+            conn.Dispose();
             return id;
         }
 
@@ -244,7 +254,7 @@ namespace Databases
 
             cmd.Dispose();
             conn.Close();
-
+            conn.Dispose();
             return id;
         }
     }

@@ -350,10 +350,11 @@ namespace DAL.Contexts.Games
         public Battle AddBattle(Game game, Battle battle)
         {
             string sp = "AddBattle";
+            DateTime dateAndTime = Convert.ToDateTime(game.DateTimePlayed.ToString("yyyy-MM-dd HH:mm:ss"));
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
             parameters.Add(new MySqlParameter("pStatus", battle.Status));
-            parameters.Add(new MySqlParameter("pDateTime", battle.DateTimeBattled));
+            parameters.Add(new MySqlParameter("pDateTime", dateAndTime));
             parameters.Add(new MySqlParameter("pGameId", game.Id));
             parameters.Add(new MySqlParameter("pMunchkinId", battle.Munchkins[0].Id));
             parameters.Add(new MySqlParameter("pModifier", battle.Munchkins[0].Modifier));
@@ -501,8 +502,8 @@ namespace DAL.Contexts.Games
 
             string sql =
                 "select `BattleId`, `Status`, `DateTime`" +
-                "from `Battle`" +                
-                "where `BattleId` = @BattleId";
+                " from `Battle`" +                
+                " where `BattleId` = @BattleId";
 
             DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@BattleId", id));
 

@@ -48,7 +48,7 @@ namespace Logic.Games
         {
             Battle battle = new Battle();
             battle.Munchkins.Add(munchkin);
-            gameRepository.AddBattle(game, battle);
+            battle = gameRepository.AddBattle(game, battle);
 
             return battle;
         }

@@ -33,11 +33,11 @@ namespace DAL.Contexts.Battles
         {
             string sql = 
                 "insert into `munchkin-battle`(`BattleId`, `MunchkinId`, `Modifier`)" +
-                "values (@BattleId, @MunchkinId, @Modifier)";
+                " values (@BattleId, @MunchkinId, @Modifier)";
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
             parameters.Add(new MySqlParameter("@BattleId", battle.Id));
-            parameters.Add(new MySqlParameter("@MonsterId", munchkin.Id));
+            parameters.Add(new MySqlParameter("@MunchkinId", munchkin.Id));
             parameters.Add(new MySqlParameter("@Modifier", munchkin.Modifier));
 
             if (database.ExecuteQueryWithStatus(sql, parameters) != ExecuteQueryStatus.OK)

@@ -1,5 +1,6 @@
 ﻿using Factories;
 using Interfaces.Battles;
+using Models;
 
 namespace Logic.Battles
 {
@@ -11,5 +12,7 @@ namespace Logic.Battles
         {
             battleRepository = repository ?? BattleFactory.GetBattleRepository();
         }
+
+        public void AddMunchkin(Battle battle, Munchkin munchkin) => battleRepository.AddMunchkin(battle, munchkin);
     }
 }

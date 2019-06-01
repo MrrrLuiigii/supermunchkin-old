@@ -13,49 +13,54 @@
 
 <div class="hiddenscroll text-center m-auto" style="height: 65vh; overflow-y: scroll;">
     @{
-        foreach (Munchkin m in Model.Munchkins)
+        if (Model.Status == GameStatus.Playing)
         {
-            int diceInt = 0;
-            int gameId = Model.Id;
+            foreach (Munchkin m in Model.Munchkins)
+            {
+                int diceInt = 0;
+                int gameId = Model.Id;
 
-            <a href="@Url.Action("MunchkinEdit", "Munchkin", new { m.Id, diceInt, gameId })">
-                <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
-                    @{
-                        if (Model.Status == GameStatus.Playing)
-                        {
-                            <div class="d-inline-block float-left">
-                                <h2 class="pl-2 pt-1 mb-0 float-left text-left" style="width: 70vw;">@m.Name</h2>
-                            </div>
-                            <div class="d-inline-block float-right pt-2 pr-2">
-                                @{
-                                    if (m.Gender == MunchkinGender.Male)
-                                    {
-                                        <i class="fas fa-mars" style="font-size: xx-large;"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="fas fa-venus" style="font-size: xx-large;"></i>
-                                    }
-                                }
-                            </div>
-                        }
-                    }
-                    <div class="text-left float-left pl-2">
-                        <div class="d-inline-block">
-                            <p class="mb-0">Level @m.Level</p>
-                            <p class="mb-0">Gear @m.Gear</p>
+                <a href="@Url.Action("MunchkinEdit", "Munchkin", new { m.Id, diceInt, gameId })">
+                    <div class="overview custom-border ml-auto mr-auto mb-3 mt-2">
+                        <div class="d-inline-block float-left">
+                            <h2 class="pl-2 pt-1 mb-0 float-left text-left" style="width: 70vw;">@m.Name</h2>
                         </div>
-                        <div class="d-inline-block">
-                            <h1 class="pl-4 mb-0">
-                                @{
-                                    int strength = m.Level + m.Gear;
+                        <div class="d-inline-block float-right pt-2 pr-2">
+                            @{
+                                if (m.Gender == MunchkinGender.Male)
+                                {
+                                    <i class="fas fa-mars" style="font-size: xx-large;"></i>
                                 }
-                                @strength
-                            </h1>
+                                else
+                                {
+                                    <i class="fas fa-venus" style="font-size: xx-large;"></i>
+                                }
+                            }
+                        </div>
+                        <div class="text-left float-left pl-2">
+                            <div class="d-inline-block">
+                                <p class="mb-0">Level @m.Level</p>
+                                <p class="mb-0">Gear @m.Gear</p>
+                            </div>
+                            <div class="d-inline-block">
+                                <h1 class="pl-4 mb-0">
+                                    @{
+                                        int strength = m.Level + m.Gear;
+                                    }
+                                    @strength
+                                </h1>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            }
+        }
+        else
+        {
+            <div class="text-center mt-5 pt-5">
+                <p>The game has ended.</p>
+                <p>Check the history tab<br /> to see the results.</p>
+            </div>
         }
     }
 </div>

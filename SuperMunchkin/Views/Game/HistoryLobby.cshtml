@@ -6,8 +6,8 @@
 @using Models;
 @using Models.Enums;
 
-<div class="w-100 text-center mt-3 mb-3">
-    <h1>Game History</h1>
+<div class="w-100 text-center mt-3">
+    <h2>Game History</h2>
 </div>
 
 <div class="hiddenscroll text-center m-auto" style="height: 70vh; overflow-y: scroll;">
@@ -36,7 +36,7 @@
                             <div class="pt-2">
                                 <h4>@g.Winner.Name won!</h4>
                             </div>
-                            <div class="d-inline-block float-left text-left ml-3" ontouchstart="showPopup(@g.Id)" ontouchend="hidePopup(@g.Id)">
+                            <div class="d-inline-block float-left text-left ml-3" onmouseover="showPopup(@g.Id)" ontouchstart="showPopup(@g.Id)" onmouseout="hidePopup(@g.Id)" ontouchend="hidePopup(@g.Id)">
                                 @g.Munchkins.Count/6<br />
                                 munchkins
                             </div>

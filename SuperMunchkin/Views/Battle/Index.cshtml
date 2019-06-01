@@ -22,11 +22,10 @@
         <div id="@Model.Munchkins[0].Id" class="d-inline-block">
             <div>
                 <h2 class="d-inline-block">@Model.Munchkins[0].Name</h2>
-
                 @{
                     if (Model.Munchkins.Count() == 2)
                     {
-                       <div onclick="swapMunchkin(Model.Munchkins[1].Id, Model.Munchkins[0].Id)">
+                       <div onclick="swapMunchkin(Model.Munchkins[1].Id, Model.Munchkins[0].Id)" ontouchstart="swapMunchkin(Model.Munchkins[1].Id, Model.Munchkins[0].Id)">
                             <i class="fas fa-exchange-alt custom-border button-tiny d-inline-block" style="padding-top: 3px;"></i>
                        </div>
                     }
@@ -70,7 +69,6 @@
             </div>
             <div class="d-inline-block text-center">
                 <h5 class="mb-0">Modifier</h5>
-
                 @{
                     int BattleId = Model.Id;
                 }
@@ -88,7 +86,6 @@
                 </div>
             </div>
         </div>
-
         @{
             if (Model.Munchkins.Count() == 2)
             {

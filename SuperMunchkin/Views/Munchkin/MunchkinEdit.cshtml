@@ -32,10 +32,10 @@
     <div class="d-inline-block text-center mr-4">
         <h3 class="mb-0">Level</h3>
         <div class="d-inline-block" style="width: 30px;">
-            <a href="@Url.Action("LevelUp", "Munchkin", new { Model.Id, AdjustStats.Up, ViewBag.GameId })">
+            <a href="@Url.Action("LevelUp", "Munchkin", new { Model.Id })">
                 <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
             </a>
-            <a href="@Url.Action("LevelDown", "Munchkin", new { Model.Id, AdjustStats.Down, ViewBag.GameId })">
+            <a href="@Url.Action("LevelDown", "Munchkin", new { Model.Id })">
                 <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
             </a>
         </div>
@@ -46,10 +46,10 @@
     <div class="d-inline-block text-center mt-4 ml-4">
         <h3 class="mb-0">Gear</h3>
         <div class="d-inline-block" style="width: 30px;">
-            <a href="@Url.Action("GearUp", "Munchkin", new { Model.Id, AdjustStats.Up, ViewBag.GameId })">
+            <a href="@Url.Action("GearUp", "Munchkin", new { Model.Id })">
                 <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
             </a>
-            <a href="@Url.Action("GearDown", "Munchkin", new { Model.Id, AdjustStats.Down, ViewBag.GameId })">
+            <a href="@Url.Action("GearDown", "Munchkin", new { Model.Id })">
                 <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
             </a>
         </div>

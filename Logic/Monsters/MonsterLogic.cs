@@ -35,7 +35,7 @@ namespace Logic.Monsters
             monsterRepository.AdjustMonster(monster);
         }
 
-        public void AdjustModifier(Monster monster, AdjustStats direction)
+        public void AdjustModifier(Monster monster, AdjustStats direction, Battle battle)
         {
             if (direction == AdjustStats.Down)
             {

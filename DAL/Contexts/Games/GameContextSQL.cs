@@ -357,11 +357,14 @@ namespace DAL.Contexts.Games
             parameters.Add(new MySqlParameter("pDateTime", dateAndTime));
             parameters.Add(new MySqlParameter("pGameId", game.Id));
             parameters.Add(new MySqlParameter("pMunchkinId", battle.Munchkins[0].Id));
-            parameters.Add(new MySqlParameter("pModifier", battle.Munchkins[0].Modifier));
+            parameters.Add(new MySqlParameter("pMunchkinModifier", battle.Munchkins[0].Modifier));
 
             MySqlParameter output = new MySqlParameter("pOutId", MySqlDbType.Int32);
             output.Direction = ParameterDirection.Output;
             parameters.Add(output);
+
+            parameters.Add(new MySqlParameter("pMonsterLevel", battle.Monsters[0].Level));
+            parameters.Add(new MySqlParameter("pMonsterModifier", battle.Monsters[0].Modifier));
 
             return GetBattleById(database.ExecuteStoredProcedureWithOutput(sp, parameters));
 

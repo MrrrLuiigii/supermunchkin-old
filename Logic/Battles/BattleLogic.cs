@@ -14,5 +14,8 @@ namespace Logic.Battles
         }
 
         public void AddMunchkin(Battle battle, Munchkin munchkin) => battleRepository.AddMunchkin(battle, munchkin);
+        public void RemoveMunchkin(Battle battle, Munchkin munchkin) => battleRepository.RemoveMunchkin(battle, munchkin);
+        public void AddMonster(Battle battle, Monster monster) => battleRepository.AddMonster(battle, monster);
+        public void RemoveMonster(Battle battle, Monster monster) => battleRepository.RemoveMonster(battle, monster);
     }
 }

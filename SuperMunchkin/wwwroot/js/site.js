@@ -31,7 +31,7 @@ function hidePopup(id) {
 }
 
 // Swap battling munchkin
-function swapMunchkin(dis, hid) {
-    document.getElementById(dis).classList.replace("d-none", "d-inline-block");
-    document.getElementById(hid).classList.replace("d-inline-block", "d-none");
+function swapMunchkin(display, hide) {
+    document.getElementById(display).classList.replace("d-none", "d-inline");
+    document.getElementById(hide).classList.replace("d-inline", "d-none");
 }

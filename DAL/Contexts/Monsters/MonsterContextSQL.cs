@@ -13,7 +13,7 @@ namespace DAL.Contexts.Monsters
     {
         private Database database = new Database();
 
-        public void AdjustMonster(Monster monster)
+        public void AdjustMonster(Monster monster, Battle battle)
         {
             string sp = "AdjustMonster";
 
@@ -21,6 +21,7 @@ namespace DAL.Contexts.Monsters
             parameters.Add(new MySqlParameter("pMonsterId", monster.Id));
             parameters.Add(new MySqlParameter("pLevel", monster.Level));
             parameters.Add(new MySqlParameter("pModifier", monster.Modifier));
+            parameters.Add(new MySqlParameter("pBattleId", battle.Id));
 
             if (database.ExecuteStoredProcedure(sp, parameters) != ExecuteQueryStatus.OK)
             {
@@ -39,7 +40,7 @@ namespace DAL.Contexts.Monsters
             output.Direction = ParameterDirection.Output;
             parameters.Add(output);
 
-            return database.ExecuteStoredProcedureWithOutput(sp, new MySqlParameter("pLevel", monster.Level));
+            return database.ExecuteStoredProcedureWithOutput(sp, parameters);
         }
 
         public List<Monster> GetAllMonstersByBattle(Battle battle)
@@ -48,10 +49,10 @@ namespace DAL.Contexts.Monsters
 
             string sql =
                 "select `monster`.`MonsterId`, `monster`.`Level`, `monster`.`Modifier`" +
-                "from `monster`" +
-                "inner join `monster-battle`" +
-                "on `monster`.`MonsterId` = `monster-battle`.`MonsterId`" +
-                "where `monster-battle`.`BattleId` = @BattleId";
+                " from `monster`" +
+                " inner join `monster-battle`" +
+                " on `monster`.`MonsterId` = `monster-battle`.`MonsterId`" +
+                " where `monster-battle`.`BattleId` = @BattleId";
 
             DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@BattleId", battle.Id));
 
@@ -80,11 +81,11 @@ namespace DAL.Contexts.Monsters
             Monster monster = null;
 
             string sql =
-                "select `monster`.`MonsterId`, `monster`.`Level`, `monster`.`Modifier`" +
-                "from `monster`" +
-                "inner join `monster-battle`" +
-                "on `monster`.`MonsterId` = `monster-battle`.`MonsterId`" +
-                "where `monster`.`MonsterId` = @MonsterId";
+                "select `monster`.`MonsterId`, `monster`.`Level`, `monster-battle`.`Modifier`" +
+                " from `monster`" +
+                " inner join `monster-battle`" +
+                " on `monster`.`MonsterId` = `monster-battle`.`MonsterId`" +
+                " where `monster`.`MonsterId` = @MonsterId";
 
             DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@MonsterId", id));
 

@@ -16,7 +16,7 @@ namespace DAL.Contexts.Battles
         {
             string sql = 
                 "insert into `monster-battle`(`BattleId`, `MonsterId`, `Modifier`)" +
-                "values (@BattleId, @MonsterId, @Modifier)";
+                " values (@BattleId, @MonsterId, @Modifier)";
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
             parameters.Add(new MySqlParameter("@BattleId", battle.Id));
@@ -50,8 +50,8 @@ namespace DAL.Contexts.Battles
         {
             string sql =
                 "update `battle`" +
-                "set `Status` = @Status" +
-                "where `BattleId` = @BattleId";
+                " set `Status` = @Status" +
+                " where `BattleId` = @BattleId";
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
             parameters.Add(new MySqlParameter("@Status", battle.Status));
@@ -77,8 +77,8 @@ namespace DAL.Contexts.Battles
         {
             string sql = 
                 "delete from `munchkin-battle`" +
-                "where `MunchkinId` = @MunchkinId" +
-                "and `BattleId`= @BattleId";
+                " where `MunchkinId` = @MunchkinId" +
+                " and `BattleId`= @BattleId";
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
             parameters.Add(new MySqlParameter("@MunchkinId", munchkin.Id));

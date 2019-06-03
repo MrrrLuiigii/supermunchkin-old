@@ -56,6 +56,15 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
+        public IActionResult AddMonster(int id, int munchkinId)
+        {
+            Battle battle = gameLogic.GetBattleById(id);
+            battleLogic.AddMonster(battle, new Monster("Monster 2"));
+            id = munchkinId;
+            return RedirectToAction("Index", "Battle", new { id });
+        }
+
+        [Authorize]
         public IActionResult RollDice(int id)
         {
             int diceInt = gameLogic.RollDice();

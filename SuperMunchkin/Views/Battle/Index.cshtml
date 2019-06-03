@@ -4,7 +4,6 @@
 }
 
 @using Models;
-@using Models.Enums;
 @model Battle
 
 @{
@@ -16,12 +15,15 @@
 
     foreach (Monster monster in Model.Monsters)
     {
-        totalMonsterPower += monster.Level += monster.Modifier;
+        totalMonsterPower += monster.Level;
+        totalMonsterPower += monster.Modifier;
     }
 
     foreach (Munchkin munchkin in Model.Munchkins)
     {
-        totalMunchkinPower += munchkin.Level += munchkin.Gear += munchkin.Modifier;
+        totalMunchkinPower += munchkin.Level;
+        totalMunchkinPower += munchkin.Gear;
+        totalMunchkinPower += munchkin.Modifier;
     }
 }
 
@@ -35,7 +37,9 @@
     <div>
         <div id="@Model.Monsters[0].Id" class="d-inline">
             <div>
-                <h2 class="d-inline-block">@Model.Monsters[0].Name</h2>
+                <h2 class="d-inline-block">
+                    @Model.Monsters[0].Name
+                </h2>
                 @{
                     if (Model.Monsters.Count() == 2)
                     {
@@ -54,10 +58,10 @@
             <div class="d-inline-block text-center">
                 <h5 class="mb-0">Level</h5>
                 <div class="d-inline-block" style="width: 30px;">
-                    <a href="@Url.Action("LevelUp", "Monster", new { Model.Monsters[0].Id, munchkinId })">
+                    <a href="@Url.Action("LevelUp", "Monster", new { Model.Monsters[0].Id, munchkinId, battleId })">
                         <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
                     </a>
-                    <a href="@Url.Action("LevelDown", "Monster", new { Model.Monsters[0].Id, munchkinId })">
+                    <a href="@Url.Action("LevelDown", "Monster", new { Model.Monsters[0].Id, munchkinId, battleId })">
                         <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
                     </a>
                 </div>
@@ -85,18 +89,28 @@
             {
                 <div id="@Model.Monsters[1].Id" class="d-none">
                     <div>
-                        <h2 class="d-inline-block">@Model.Monsters[1].Name</h2>
+                        <h2 class="d-inline-block">                            
+                            @Model.Monsters[1].Name
+                        </h2>
                         <div class="custom-border button-tiny d-inline-block" onclick="swapDisplay(@Model.Monsters[0].Id, @Model.Monsters[1].Id)">
                             <i class="fas fa-exchange-alt" style="padding-top: 5px;"></i>
                         </div>
+                        @{ 
+                            int monsterId = Model.Monsters[1].Id;
+                        }
+                        <a href="@Url.Action("RemoveMonster", "Battle", new { Model.Id, monsterId, munchkinId })">
+                            <div class="custom-border button-tiny d-inline-block">
+                                <i class="fas fa-times" style="padding-left: 1px; padding-top: 5px;"></i>
+                            </div>
+                        </a>
                     </div>
                     <div class="d-inline-block text-center">
                         <h5 class="mb-0">Level</h5>
                         <div class="d-inline-block" style="width: 30px;">
-                            <a href="@Url.Action("LevelUp", "Monster", new { Model.Monsters[1].Id, munchkinId })">
+                            <a href="@Url.Action("LevelUp", "Monster", new { Model.Monsters[1].Id, munchkinId, battleId })">
                                 <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
                             </a>
-                            <a href="@Url.Action("LevelDown", "Monster", new { Model.Monsters[1].Id, munchkinId })">
+                            <a href="@Url.Action("LevelDown", "Monster", new { Model.Monsters[1].Id, munchkinId, battleId })">
                                 <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
                             </a>
                         </div>
@@ -122,23 +136,39 @@
             }
         }
     </div>
-
     <div class="my-3">
         <div class="d-inline-block">
-            <h1>@totalMonsterPower</h1>
+            <h1>
+                @{
+                    if (totalMonsterPower >= totalMunchkinPower)
+                    {
+                        <i class="fas fa-crown"></i>
+                    }
+                }
+                @totalMonsterPower
+            </h1>
         </div>
         <div class="d-inline-block px-3">
-            <h2>vs</h2>
+            <h3>VS</h3>
         </div>
         <div class="d-inline-block" >
-            <h1>@totalMunchkinPower</h1>
+            <h1>
+                @totalMunchkinPower
+                @{
+                    if (totalMunchkinPower > totalMonsterPower)
+                    {
+                        <i class="fas fa-crown"></i>
+                    }
+                }
+            </h1>
         </div>
     </div>
-
     <div>
         <div id="@Model.Munchkins[0].Id" class="d-inline">
             <div>
-                <h2 class="d-inline-block">@Model.Munchkins[0].Name</h2>
+                <h2 class="d-inline-block">                    
+                    @Model.Munchkins[0].Name
+                </h2>
                 @{
                     if (Model.Munchkins.Count() == 2)
                     {
@@ -157,10 +187,10 @@
             <div class="d-inline-block text-center">
                 <h5 class="mb-0">Level</h5>
                 <div class="d-inline-block" style="width: 30px;">
-                    <a href="@Url.Action("LevelUp", "Battle", new { Model.Munchkins[0].Id, AdjustStats.Up })">
+                    <a href="@Url.Action("LevelUp", "Battle", new { Model.Munchkins[0].Id })">
                         <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
                     </a>
-                    <a href="@Url.Action("LevelDown", "Battle", new { Model.Munchkins[0].Id, AdjustStats.Down })">
+                    <a href="@Url.Action("LevelDown", "Battle", new { Model.Munchkins[0].Id })">
                         <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
                     </a>
                 </div>
@@ -171,10 +201,10 @@
             <div class="d-inline-block text-center mx-3">
                 <h5 class="mb-0">Gear</h5>
                 <div class="d-inline-block" style="width: 30px;">
-                    <a href="@Url.Action("GearUp", "Battle", new { Model.Munchkins[0].Id, AdjustStats.Up })">
+                    <a href="@Url.Action("GearUp", "Battle", new { Model.Munchkins[0].Id })">
                         <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
                     </a>
-                    <a href="@Url.Action("GearDown", "Battle", new { Model.Munchkins[0].Id, AdjustStats.Down })">
+                    <a href="@Url.Action("GearDown", "Battle", new { Model.Munchkins[0].Id })">
                         <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
                     </a>
                 </div>
@@ -186,10 +216,10 @@
                 <h5 class="mb-0">Modifier</h5>
 
                 <div class="d-inline-block" style="width: 30px;">
-                    <a href="@Url.Action("ModifierUp", "Battle", new { Model.Munchkins[0].Id, AdjustStats.Up, battleId })">
+                    <a href="@Url.Action("ModifierUp", "Battle", new { Model.Munchkins[0].Id, battleId })">
                         <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
                     </a>
-                    <a href="@Url.Action("ModifierDown", "Battle", new { Model.Munchkins[0].Id, AdjustStats.Down, battleId })">
+                    <a href="@Url.Action("ModifierDown", "Battle", new { Model.Munchkins[0].Id, battleId })">
                         <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
                     </a>
                 </div>
@@ -203,18 +233,28 @@
             {
                 <div id="@Model.Munchkins[1].Id" class="d-none">
                     <div>
-                        <h2 class="d-inline-block">@Model.Munchkins[1].Name</h2>
+                        <h2 class="d-inline-block">
+                            @Model.Munchkins[1].Name
+                        </h2>
                         <div class="custom-border button-tiny d-inline-block" onclick="swapDisplay(@Model.Munchkins[0].Id, @Model.Munchkins[1].Id)">
                             <i class="fas fa-exchange-alt" style="padding-top: 5px;"></i>
                         </div>
+                        @{
+                            int munchkinRemoveId = Model.Munchkins[1].Id;
+                        }
+                        <a href="@Url.Action("RemoveMunchkin", "Battle", new { Model.Id, munchkinRemoveId, munchkinId })">
+                            <div class="custom-border button-tiny d-inline-block">
+                                <i class="fas fa-times" style="padding-top: 5px;"></i>
+                            </div>
+                        </a>
                     </div>
                     <div class="d-inline-block text-center">
                         <h5 class="mb-0">Level</h5>
                         <div class="d-inline-block" style="width: 30px;">
-                            <a href="@Url.Action("LevelUp", "Battle", new { Model.Munchkins[1].Id, AdjustStats.Up })">
+                            <a href="@Url.Action("LevelUp", "Battle", new { Model.Munchkins[1].Id })">
                                 <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
                             </a>
-                            <a href="@Url.Action("LevelDown", "Battle", new { Model.Munchkins[1].Id, AdjustStats.Down })">
+                            <a href="@Url.Action("LevelDown", "Battle", new { Model.Munchkins[1].Id })">
                                 <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
                             </a>
                         </div>
@@ -225,10 +265,10 @@
                     <div class="d-inline-block text-center mx-3">
                         <h5 class="mb-0">Gear</h5>
                         <div class="d-inline-block" style="width: 30px;">
-                            <a href="@Url.Action("GearUp", "Battle", new { Model.Munchkins[1].Id, AdjustStats.Up })">
+                            <a href="@Url.Action("GearUp", "Battle", new { Model.Munchkins[1].Id })">
                                 <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
                             </a>
-                            <a href="@Url.Action("GearDown", "Battle", new { Model.Munchkins[1].Id, AdjustStats.Down })">
+                            <a href="@Url.Action("GearDown", "Battle", new { Model.Munchkins[1].Id })">
                                 <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
                             </a>
                         </div>
@@ -239,10 +279,10 @@
                     <div class="d-inline-block text-center">
                         <h5 class="mb-0">Modifier</h5>
                         <div class="d-inline-block" style="width: 30px;">
-                            <a href="@Url.Action("ModifierUp", "Battle", new { Model.Munchkins[1].Id, AdjustStats.Up, battleId })">
+                            <a href="@Url.Action("ModifierUp", "Battle", new { Model.Munchkins[1].Id, battleId })">
                                 <i class="fas fa-chevron-up custom-border button-tiny mb-2" style="padding-top: 3px;"></i><br />
                             </a>
-                            <a href="@Url.Action("ModifierDown", "Battle", new { Model.Munchkins[1].Id, AdjustStats.Down, battleId })">
+                            <a href="@Url.Action("ModifierDown", "Battle", new { Model.Munchkins[1].Id, battleId })">
                                 <i class="fas fa-chevron-down custom-border button-tiny" style="padding-top: 5px;"></i>
                             </a>
                         </div>
@@ -255,19 +295,16 @@
         }
     </div>
 </div>
-
 <div class="d-inline-block" style="position: fixed; bottom: 0; left: 0;">
     <div class="custom-border button-small m-3 text-center float-left" style="padding-top: 3px;">
         <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
     </div>
-
     <a href="@Url.Action("MunchkinEdit", "Munchkin", new { ViewBag.Munchkin.Id })">
         <div class="custom-border button-small my-3 text-center float-right" style="padding-top: 7px; padding-left: -1px;">
             <i class="fas fa-chevron-left fa-2x"></i>
         </div>
     </a>
 </div>
-
 <div class="d-inline-block" style="position: fixed; bottom: 0; right: 0;">
     <a href="@Url.Action("RollDice", "Battle", new { ViewBag.Munchkin.Id })">
         <div class="custom-border button-small m-3 text-center float-left" style="padding-top: 3px;">

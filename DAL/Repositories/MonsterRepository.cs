@@ -14,26 +14,14 @@ namespace DAL.Repositories
             monsterContext = context ?? new MonsterContextSQL();
         }
 
-        public void AdjustMonster(Monster monster) => monsterContext.AdjustMonster(monster);
+        public void AdjustMonster(Monster monster, Battle battle) => monsterContext.AdjustMonster(monster, battle);
 
-        public int CreateMonster(Monster monster)
-        {
-            throw new System.NotImplementedException();
-        }
+        public int CreateMonster(Monster monster) => monsterContext.CreateMonster(monster);
 
-        public List<Monster> GetAllMonstersByBattle(Battle battle)
-        {
-            throw new System.NotImplementedException();
-        }
+        public List<Monster> GetAllMonstersByBattle(Battle battle) => monsterContext.GetAllMonstersByBattle(battle);
 
-        public Monster GetMonsterById(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        public Monster GetMonsterById(int id) => monsterContext.GetMonsterById(id);
 
-        public void RemoveMonster(Monster monster)
-        {
-            throw new System.NotImplementedException();
-        }
+        public void RemoveMonster(Monster monster) => monsterContext.RemoveMonster(monster);
     }
 }

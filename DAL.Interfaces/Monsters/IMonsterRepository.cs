@@ -4,6 +4,6 @@ namespace Interfaces.Monsters
 {
     public interface IMonsterRepository
     {
-        void AdjustMonster(Monster monster);
+        void AdjustMonster(Monster monster, Battle battle);
     }
 }

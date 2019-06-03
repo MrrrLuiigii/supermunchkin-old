@@ -6,7 +6,7 @@ namespace DAL.Contexts.Monsters
 {
     public class MonsterContextMemory : IMonsterContext
     {
-        public void AdjustMonster(Monster monster)
+        public void AdjustMonster(Monster monster, Battle battle)
         {
             throw new System.NotImplementedException();
         }

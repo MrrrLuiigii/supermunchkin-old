@@ -14,7 +14,7 @@ namespace Logic.Monsters
             monsterRepository = repository ?? MonsterFactory.GetMonsterRepository();
         }
 
-        public void AdjustLevel(Monster monster, AdjustStats direction)
+        public void AdjustLevel(Monster monster, AdjustStats direction, Battle battle)
         {
             if (direction == AdjustStats.Down)
             {
@@ -32,7 +32,7 @@ namespace Logic.Monsters
                 monster.Level += 1;
             }
 
-            monsterRepository.AdjustMonster(monster);
+            monsterRepository.AdjustMonster(monster, battle);
         }
 
         public void AdjustModifier(Monster monster, AdjustStats direction, Battle battle)
@@ -46,7 +46,7 @@ namespace Logic.Monsters
                 monster.Modifier += 1;
             }
 
-            monsterRepository.AdjustMonster(monster);
+            monsterRepository.AdjustMonster(monster, battle);
         }
     }
 }

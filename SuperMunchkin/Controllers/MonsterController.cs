@@ -16,19 +16,21 @@ namespace SuperMunchkin.Controllers
         private GameLogic gameLogic = new GameLogic();
 
         [Authorize]
-        public IActionResult LevelUp(int id, int munchkinId)
+        public IActionResult LevelUp(int id, int munchkinId, int battleId)
         {
-            Monster munchkin = monsterCollectionLogic.GetMonsterById(id);
-            monsterLogic.AdjustLevel(munchkin, AdjustStats.Up);
+            Monster monster = monsterCollectionLogic.GetMonsterById(id);
+            Battle battle = gameLogic.GetBattleById(battleId);
+            monsterLogic.AdjustLevel(monster, AdjustStats.Up, battle);
             id = munchkinId;
             return RedirectToAction("Index", "Battle", new { id });
         }
 
         [Authorize]
-        public IActionResult LevelDown(int id, int munchkinId)
+        public IActionResult LevelDown(int id, int munchkinId, int battleId)
         {
             Monster munchkin = monsterCollectionLogic.GetMonsterById(id);
-            monsterLogic.AdjustLevel(munchkin, AdjustStats.Down);
+            Battle battle = gameLogic.GetBattleById(battleId);
+            monsterLogic.AdjustLevel(munchkin, AdjustStats.Down, battle);
             id = munchkinId;
             return RedirectToAction("Index", "Battle", new { id });
         }

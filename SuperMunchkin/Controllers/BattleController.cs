@@ -146,11 +146,11 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
-        public IActionResult Finish(int id, BattleStatus result)
+        public IActionResult Finish(int id, int battleId)
         {
-            //Battle battle = gameLogic.GetBattleById(battleId);
-            //Munchkin munchkin = userLogic.GetMunchkinById(id, battleId);
-            //munchkinLogic.AdjustModifier(munchkin, AdjustStats.Down, battle);
+            Battle battle = gameLogic.GetBattleById(battleId);
+            Munchkin munchkin = userLogic.GetMunchkinById(id);
+            battleLogic.AdjustBattleStatus(battle);
             return RedirectToAction("MunchkinEdit", "Munchkin", new { id });
         }
     }

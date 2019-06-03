@@ -322,7 +322,7 @@
             }
         </div>
     </a>
-    <a href="@Url.Action("Finish", "Battle", new { Model.Id })">
+    <a href="@Url.Action("Finish", "Battle", new { ViewBag.Munchkin.Id, battleId })">
         <div class="custom-border button-small mr-3 my-3 text-center float-right" style="padding-top: 6px;">
             <i class="fas fa-flag-checkered fa-2x"></i>
         </div>

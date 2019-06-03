@@ -14,7 +14,7 @@ namespace Logic.Monsters
             mcRepository = repository ?? MonsterFactory.GetMonsterCollectionRepository();
         }
 
-        public void CreateMonster(Monster monster) => mcRepository.CreateMonster(monster);
+        public int CreateMonster(Monster monster) => mcRepository.CreateMonster(monster);
 
         public void RemoveMonster(Monster monster) => mcRepository.RemoveMonster(monster);
 

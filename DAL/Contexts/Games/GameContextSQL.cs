@@ -374,8 +374,8 @@ namespace DAL.Contexts.Games
         {
             string sql =
                 "delete from `battle`" +
-                "where `BattleId` = @BattleId" +
-                "and `GameId` = @GameId";
+                " where `BattleId` = @BattleId" +
+                " and `GameId` = @GameId";
 
             List<MySqlParameter> parameters = new List<MySqlParameter>();
             parameters.Add(new MySqlParameter("@BattleId", battle.Id));
@@ -393,8 +393,8 @@ namespace DAL.Contexts.Games
 
             string sql =
                 "select `BattleId`, `Status`, `DateTime`" +
-                "from `Battle`" +
-                "where `GameId` = @GameId";
+                " from `Battle`" +
+                " where `GameId` = @GameId";
 
             DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@GameId", game.Id));
 
@@ -433,12 +433,12 @@ namespace DAL.Contexts.Games
 
             string sql =
                 "select `munchkin`.`MunchkinId`, `user`.`Username`, `munchkin`.`Gender`, `munchkin`.`Level`, `munchkin`.`Gear`, `munchkin-battle`.`Modifier`" +
-                "from `munchkin`" +
-                "inner join `user`" +
-                "on `munchkin`.`UserId` = `user`.`UserId`" +
-                "inner join `munchkin-battle`" +
-                "on `munchkin`.`MunchkinId` = `munchkin-battle`.`MunchkinId`" +
-                "where `munchkin-battle`.`BattleId` = @BattleId";
+                " from `munchkin`" +
+                " inner join `user`" +
+                " on `munchkin`.`UserId` = `user`.`UserId`" +
+                " inner join `munchkin-battle`" +
+                " on `munchkin`.`MunchkinId` = `munchkin-battle`.`MunchkinId`" +
+                " where `munchkin-battle`.`BattleId` = @BattleId";
 
             DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@BattleId", battleId));
 
@@ -473,10 +473,10 @@ namespace DAL.Contexts.Games
 
             string sql =
                 "select `monster`.`MonsterId`, `monster`.`Level`, `monster-battle`.`Modifier`" +
-                "from `monster`" +
-                "inner join `monster-battle`" +
-                "on `monster`.`MonsterId` = `monster-battle`.`MonsterId`" +
-                "where `monster-battle`.`BattleId` = @BattleId";
+                " from `monster`" +
+                " inner join `monster-battle`" +
+                " on `monster`.`MonsterId` = `monster-battle`.`MonsterId`" +
+                " where `monster-battle`.`BattleId` = @BattleId";
 
             DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@BattleId", battleId));
 
@@ -543,10 +543,10 @@ namespace DAL.Contexts.Games
 
             string sql =
                 "select `Battle`.`BattleId`, `Battle`.`Status`, `Battle`.`DateTime`" +
-                "from `Battle`" +
-                "inner join `munchkin-battle`" +
-                "on `battle`.`BattleId` = `munchkin-battle`.`BattleId" +
-                "where `MunchkinId` = @MunchkinId";
+                " from `Battle`" +
+                " inner join `munchkin-battle`" +
+                " on `battle`.`BattleId` = `munchkin-battle`.`BattleId" +
+                " where `MunchkinId` = @MunchkinId";
 
             DataTable dt = database.ExecuteQuery(sql, new MySqlParameter("@MunchkinId", munchkin.Id));
 

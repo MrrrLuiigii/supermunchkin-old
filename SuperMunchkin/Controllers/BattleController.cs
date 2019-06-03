@@ -1,5 +1,6 @@
 ﻿using Logic.Battles;
 using Logic.Games;
+using Logic.Monsters;
 using Logic.Munchkins;
 using Logic.Users;
 using Microsoft.AspNetCore.Authorization;
@@ -18,6 +19,7 @@ namespace SuperMunchkin.Controllers
         private BattleLogic battleLogic = new BattleLogic();
         private GameLogic gameLogic = new GameLogic();
         private GameCollectionLogic gameCollectionLogic = new GameCollectionLogic();
+        private MonsterCollectionLogic monsterCollectionLogic = new MonsterCollectionLogic();
 
         [Authorize]
         public IActionResult Index(int id, int diceInt)
@@ -56,10 +58,32 @@ namespace SuperMunchkin.Controllers
         }
 
         [Authorize]
+        public IActionResult RemoveMunchkin(int id, int munchkinRemoveId, int munchkinId)
+        {
+            Battle battle = gameLogic.GetBattleById(id);
+            Munchkin munchkinRemove = userLogic.GetMunchkinById(munchkinRemoveId);
+            battleLogic.RemoveMunchkin(battle, munchkinRemove);
+            id = munchkinId;
+            return RedirectToAction("Index", "Battle", new { id });
+        }
+
+        [Authorize]
         public IActionResult AddMonster(int id, int munchkinId)
         {
             Battle battle = gameLogic.GetBattleById(id);
-            battleLogic.AddMonster(battle, new Monster("Monster 2"));
+            Monster monster = new Monster("Monster 2");
+            monster.Id = monsterCollectionLogic.CreateMonster(monster);
+            battleLogic.AddMonster(battle, monster);
+            id = munchkinId;
+            return RedirectToAction("Index", "Battle", new { id });
+        }
+
+        [Authorize]
+        public IActionResult RemoveMonster(int id, int monsterId, int munchkinId)
+        {
+            Battle battle = gameLogic.GetBattleById(id);
+            Monster monster = monsterCollectionLogic.GetMonsterById(monsterId);
+            battleLogic.RemoveMonster(battle, monster);
             id = munchkinId;
             return RedirectToAction("Index", "Battle", new { id });
         }

@@ -6,10 +6,16 @@ using System;
 
 namespace Databases
 {
-    public class Database : DatabaseConnection
+    public class Database
     {
+        private static MySqlConnection conn;
         private MySqlCommand cmd;
         private MySqlDataReader reader;
+
+        public static void SetConnectionString(string connectionstring)
+        {
+            conn = new MySqlConnection(connectionstring);
+        }
 
         public DataTable ExecuteQuery(string sql)
         {

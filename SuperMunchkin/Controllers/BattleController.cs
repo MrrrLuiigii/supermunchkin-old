@@ -4,6 +4,7 @@ using Logic.Monsters;
 using Logic.Munchkins;
 using Logic.Users;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.Enums;
@@ -64,6 +65,7 @@ namespace SuperMunchkin.Controllers
             Munchkin munchkinRemove = userLogic.GetMunchkinById(munchkinRemoveId);
             battleLogic.RemoveMunchkin(battle, munchkinRemove);
             id = munchkinId;
+            HttpContext.Session.SetString("activeMunchkin", "Munchkin1");
             return RedirectToAction("Index", "Battle", new { id });
         }
 
@@ -85,6 +87,7 @@ namespace SuperMunchkin.Controllers
             Monster monster = monsterCollectionLogic.GetMonsterById(monsterId);
             battleLogic.RemoveMonster(battle, monster);
             id = munchkinId;
+            HttpContext.Session.SetString("activeMonster", "Monster1");
             return RedirectToAction("Index", "Battle", new { id });
         }
 
@@ -148,6 +151,7 @@ namespace SuperMunchkin.Controllers
         [Authorize]
         public IActionResult Finish(int id, int battleId)
         {
+            HttpContext.Session.Clear();
             Battle battle = gameLogic.GetBattleById(battleId);
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             battleLogic.AdjustBattleStatus(battle);

@@ -34,4 +34,19 @@ function hidePopup(id) {
 function swapDisplay(display, hide) {
     document.getElementById(display).classList.replace("d-none", "d-inline");
     document.getElementById(hide).classList.replace("d-inline", "d-none");
+    sessionStorage.setItem('active' + display.toString().substring(0, display.length - 1), display);
+}
+
+if (sessionStorage.activeMonster) {
+    if (sessionStorage.activeMonster == 'Monster2') {
+        document.getElementById('Monster1').classList.replace("d-inline", "d-none");
+        document.getElementById('Monster2').classList.replace("d-none", "d-inline");
+    }
+}
+
+if (sessionStorage.activeMunchkin) {
+    if (sessionStorage.activeMunchkin == 'Munchkin2') {
+        document.getElementById('Munchkin1').classList.replace("d-inline", "d-none");
+        document.getElementById('Munchkin2').classList.replace("d-none", "d-inline");
+    }
 }

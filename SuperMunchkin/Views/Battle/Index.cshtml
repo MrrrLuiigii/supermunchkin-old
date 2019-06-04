@@ -35,7 +35,7 @@
 
 <div class="text-center">
     <div>
-        <div id="@Model.Monsters[0].Id" class="d-inline">
+        <div id="Monster1" class="d-inline">
             <div>
                 <h2 class="d-inline-block">
                     @Model.Monsters[0].Name
@@ -43,7 +43,7 @@
                 @{
                     if (Model.Monsters.Count() == 2)
                     {
-                        <div class="custom-border button-tiny d-inline-block" onclick="swapDisplay(@Model.Monsters[1].Id, @Model.Monsters[0].Id)">
+                        <div class="custom-border button-tiny d-inline-block" onclick="swapDisplay('Monster2', 'Monster1')">
                             <i class="fas fa-exchange-alt" style="padding-top: 5px;"></i>
                         </div>
                     }
@@ -87,12 +87,12 @@
         @{
             if (Model.Monsters.Count() == 2)
             {
-                <div id="@Model.Monsters[1].Id" class="d-none">
+                <div id="Monster2" class="d-none">
                     <div>
                         <h2 class="d-inline-block">                            
                             @Model.Monsters[1].Name
                         </h2>
-                        <div class="custom-border button-tiny d-inline-block" onclick="swapDisplay(@Model.Monsters[0].Id, @Model.Monsters[1].Id)">
+                        <div class="custom-border button-tiny d-inline-block" onclick="swapDisplay('Monster1', 'Monster2')">
                             <i class="fas fa-exchange-alt" style="padding-top: 5px;"></i>
                         </div>
                         @{ 
@@ -164,7 +164,7 @@
         </div>
     </div>
     <div>
-        <div id="@Model.Munchkins[0].Id" class="d-inline">
+        <div id="Munchkin1" class="d-inline">
             <div>
                 <h2 class="d-inline-block">                    
                     @Model.Munchkins[0].Name
@@ -172,7 +172,7 @@
                 @{
                     if (Model.Munchkins.Count() == 2)
                     {
-                        <div class="custom-border button-tiny d-inline-block" onclick="swapDisplay(@Model.Munchkins[1].Id, @Model.Munchkins[0].Id)">
+                        <div class="custom-border button-tiny d-inline-block" onclick="swapDisplay('Munchkin2', 'Munchkin1')">
                             <i class="fas fa-exchange-alt" style="padding-top: 5px;"></i>
                         </div>
                     }
@@ -231,12 +231,12 @@
         @{
             if (Model.Munchkins.Count() == 2)
             {
-                <div id="@Model.Munchkins[1].Id" class="d-none">
+                <div id="Munchkin2" class="d-none">
                     <div>
                         <h2 class="d-inline-block">
                             @Model.Munchkins[1].Name
                         </h2>
-                        <div class="custom-border button-tiny d-inline-block" onclick="swapDisplay(@Model.Munchkins[0].Id, @Model.Munchkins[1].Id)">
+                        <div class="custom-border button-tiny d-inline-block" onclick="swapDisplay('Munchkin1', 'Munchkin2')">
                             <i class="fas fa-exchange-alt" style="padding-top: 5px;"></i>
                         </div>
                         @{

@@ -50,3 +50,7 @@ if (sessionStorage.activeMunchkin) {
         document.getElementById('Munchkin2').classList.replace("d-none", "d-inline");
     }
 }
+
+function clearSession() {
+    sessionStorage.clear();
+}

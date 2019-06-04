@@ -69,7 +69,6 @@ namespace SuperMunchkin.Controllers
         [Authorize]
         public IActionResult MunchkinEdit(int id, int diceInt)
         {
-            HttpContext.Session.Clear();
             Munchkin munchkin = userLogic.GetMunchkinById(id);
             ViewBag.DiceInt = diceInt;
             ViewBag.Winner = null;

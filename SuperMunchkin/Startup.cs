@@ -34,8 +34,6 @@ namespace SuperMunchkin
             });            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDistributedMemoryCache();
-            services.AddSession();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
@@ -69,7 +67,6 @@ namespace SuperMunchkin
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-            app.UseSession();
 
             app.UseMvc(routes =>
             {

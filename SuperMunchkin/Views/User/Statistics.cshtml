@@ -20,7 +20,6 @@
         <p class="mb-0 text-left">Avg gear: @ViewBag.AvgGear</p>
     </div>
 </div>
-
 <div class="hiddenscroll text-center m-auto" style="height: 55vh; overflow-y: scroll;">
     @{
         if (ViewBag.UserGames.Count == 0 && ViewBag.LoggedInUser.Munchkins.Count == 0)
@@ -37,26 +36,21 @@
                 @Html.Raw("and become a real munchkin!")
             </div>
         }
-
         foreach (Munchkin m in ViewBag.LoggedInUser.Munchkins)
         {
             <div class="overview custom-border mx-auto mb-3 mt-2">
-                <div class="d-inline">
-                    @{
-                        foreach (Game g in ViewBag.UserGames)
+                @{
+                    foreach (Game g in ViewBag.UserGames)
+                    {
+                        if (g.Status == GameStatus.Finished)
                         {
-                            if (g.Status == GameStatus.Finished)
+                            if (g.Munchkins.Find(gm => gm.Id == m.Id) != null)
                             {
-                                if (g.Munchkins.Find(gm => gm.Id == m.Id) != null)
+                                if (g.Winner.Id == m.Id)
                                 {
-                                    if (g.Winner.Id == m.Id)
-                                    {
-                                        <h4 class="pl-2 py-2 mb-0 text-left d-inline-block float-left">Won!</h4>
-                                        <div class="d-block float-right text-right pr-2 pt-2">
-                                            @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
-                                            @g.DateTimePlayed.ToString("HH:mm")
-                                        </div>
-                                        <div class="d-inline-block float-left text-left pl-2" onmouseover="showPopup(@m.Id)" ontouchstart="showPopup(@m.Id)" onmouseout="hidePopup(@m.Id)" ontouchend="hidePopup(@m.Id)">
+                                    <div class="d-inline-block float-left">
+                                        <h4 class="pl-2 py-2 mb-0 text-left">Won!</h4>
+                                        <div class="pl-2 text-left" onmouseover="showPopup(@m.Id)" ontouchstart="showPopup(@m.Id)" onmouseout="hidePopup(@m.Id)" ontouchend="hidePopup(@m.Id)">
                                             <div class="d-inline-block">
                                                 <p class="d-block mb-0">Level @m.Level</p>
                                                 <p class="d-block mb-0">Gear @m.Gear</p>
@@ -70,43 +64,47 @@
                                                 </h2>
                                             </div>
                                         </div>
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        <h4 class="pl-2 py-2 mb-0 text-left d-inline-block float-left">Lost!</h4>
-                                        <div class="d-block float-right text-right pr-2 pt-2">
-                                            @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
-                                            @g.DateTimePlayed.ToString("HH:mm")
-                                        </div>
-                                        <div class="d-inline-block float-left text-left pl-2" onmouseover="showPopup(@m.Id)" ontouchstart="showPopup(@m.Id)" onmouseout="hidePopup(@m.Id)" ontouchend="hidePopup(@m.Id)">
-                                            <div class="d-inline-block">
-                                                <p class="d-block mb-0">Level @m.Level</p>
-                                                <p class="d-block mb-0">Gear @m.Gear</p>
-                                            </div>
-                                            <div class="d-inline-block">
-                                                <h2 class="pl-3 mb-0">
-                                                    @{
-                                                        int strength = m.Level + m.Gear;
-                                                    }
-                                                    @strength
-                                                </h2>
-                                            </div>
-                                        </div>
-                                        break;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                if (g.Munchkins.Find(gm => gm.Id == m.Id) != null)
-                                {
-                                    <h4 class="pl-2 py-2 mb-0 text-left d-inline-block float-left">Playing!</h4>
-                                    <div class="d-block float-right text-right pr-2 pt-2">
+                                    </div>
+                                    <div class="d-inline-block float-right text-right pt-2 pr-2">
                                         @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
                                         @g.DateTimePlayed.ToString("HH:mm")
                                     </div>
-                                    <div class="d-inline-block float-left text-left pl-2" onmouseover="showPopup(@m.Id)" ontouchstart="showPopup(@m.Id)" onmouseout="hidePopup(@m.Id)" ontouchend="hidePopup(@m.Id)">
+                                    break;
+                                }
+                                else
+                                {
+                                    <div class="d-inline-block float-left">
+                                        <h4 class="pl-2 py-2 mb-0 text-left">Lost!</h4>
+                                        <div class="pl-2 text-left" onmouseover="showPopup(@m.Id)" ontouchstart="showPopup(@m.Id)" onmouseout="hidePopup(@m.Id)" ontouchend="hidePopup(@m.Id)">
+                                            <div class="d-inline-block">
+                                                <p class="d-block mb-0">Level @m.Level</p>
+                                                <p class="d-block mb-0">Gear @m.Gear</p>
+                                            </div>
+                                            <div class="d-inline-block">
+                                                <h2 class="pl-3 mb-0">
+                                                    @{
+                                                        int strength = m.Level + m.Gear;
+                                                    }
+                                                    @strength
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-inline-block float-right text-right pt-2 pr-2">
+                                        @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
+                                        @g.DateTimePlayed.ToString("HH:mm")
+                                    </div>
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (g.Munchkins.Find(gm => gm.Id == m.Id) != null)
+                            {
+                                <div class="d-inline-block float-left">
+                                    <h4 class="pl-2 py-2 mb-0 text-left">Playing!</h4>
+                                    <div class="pl-2 text-left" onmouseover="showPopup(@m.Id)" ontouchstart="showPopup(@m.Id)" onmouseout="hidePopup(@m.Id)" ontouchend="hidePopup(@m.Id)">
                                         <div class="d-inline-block">
                                             <p class="d-block mb-0">Level @m.Level</p>
                                             <p class="d-block mb-0">Gear @m.Gear</p>
@@ -120,11 +118,15 @@
                                             </h2>
                                         </div>
                                     </div>
-                                }
+                                </div>
+                                <div class="d-inline-block float-right text-right pt-2 pr-2">
+                                    @g.DateTimePlayed.ToString("dd-MM-yyyy")<br />
+                                    @g.DateTimePlayed.ToString("HH:mm")
+                                </div>
                             }
                         }
                     }
-                </div>
+                }
                 <div id="@m.Id" class="d-none custom-border munchkinspopup mb-4">
                     <div class="text-left px-3 pt-2 pb-1">
                         <h5>
@@ -146,7 +148,6 @@
         }
     }
 </div>
-
 <div class="custom-border button-small m-3 text-center" style="position: fixed; bottom: 0; left: 0; padding-top: 3px;">
     <i class="fas fa-bars fa-2x navbar-toggler navbar-toggler-icon" style="padding-left: 8px;"></i>
 </div>

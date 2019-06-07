@@ -1,7 +1,8 @@
-﻿using Factories;
-using Logic.Users;
+﻿using Logic.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
+using Databases;
+using System.Configuration;
 
 namespace Logic.Test.Users
 {
@@ -14,56 +15,57 @@ namespace Logic.Test.Users
         [TestInitialize]
         public void TestInitialize()
         {
-            userCollectionLogic = new UserCollectionLogic(UserFactory.GetUserCollectionRepositoryTest());
-            user = new User(1, "Nicky", "admin", "nicky@gmail.com");
+            Database.SetConnectionString("server=127.0.0.1;uid=root;pwd=;database=supermunchkin");
+            Database database = new Database();
+            database.ExecuteStoredProcedure("ClearDatabase");
+
+            userCollectionLogic = new UserCollectionLogic();
+
+            user = new User("MrrrLuiigii", "admin", "nicky@gmail.com");
+            userCollectionLogic.AddUser(user);
+            user = userCollectionLogic.Login("MrrrLuiigii", "admin");
         }
 
         [TestMethod]
         public void AddUserTest()
         {
-            user.Username = "NewUser";
-            user.Email = "newuser@gmail.com";
-            Assert.IsTrue(userCollectionLogic.AddUser(user));
+            User newUser = new User("newuser", "user", "newuser@gmail.com");
+            Assert.IsTrue(userCollectionLogic.AddUser(newUser));
         }
 
         [TestMethod]
         public void AddUserUsernameTakenTest()
         {
-            user.Email = "newemail@gmail.com";
-            Assert.IsFalse(userCollectionLogic.AddUser(user));
+            User newUser = new User("MrrrLuiigii", "user", "newuser@gmail.com");
+            Assert.IsFalse(userCollectionLogic.AddUser(newUser));
         }
 
         [TestMethod]
         public void AddUserEmailTakenTest()
         {
-            user.Username = "NewUser";
-            Assert.IsFalse(userCollectionLogic.AddUser(user));
+            User newUser = new User("newuser", "user", "nicky@gmail.com");
+            Assert.IsFalse(userCollectionLogic.AddUser(newUser));
         }
 
         [TestMethod]
         public void LoginTest()
         {
-            Assert.AreEqual(user.Id, userCollectionLogic.Login(user.Username, user.Password).Id);
+            User logginInUser = new User("MrrrLuiigii", "admin", "nicky@gmail.com");
+            Assert.AreEqual(user.Id, userCollectionLogic.Login(logginInUser.Username, logginInUser.Password).Id);
         }
 
         [TestMethod]
         public void LoginWrongUsernameTest()
         {
-            user.Username = "Nickyy";
-            Assert.IsNull(userCollectionLogic.Login(user.Username, user.Password));
+            User logginInUser = new User("wrong", "admin", "nicky@gmail.com");
+            Assert.IsNull(userCollectionLogic.Login(logginInUser.Username, logginInUser.Password));
         }
 
         [TestMethod]
         public void LoginWrongPasswordTest()
         {
-            user.Username = "Nicky";
-            user.Password = HashPassword("wrong");
+            User logginInUser = new User("MrrrLuiigii", "wrong", "nicky@gmail.com");
             Assert.IsNull(userCollectionLogic.Login(user.Username, user.Password));
-        }
-
-        private string HashPassword(string password)
-        {
-            return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt());
         }
     }
 }

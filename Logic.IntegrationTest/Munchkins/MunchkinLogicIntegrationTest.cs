@@ -1,8 +1,9 @@
-using Factories;
 using Logic.Munchkins;
+using Logic.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 using Models.Enums;
+using Databases;
 
 namespace Logic.Test.Munchkins
 {
@@ -15,8 +16,21 @@ namespace Logic.Test.Munchkins
         [TestInitialize]
         public void TestInitialize()
         {
-            munchkin = new Munchkin(1, "MrrrLuiigii", MunchkinGender.Male, 5, 5);
-            munchkinLogic = new MunchkinLogic(MunchkinFactory.GetMunchkinRepositoryTest());
+            Database.SetConnectionString("server=127.0.0.1;uid=root;pwd=;database=supermunchkin");
+            Database database = new Database();
+            database.ExecuteStoredProcedure("ClearDatabase");
+
+            UserLogic userLogic = new UserLogic();
+            UserCollectionLogic userCollectionLogic = new UserCollectionLogic();            
+
+            User user = new User("MrrrLuiigii", "admin", "nicky@gmail.com");
+            userCollectionLogic.AddUser(user);
+            user = userCollectionLogic.Login("MrrrLuiigii", "admin");
+
+            munchkin = new Munchkin(1, user.Username, MunchkinGender.Male, 5, 5);
+            munchkin = userLogic.CreateMunchkin(user, munchkin);
+            
+            munchkinLogic = new MunchkinLogic();
         }
 
         [TestMethod]
@@ -44,9 +58,9 @@ namespace Logic.Test.Munchkins
         [TestMethod]
         public void AdjustLevelTooLowTest()
         {
-            munchkin.Level = 0;
+            munchkin.Level = 1;
             munchkinLogic.AdjustLevel(munchkin, AdjustStats.Down);
-            Assert.AreEqual(0, munchkin.Level);
+            Assert.AreEqual(1, munchkin.Level);
         }
 
         [TestMethod]

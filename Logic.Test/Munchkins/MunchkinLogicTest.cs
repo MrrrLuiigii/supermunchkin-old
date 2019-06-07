@@ -44,9 +44,9 @@ namespace Logic.Test.Munchkins
         [TestMethod]
         public void AdjustLevelTooLowTest()
         {
-            munchkin.Level = 0;
+            munchkin.Level = 1;
             munchkinLogic.AdjustLevel(munchkin, AdjustStats.Down);
-            Assert.AreEqual(0, munchkin.Level);
+            Assert.AreEqual(1, munchkin.Level);
         }
 
         [TestMethod]

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using Models.Enums;
-using System;
 
 namespace Databases
 {
@@ -102,7 +101,7 @@ namespace Databases
             return dt;
         }
 
-        public ExecuteQueryStatus ExecuteQueryWithStatus(string sql, List<MySqlParameter> parameters)
+        public ExecuteQueryStatus ExecuteQueryWithStatus(string sql, List<MySqlParameter> parameters = null)
         {
             conn.Open();
             cmd = new MySqlCommand(sql, conn);
@@ -129,7 +128,7 @@ namespace Databases
             return status;
         }
 
-        public ExecuteQueryStatus ExecuteQueryWithStatus(string sql, MySqlParameter p)
+        public ExecuteQueryStatus ExecuteQueryWithStatus(string sql, MySqlParameter p = null)
         {
             conn.Open();
             cmd = new MySqlCommand(sql, conn);
@@ -156,7 +155,30 @@ namespace Databases
             return status;
         }
 
-        public ExecuteQueryStatus ExecuteStoredProcedure(string procedureName, MySqlParameter parameter)
+        public ExecuteQueryStatus ExecuteStoredProcedure(string procedureName)
+        {
+            conn.Open();
+            cmd = new MySqlCommand(procedureName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            ExecuteQueryStatus status = ExecuteQueryStatus.OK;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                status = ExecuteQueryStatus.Error;
+            }
+
+            cmd.Dispose();
+            conn.Close();
+            conn.Dispose();
+            return status;
+        }
+
+        public ExecuteQueryStatus ExecuteStoredProcedure(string procedureName, MySqlParameter parameter = null)
         {
             conn.Open();
             cmd = new MySqlCommand(procedureName, conn);
@@ -181,7 +203,7 @@ namespace Databases
             return status;
         }
 
-        public ExecuteQueryStatus ExecuteStoredProcedure(string procedureName, List<MySqlParameter> parameters)
+        public ExecuteQueryStatus ExecuteStoredProcedure(string procedureName, List<MySqlParameter> parameters = null)
         {
             conn.Open();
             cmd = new MySqlCommand(procedureName, conn);
@@ -209,7 +231,7 @@ namespace Databases
             return status;
         }
 
-        public int ExecuteStoredProcedureWithOutput(string procedureName, MySqlParameter parameter)
+        public int ExecuteStoredProcedureWithOutput(string procedureName, MySqlParameter parameter = null)
         {
             conn.Open();
             cmd = new MySqlCommand(procedureName, conn);
@@ -235,7 +257,7 @@ namespace Databases
             return id;
         }
 
-        public int ExecuteStoredProcedureWithOutput(string procedureName, List<MySqlParameter> parameters)
+        public int ExecuteStoredProcedureWithOutput(string procedureName, List<MySqlParameter> parameters = null)
         {
             conn.Open();
             cmd = new MySqlCommand(procedureName, conn);
